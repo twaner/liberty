@@ -113,7 +113,7 @@ class Installation_Information(models.Model)
 	installation_end_time = models.DateTime()
 	
 	def get_install_time(self):
-		dt =self.installation_start_time - installation_end_time
+		dt =self.installation_start_time - self.installation_end_time
 		days, seconds = dt.days, dt.seconds
 		hours = days * 24 + seconds // 3600
 		minutes = (seconds % 3600) // 60

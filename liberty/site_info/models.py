@@ -10,6 +10,9 @@ class Site(Site):
 	call_list = models.ManyToManyField(Call_List)
 	contact = models.ForeignKey(Contact)
 	
+	def __unicode__(self):
+		return(self.name)
+	
 class Call_List(models.Model)
 	GENERAL = 'G'
 	BURG = 'B'

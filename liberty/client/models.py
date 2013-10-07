@@ -3,16 +3,27 @@ from django.db import models
 from common.models import Person, Business, Address, Contact
 from employee.models import Employee
 
-class Client_Person(Person):
+class BusinessManager(models.Manager):
+	def get_query_set(self):
+		return(super(Client,self).get_query_set().filter(is_business=True))
+		
+class PersonalManager(models.Manager):
+	def get_query_set(self):
+		return(super(Client, self).get_query_set.filter(is_business=False))
+
+class Client(Person):
 	client_id = models.AutoField(primary_key=True)
 	business_name = models.CharField(max_length=50)
 	is_business = models.BooleanField(default=False)
 	address = models.ForeignKey(Address)
 	contact_info = models.ForeignKey(Contact)
 	billing = models.ForeignKey(Billing_Information)
+	clients = models.Manager()
+	personal = PersonalManager()
+	businesses = BusinessManager()
 	
 	def __unicode__(self)
-		if self.business_name not null:
+		if self.is_business == True:
 			return(self.business_name)
 		else:
 			return(u'%s %s' % (self.first_name, self.last_name))

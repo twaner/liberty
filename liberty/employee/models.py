@@ -15,7 +15,10 @@ class Employee(Person):
 	
 	def __unicode__(self):
 		return u'%s %s' % (self.first_name, self.last_name)
-	
+		
+	def worker_is(self):
+		return(self.title)
+		
 class Title(models.Model):
 	SALES = 'S'
 	TECHNICIAN = 'T'
