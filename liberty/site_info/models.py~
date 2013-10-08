@@ -1,14 +1,17 @@
 # Site_Info models
 from django.db import models
 from datetime import datetime, timedelta
-from common.models import Person, Business, Contact, Site, Module_Zone, Equipment
-from employee.models import Employee
+from common.models import Site, Module_Zone, Equipment
+
 
 # REGION	 SITE INFORMATION
 class Site(Site):
 	site_id = models.AutoField(primary_key=True)
 	call_list = models.ManyToManyField(Call_List)
-	contact = models.ForeignKey(Contact)
+	contact = models.ForeignKey('common.models.Contact')
+	
+	def __unicode__(self):
+		return(self.name)
 	
 class Call_List(models.Model)
 	GENERAL = 'G'
@@ -30,7 +33,7 @@ class Call_List(models.Model)
 
 	call_list_id = models.AutoField(primary_key=True)
 	call_list_type = models.CharField(max_length=2,choices=CALL_LIST_TYPE)
-	site = models.ForeignKey(Site)
+	site = models.ForeignKey('common.models.Site')
 	call_order = models.CharField(max_length=30)
 	enabled = models.BooleanField(default=False)
 	
@@ -41,7 +44,7 @@ class Call_List(models.Model)
 # REGION LOCATIONAL INFORMATION
 class Module(Module_Zone):
 	module_id = models.AutoField(primary_key)
-	module_panel_alarm = models.ForeignKey(Panel_Information)
+	module_panel_alarm = models.ForeignKey('common.models.Panel_Information')
 
 	#TODO - 10/6 - Better return info?
 	def __unicode__(self):
@@ -59,7 +62,7 @@ class Zone(Module_Zone):
 #BASE OBJECT
 class Site_Equipment(Equipment):
 	equipment_id = models.AutoField(primary_key=True)
-	equipment_site = models.ForeignKey(Site)
+	equipment_site = models.ForeignKey('common.models.Site')
 	
 # CAMERA OBJECT
 class Camera(Equipment):
@@ -72,21 +75,22 @@ class Camera(Equipment):
 # PANEL OBJECT
 class Panel(Equipment):
 	panel_id = models.AutoField(primary_key=True)
-	self.equipment_type = models.CharField(default='camera')
+	self.equipment_type = models.CharField(default='panel')
 	panel_name = models.CharField(max_length=100)
 	#TODO - 10/6 - Get additional panel fields
 
 # Panel gets its location from zone or module table
 class Site_Panel(models.Model):
 	site_panel_id = models.AutoField(primary_key=True)
-	panel_site = models.ForeignKey(Site)
+	panel_site = models.ForeignKey('common.models.Site')
 	# TODO - 10/6 choices or own table
-	panel_type = models.ForeignKey(Panel)
+	panel = models.ForeignKey(Panel)
 	communication_id = models.CharField(max_length=20)
 	
 class Site_Camera(models.Model):
 	site_camera_id = models.AutoField(primary_key=True)
-	camera_site = models.ForeignKey(Site)
+	camera_site = models.ForeignKey('common.models.Site')
+	camera = models.ForeignKey(Camera)
 	location = models.CharField(max_length=100)
 	
 		
@@ -94,8 +98,8 @@ class Site_Camera(models.Model):
 # Instance of service on equipment
 class Service_Information(models.Model):
 	service_id = models.AutoField(primary_key=True)
-	service_panel_alarm = models.ForeignKey(Panel_Information)
-	techician = models.ForeignKey(Employee)
+	service_panel = models.ForeignKey(Panel)
+	techician = models.ForeignKey('common.models.Employee')
 	start_time = models.DateTime()
 	end_time = models.DateField()
 	note	s = models.CharField(max_length=1000)
@@ -104,10 +108,10 @@ class Service_Information(models.Model):
 class Installation_Information(models.Model)
 	installation_id = models.AutoField(primary_key=True)
 	installation_site = models.ForeignKey(Site)
-	installation_tech = models.ManyToManyField(Employee)
+	installation_tech = models.ManyToManyField('common.models.Employee')
 	panels_installed = models.ManyToManyField(Panel)
 	cameras_installed = models.ManyToManyField(Camera)
-	additional_equipment = models.ManyToManyField(Equipment)
+	additional_equipment = models.ManyToManyField('common.models.Equipment')
 	installation_date = models.DateField()
 	installation_start_time = models.DateTime()
 	installation_end_time = models.DateTime()
