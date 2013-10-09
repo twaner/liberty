@@ -1,6 +1,6 @@
 #Employee models
 from django.db import models
-from common.models import Person #, Address, Contact
+from common.models import Person
 
 
 class Title(models.Model):
