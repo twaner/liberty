@@ -89,7 +89,7 @@ class State(models.Model):
 class Address(models.Model):
     address = models.CharField("address", max_length=30)
     address2 = models.CharField("address 2", max_length=30)
-    city = models.CharField("city", max_length=30)
+    city = models.ForeignKey(City)
     state = models.ForeignKey(State)
     zip_code = models.IntegerField("zip code", max_length=10)
 

@@ -31,7 +31,8 @@ class Employee(Person):
     contact_info = models.ForeignKey('common.Contact')
     hire_date = models.DateField()
     pay_type = models.CharField(max_length=20)
-    pay_rate = models.CharField(max_length=20)
+    #pay_rate = models.CharField(max_length=20)
+    pay_rate = models.DecimalField("employee pay rate",max_digits=5, decimal_places=2)
     termination_date = models.DateField()
     termination_reason = models.CharField(max_length=300)
 

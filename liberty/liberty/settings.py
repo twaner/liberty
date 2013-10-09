@@ -3,6 +3,10 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+# South migration with manage.py test
+SKIP_SOUTH_TESTS = True
+SOUTH_TESTS_MIGRATE = False
+
 ADMINS = (
     # ('Taiowa Waner', 'twaner@lssasap.com'),
 )
@@ -124,7 +128,8 @@ INSTALLED_APPS = (
     'common',
     'employee',
     'client',
-    'site_info'
+    'site_info',
+    'south',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
