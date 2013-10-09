@@ -90,7 +90,7 @@ class Address(models.Model):
     address = models.CharField("address", max_length=30)
     address2 = models.CharField("address 2", max_length=30)
     city = models.CharField("city", max_length=30)
-    state = models.ForeignKey(State, )
+    state = models.ForeignKey(State)
     zip_code = models.IntegerField("zip code", max_length=10)
 
     def __unicode__(self):
@@ -101,8 +101,8 @@ class Contact(models.Model):
     phone = models.CharField("primary phone", max_length=13)
     phone_extension = models.CharField("primary phone extension", max_length=10)
     cell = models.CharField("cell phone", max_length=12)
-    phone = models.CharField("office phone", max_length=13)
-    phone_extension = models.CharField("office phone extension", max_length=10)
+    office_phone = models.CharField("office phone", max_length=13)
+    office_phone_extension = models.CharField("office phone extension", max_length=10)
     email = models.EmailField()
     website = models.URLField()
 
