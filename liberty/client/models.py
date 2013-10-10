@@ -39,7 +39,7 @@ class Sales_Prospect(Person):
     liberty_contact = models.ForeignKey(Employee)
     sale_type = models.CharField(max_length=40)
     probability = models.CharField(max_length=30)
-    initial_contact_date = models.DateField()
+    initial_contact_date = models.DateField(null=True, blank=True)
     comments = models.CharField(max_length=500)
 
     def __unicode__(self):

@@ -26,14 +26,14 @@ class Title(models.Model):
 class Employee(Person):
     employee_id = models.AutoField(primary_key=True)
     employee_number = models.IntegerField(max_length=10)
-    title = models.ManyToManyField(Title)
+    employee_title_name = models.ManyToManyField(Title)
     address = models.ForeignKey('common.Address')
     contact_info = models.ForeignKey('common.Contact')
     hire_date = models.DateField()
     pay_type = models.CharField(max_length=20)
     #pay_rate = models.CharField(max_length=20)
-    pay_rate = models.DecimalField("employee pay rate",max_digits=5, decimal_places=2)
-    termination_date = models.DateField()
+    pay_rate = models.DecimalField("employee pay rate", max_digits=5, decimal_places=2)
+    termination_date = models.DateField(null=True, blank=True)
     termination_reason = models.CharField(max_length=300)
 
     def __unicode__(self):

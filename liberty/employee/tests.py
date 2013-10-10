@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-import datetime
+import datetime as dt
 from common.models import Address, City, State, Contact
 from employee.models import Employee, Title
 
@@ -14,7 +14,7 @@ from employee.models import Employee, Title
 first_name = "Tom"
 last_name = "Jane"
 employee_number = 1234
-hire_date = (2010, 1, 1)
+#hire_date = (2010, 1, 1)
 pay_type = "hourly"
 pay_rate = "20.00"
 
@@ -30,7 +30,7 @@ class SimpleTest(TestCase):
                                    city=c, state=s, zip_code=12401)
         a.save()
 
-        d = datetime.date(2012, 9, 10)
+        d = str( dt.datetime.now())[:10]
 
         # contact info
         con = Contact.objects.create(phone="876123409876",
@@ -45,13 +45,13 @@ class SimpleTest(TestCase):
 
         Employee.objects.create(first_name="Tom", last_name="Jane",
                                 employee_number=1234, address=a,
-                                contact_info=con,
-                                hire_date=datetime, pay_type="hourly",
+                                contact_info=con, termination_date='2013-10-09',
+                                hire_date='2013-08-09', pay_type="hourly",
                                 pay_rate=20.00)
-        e.save()
+        #e.save()
 
     def test_employee_exist(self):
         employee = Employee.objects.get(employee_number=1234)
-        self.assertEqual(employee.pay_type(), pay_type,
+        self.assertEqual(employee.pay_type, pay_type,
                          "Pay type doesnt match")
 

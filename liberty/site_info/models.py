@@ -125,8 +125,8 @@ class Installation_Information(models.Model):
     cameras_installed = models.ManyToManyField(Camera, related_name="cameras")
     additional_equipment = models.ManyToManyField('common.Equipment')
     #installation_date = models.DateField()
-    installation_start_time = models.DateTimeField()
-    installation_end_time = models.DateTimeField()
+    installation_start_time = models.DateTimeField(null=True, blank=True)
+    installation_end_time = models.DateTimeField(null=True, blank=True)
 
 
 def _get_install_time(self):
