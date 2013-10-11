@@ -103,8 +103,8 @@ class Contact(models.Model):
     cell = models.CharField("cell phone", max_length=12)
     office_phone = models.CharField("office phone", max_length=13)
     office_phone_extension = models.CharField("office phone extension", max_length=10)
-    email = models.EmailField()
-    website = models.URLField()
+    email = models.EmailField(blank=True)
+    website = models.URLField(blank=True)
 
 
 class Billing_Information(models.Model):
@@ -129,7 +129,7 @@ class Module_Zone(models.Model):
     manufacturer = models.CharField(max_length=50)
     part_number = models.CharField(max_length=50)
     serial_number = models.CharField(max_length=30)
-    install_date = models.DateField()
+    install_date = models.DateField(null=True, blank=True)
     install_tech = models.ForeignKey('employee.Employee')
     service = models.ForeignKey('site_info.Service_Information', verbose_name="service instance")
 

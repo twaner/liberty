@@ -42,16 +42,28 @@ class SimpleTest(TestCase):
         #
         # employee
         t = Title.objects.create(title="T")
+        t.save()
 
         Employee.objects.create(first_name="Tom", last_name="Jane",
                                 employee_number=1234, address=a,
                                 contact_info=con, termination_date='2013-10-09',
                                 hire_date='2013-08-09', pay_type="hourly",
                                 pay_rate=20.00)
+        e = Employee.objects.get(employee_number=1234)
+        e.save()
+        e.employee_title_name.add(t)
+        e.save()
         #e.save()
 
     def test_employee_exist(self):
         employee = Employee.objects.get(employee_number=1234)
         self.assertEqual(employee.pay_type, pay_type,
                          "Pay type doesnt match")
+
+
+    def test_worker_is(self):
+        e = Employee.objects.get(employee_number=1234)
+        e.save()
+        f = e.worker_is()
+        self.assertEqual(f, "T", "Employee title doesn't match")
 

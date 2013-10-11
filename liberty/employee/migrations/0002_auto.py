@@ -8,11 +8,11 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Removing M2M table for field title on 'Employee'
-        db.delete_table(db.shorten_name(u'employee_employee_title'))
+        # Removing M2M table for field employee_title on 'Employee'
+        db.delete_table(db.shorten_name(u'employee_employee_employee_title'))
 
-        # Adding M2M table for field employee_title_name on 'Employee'
-        m2m_table_name = db.shorten_name(u'employee_employee_employee_title_name')
+        # Adding M2M table for field e_title on 'Employee'
+        m2m_table_name = db.shorten_name(u'employee_employee_e_title')
         db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('employee', models.ForeignKey(orm[u'employee.employee'], null=False)),
@@ -22,8 +22,8 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
-        # Adding M2M table for field title on 'Employee'
-        m2m_table_name = db.shorten_name(u'employee_employee_title')
+        # Adding M2M table for field employee_title on 'Employee'
+        m2m_table_name = db.shorten_name(u'employee_employee_employee_title')
         db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('employee', models.ForeignKey(orm[u'employee.employee'], null=False)),
@@ -31,8 +31,8 @@ class Migration(SchemaMigration):
         ))
         db.create_unique(m2m_table_name, ['employee_id', 'title_id'])
 
-        # Removing M2M table for field employee_title_name on 'Employee'
-        db.delete_table(db.shorten_name(u'employee_employee_employee_title_name'))
+        # Removing M2M table for field e_title on 'Employee'
+        db.delete_table(db.shorten_name(u'employee_employee_e_title'))
 
 
     models = {
@@ -53,13 +53,13 @@ class Migration(SchemaMigration):
         u'common.contact': {
             'Meta': {'object_name': 'Contact'},
             'cell': ('django.db.models.fields.CharField', [], {'max_length': '12'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'office_phone': ('django.db.models.fields.CharField', [], {'max_length': '13'}),
             'office_phone_extension': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '13'}),
             'phone_extension': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
-            'website': ('django.db.models.fields.URLField', [], {'max_length': '200'})
+            'website': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'})
         },
         u'common.state': {
             'Meta': {'object_name': 'State'},
@@ -70,9 +70,9 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Employee'},
             'address': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['common.Address']"}),
             'contact_info': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['common.Contact']"}),
+            'e_title': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['employee.Title']", 'symmetrical': 'False'}),
             'employee_id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'employee_number': ('django.db.models.fields.IntegerField', [], {'max_length': '10'}),
-            'employee_title_name': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['employee.Title']", 'symmetrical': 'False'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'hire_date': ('django.db.models.fields.DateField', [], {}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),

@@ -30,7 +30,7 @@ class Migration(SchemaMigration):
             ('liberty_contact', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['employee.Employee'])),
             ('sale_type', self.gf('django.db.models.fields.CharField')(max_length=40)),
             ('probability', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('initial_contact_date', self.gf('django.db.models.fields.DateField')()),
+            ('initial_contact_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('comments', self.gf('django.db.models.fields.CharField')(max_length=500)),
         ))
         db.send_create_signal(u'client', ['Sales_Prospect'])
@@ -82,7 +82,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Sales_Prospect'},
             'comments': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
-            'initial_contact_date': ('django.db.models.fields.DateField', [], {}),
+            'initial_contact_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'liberty_contact': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['employee.Employee']"}),
             'probability': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
@@ -110,13 +110,13 @@ class Migration(SchemaMigration):
         u'common.contact': {
             'Meta': {'object_name': 'Contact'},
             'cell': ('django.db.models.fields.CharField', [], {'max_length': '12'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'office_phone': ('django.db.models.fields.CharField', [], {'max_length': '13'}),
             'office_phone_extension': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '13'}),
             'phone_extension': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
-            'website': ('django.db.models.fields.URLField', [], {'max_length': '200'})
+            'website': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'})
         },
         u'common.state': {
             'Meta': {'object_name': 'State'},
@@ -129,14 +129,14 @@ class Migration(SchemaMigration):
             'contact_info': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['common.Contact']"}),
             'employee_id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'employee_number': ('django.db.models.fields.IntegerField', [], {'max_length': '10'}),
+            'employee_title': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['employee.Title']", 'symmetrical': 'False'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'hire_date': ('django.db.models.fields.DateField', [], {}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'pay_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2'}),
             'pay_type': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
-            'termination_date': ('django.db.models.fields.DateField', [], {}),
-            'termination_reason': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
-            'title': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['employee.Title']", 'symmetrical': 'False'})
+            'termination_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
+            'termination_reason': ('django.db.models.fields.CharField', [], {'max_length': '300'})
         },
         u'employee.title': {
             'Meta': {'object_name': 'Title'},

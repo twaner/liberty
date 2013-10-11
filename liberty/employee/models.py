@@ -26,7 +26,7 @@ class Title(models.Model):
 class Employee(Person):
     employee_id = models.AutoField(primary_key=True)
     employee_number = models.IntegerField(max_length=10)
-    employee_title_name = models.ManyToManyField(Title)
+    e_title = models.ManyToManyField(Title)
     address = models.ForeignKey('common.Address')
     contact_info = models.ForeignKey('common.Contact')
     hire_date = models.DateField()
@@ -35,9 +35,9 @@ class Employee(Person):
     pay_rate = models.DecimalField("employee pay rate", max_digits=5, decimal_places=2)
     termination_date = models.DateField(null=True, blank=True)
     termination_reason = models.CharField(max_length=300)
-
+    #e.e_title.add(t)
     def __unicode__(self):
         return u'%s %s' % (self.first_name, self.last_name)
 
     def worker_is(self):
-        return (self.title)
+        return (self.e_title)

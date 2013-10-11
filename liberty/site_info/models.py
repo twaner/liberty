@@ -112,8 +112,8 @@ class Service_Information(models.Model):
     service_id = models.AutoField(primary_key=True)
     service_panel = models.ForeignKey(Panel)
     technician = models.ForeignKey('employee.Employee')
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.DateTimeField(null=True, blank=True)
+    end_time = models.DateTimeField(null=True, blank=True)
     notes = models.CharField(max_length=1000)
 
 # TODO - Table for installation information

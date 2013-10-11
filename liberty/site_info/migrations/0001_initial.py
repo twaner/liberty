@@ -60,7 +60,7 @@ class Migration(SchemaMigration):
             ('manufacturer', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('part_number', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('serial_number', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('install_date', self.gf('django.db.models.fields.DateField')()),
+            ('install_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('install_tech', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['employee.Employee'])),
             ('service', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Service_Information'])),
             ('module_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -77,7 +77,7 @@ class Migration(SchemaMigration):
             ('manufacturer', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('part_number', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('serial_number', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('install_date', self.gf('django.db.models.fields.DateField')()),
+            ('install_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('install_tech', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['employee.Employee'])),
             ('service', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Service_Information'])),
             ('zone_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -127,8 +127,8 @@ class Migration(SchemaMigration):
             ('service_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('service_panel', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Panel'])),
             ('technician', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['employee.Employee'])),
-            ('start_time', self.gf('django.db.models.fields.DateTimeField')()),
-            ('end_time', self.gf('django.db.models.fields.DateTimeField')()),
+            ('start_time', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
+            ('end_time', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
             ('notes', self.gf('django.db.models.fields.CharField')(max_length=1000)),
         ))
         db.send_create_signal(u'site_info', ['Service_Information'])
@@ -137,8 +137,8 @@ class Migration(SchemaMigration):
         db.create_table(u'site_info_installation_information', (
             ('installation_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('installation_site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Site_Information'])),
-            ('installation_start_time', self.gf('django.db.models.fields.DateTimeField')()),
-            ('installation_end_time', self.gf('django.db.models.fields.DateTimeField')()),
+            ('installation_start_time', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
+            ('installation_end_time', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
         ))
         db.send_create_signal(u'site_info', ['Installation_Information'])
 
@@ -266,13 +266,13 @@ class Migration(SchemaMigration):
         u'common.contact': {
             'Meta': {'object_name': 'Contact'},
             'cell': ('django.db.models.fields.CharField', [], {'max_length': '12'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'office_phone': ('django.db.models.fields.CharField', [], {'max_length': '13'}),
             'office_phone_extension': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '13'}),
             'phone_extension': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
-            'website': ('django.db.models.fields.URLField', [], {'max_length': '200'})
+            'website': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'})
         },
         u'common.equipment': {
             'Meta': {'object_name': 'Equipment'},
@@ -292,14 +292,14 @@ class Migration(SchemaMigration):
             'contact_info': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['common.Contact']"}),
             'employee_id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'employee_number': ('django.db.models.fields.IntegerField', [], {'max_length': '10'}),
+            'employee_title': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['employee.Title']", 'symmetrical': 'False'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'hire_date': ('django.db.models.fields.DateField', [], {}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'pay_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2'}),
             'pay_type': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
-            'termination_date': ('django.db.models.fields.DateField', [], {}),
-            'termination_reason': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
-            'title': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['employee.Title']", 'symmetrical': 'False'})
+            'termination_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
+            'termination_reason': ('django.db.models.fields.CharField', [], {'max_length': '300'})
         },
         u'employee.title': {
             'Meta': {'object_name': 'Title'},
@@ -325,16 +325,16 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Installation_Information'},
             'additional_equipment': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['common.Equipment']", 'symmetrical': 'False'}),
             'cameras_installed': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'cameras'", 'symmetrical': 'False', 'to': u"orm['site_info.Camera']"}),
-            'installation_end_time': ('django.db.models.fields.DateTimeField', [], {}),
+            'installation_end_time': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'installation_id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'installation_site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['site_info.Site_Information']"}),
-            'installation_start_time': ('django.db.models.fields.DateTimeField', [], {}),
+            'installation_start_time': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'installation_tech': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['employee.Employee']", 'symmetrical': 'False'}),
             'panels_installed': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'panels'", 'symmetrical': 'False', 'to': u"orm['site_info.Panel']"})
         },
         u'site_info.module': {
             'Meta': {'object_name': 'Module'},
-            'install_date': ('django.db.models.fields.DateField', [], {}),
+            'install_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'install_tech': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['employee.Employee']"}),
             'location': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'manufacturer': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
@@ -355,11 +355,11 @@ class Migration(SchemaMigration):
         },
         u'site_info.service_information': {
             'Meta': {'object_name': 'Service_Information'},
-            'end_time': ('django.db.models.fields.DateTimeField', [], {}),
+            'end_time': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'notes': ('django.db.models.fields.CharField', [], {'max_length': '1000'}),
             'service_id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'service_panel': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['site_info.Panel']"}),
-            'start_time': ('django.db.models.fields.DateTimeField', [], {}),
+            'start_time': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'technician': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['employee.Employee']"})
         },
         u'site_info.site_camera': {
@@ -399,7 +399,7 @@ class Migration(SchemaMigration):
         },
         u'site_info.zone': {
             'Meta': {'object_name': 'Zone'},
-            'install_date': ('django.db.models.fields.DateField', [], {}),
+            'install_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'install_tech': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['employee.Employee']"}),
             'location': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'manufacturer': ('django.db.models.fields.CharField', [], {'max_length': '50'}),

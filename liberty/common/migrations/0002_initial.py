@@ -41,8 +41,8 @@ class Migration(SchemaMigration):
             ('cell', self.gf('django.db.models.fields.CharField')(max_length=12)),
             ('office_phone', self.gf('django.db.models.fields.CharField')(max_length=13)),
             ('office_phone_extension', self.gf('django.db.models.fields.CharField')(max_length=10)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
-            ('website', self.gf('django.db.models.fields.URLField')(max_length=200)),
+            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75, blank=True)),
+            ('website', self.gf('django.db.models.fields.URLField')(max_length=200, blank=True)),
         ))
         db.send_create_signal(u'common', ['Contact'])
 
@@ -104,13 +104,13 @@ class Migration(SchemaMigration):
         u'common.contact': {
             'Meta': {'object_name': 'Contact'},
             'cell': ('django.db.models.fields.CharField', [], {'max_length': '12'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'office_phone': ('django.db.models.fields.CharField', [], {'max_length': '13'}),
             'office_phone_extension': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '13'}),
             'phone_extension': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
-            'website': ('django.db.models.fields.URLField', [], {'max_length': '200'})
+            'website': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'})
         },
         u'common.equipment': {
             'Meta': {'object_name': 'Equipment'},
