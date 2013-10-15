@@ -2,23 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43ae2cf1-d360-43a6-b9e3-fcb6a34f994f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/liberty/client/migrations/0002_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/liberty/employee/migrations/0002_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/liberty/employee/migrations/0003_auto__chg_field_employee_termination_date.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/liberty/employee/migrations/0004_auto.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/liberty/employee/migrations/0005_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/liberty/employee/migrations/0006_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/liberty/employee/migrations/0007_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/liberty/employee/migrations/0008_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/liberty/site_info/migrations/0002_initial.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/client/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/liberty/client/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/employee/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/liberty/employee/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/site_info/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/liberty/site_info/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/common/migrations/0002_initial.py" afterPath="$PROJECT_DIR$/liberty/common/migrations/0002_initial.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liberty/site_info/admin.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liberty/client/templates/client/detail.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liberty/employee/templates/employee/detail.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liberty/client/templates/client/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liberty/client/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liberty/employee/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/client/models.py" afterPath="$PROJECT_DIR$/liberty/client/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/common/models.py" afterPath="$PROJECT_DIR$/liberty/common/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/employee/models.py" afterPath="$PROJECT_DIR$/liberty/employee/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/site_info/models.py" afterPath="$PROJECT_DIR$/liberty/site_info/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/employee/tests.py" afterPath="$PROJECT_DIR$/liberty/employee/tests.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/liberty/settings.py" afterPath="$PROJECT_DIR$/liberty/liberty/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/liberty/urls.py" afterPath="$PROJECT_DIR$/liberty/liberty/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/client/views.py" afterPath="$PROJECT_DIR$/liberty/client/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/employee/views.py" afterPath="$PROJECT_DIR$/liberty/employee/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="LibertySecurity.iws" />
@@ -42,38 +39,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/liberty/client/models.py">
+      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/liberty/employee/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="34" selection-start="1497" selection-end="1497" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1005">
+            <state line="8" column="0" selection-start="248" selection-end="348" vertical-scroll-proportion="0.04315197" vertical-offset="97" max-vertical-offset="630">
+              <folding>
+                <element signature="e#0#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/liberty/client/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="1" selection-start="266" selection-end="266" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detail.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/liberty/client/templates/client/detail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="900">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/liberty/employee/models.py">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/liberty/client/templates/client/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="21" selection-start="1208" selection-end="1208" vertical-scroll-proportion="0.7659575" vertical-offset="0" max-vertical-offset="720">
+            <state line="15" column="14" selection-start="402" selection-end="427" vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="330">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/liberty/site_info/models.py">
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/liberty/client/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="60" selection-start="3633" selection-end="3633" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2190">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tests.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/liberty/employee/tests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="295" selection-end="338" vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="1125">
-              <folding />
+            <state line="12" column="31" selection-start="429" selection-end="429" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+              <folding>
+                <element signature="e#0#54#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -81,7 +93,38 @@
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/liberty/common/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="130" column="25" selection-start="3768" selection-end="3768" vertical-scroll-proportion="-30.8" vertical-offset="1180" max-vertical-offset="2280">
+            <state line="114" column="25" selection-start="3304" selection-end="3323" vertical-scroll-proportion="-13.44" vertical-offset="1374" max-vertical-offset="2475">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/liberty/employee/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="41" selection-start="146" selection-end="219" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/liberty/client/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="0" selection-start="114" selection-end="114" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
+              <folding>
+                <element signature="e#15#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/liberty/site_info/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="33" selection-start="736" selection-end="736" vertical-scroll-proportion="-1.28" vertical-offset="313" max-vertical-offset="2190">
               <folding />
             </state>
           </provider>
@@ -105,19 +148,30 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/liberty/client/models.py" />
-        <option value="$PROJECT_DIR$/liberty/employee/tests.py" />
-        <option value="$PROJECT_DIR$/liberty/site_info/models.py" />
-        <option value="$PROJECT_DIR$/liberty/common/models.py" />
+        <option value="$PROJECT_DIR$/liberty/liberty/settings.py" />
+        <option value="$PROJECT_DIR$/liberty/employee/templates/index.html" />
+        <option value="$PROJECT_DIR$/liberty/employee/urls.py" />
+        <option value="$PROJECT_DIR$/liberty/employee/templates/employee/index.html" />
+        <option value="$PROJECT_DIR$/liberty/employee/templates/employee/detail.html" />
         <option value="$PROJECT_DIR$/liberty/employee/models.py" />
+        <option value="$PROJECT_DIR$/liberty/common/models.py" />
+        <option value="$PROJECT_DIR$/liberty/site_info/models.py" />
+        <option value="$PROJECT_DIR$/liberty/client/models.py" />
+        <option value="$PROJECT_DIR$/liberty/liberty/urls.py" />
+        <option value="$PROJECT_DIR$/liberty/employee/views.py" />
+        <option value="$PROJECT_DIR$/liberty/client/admin.py" />
+        <option value="$PROJECT_DIR$/liberty/client/urls.py" />
+        <option value="$PROJECT_DIR$/liberty/client/views.py" />
+        <option value="$PROJECT_DIR$/liberty/client/templates/client/index.html" />
+        <option value="$PROJECT_DIR$/liberty/client/templates/client/detail.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-847" />
-    <option name="y" value="20" />
-    <option name="width" value="813" />
-    <option name="height" value="864" />
+    <option name="x" value="509" />
+    <option name="y" value="22" />
+    <option name="width" value="773" />
+    <option name="height" value="715" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -145,7 +199,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -153,15 +206,13 @@
               <option name="myItemId" value="LibertySecurity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LibertySecurity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LibertySecurity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="&lt; Python 2.7.5 (/usr/local/bin/python-32) &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -173,10 +224,6 @@
               <option name="myItemId" value="LibertySecurity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="liberty" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -185,28 +232,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="LibertySecurity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="liberty" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="site_info" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LibertySecurity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LibertySecurity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="liberty" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -225,6 +250,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="liberty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="employee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LibertySecurity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LibertySecurity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="liberty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="employee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -268,22 +319,54 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LibertySecurity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LibertySecurity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="liberty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="editor.preferences.appearance" />
+    <property name="recentsLimit" value="5" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
       <PyConsoleSettings />
     </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/liberty/client/templates/client" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.manage">
     <configuration default="false" name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -461,14 +544,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-847" y="20" width="813" height="864" extended-state="0" />
+    <frame x="509" y="22" width="773" height="715" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22509225" sideWeight="0.6710013" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23544632" sideWeight="0.6710013" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32853982" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -494,124 +577,127 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/liberty/employee/tests.py</url>
-          <line>49</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/liberty/common/models.py">
+    <entry file="file://$PROJECT_DIR$/liberty/liberty/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="2280">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/client/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="13" selection-start="1052" selection-end="1052" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="1035">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/employee/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="8" selection-start="1172" selection-end="1172" vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="720">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/site_info/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="76" selection-start="4125" selection-end="4125" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2220">
-          <folding />
-        </state>
+        <state line="117" column="59" selection-start="4287" selection-end="4287" vertical-scroll-proportion="0.85640365" vertical-offset="1093" max-vertical-offset="2565" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/liberty/employee/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="51" selection-start="1373" selection-end="1373" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="870">
+        <state line="10" column="0" selection-start="295" selection-end="338" vertical-scroll-proportion="-0.9192913" vertical-offset="617" max-vertical-offset="1125" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/employee/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="40" selection-start="620" selection-end="620" vertical-scroll-proportion="0.48741007" vertical-offset="74" max-vertical-offset="750">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/employee/templates/employee/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="29" selection-start="537" selection-end="537" vertical-scroll-proportion="0.591716" vertical-offset="0" max-vertical-offset="840">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/employee/templates/employee/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="388" selection-end="388" vertical-scroll-proportion="0.3697183" vertical-offset="0" max-vertical-offset="568">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/liberty/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="0" selection-start="648" selection-end="648" vertical-scroll-proportion="0.5294118" vertical-offset="0" max-vertical-offset="510">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/liberty/common/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="11" selection-start="3840" selection-end="3840" vertical-scroll-proportion="0.0" vertical-offset="1365" max-vertical-offset="2280">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/client/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="23" selection-start="337" selection-end="337" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1035">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/employee/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="14" selection-start="591" selection-end="599" vertical-scroll-proportion="0.0" vertical-offset="375" max-vertical-offset="720">
+        <state line="114" column="25" selection-start="3304" selection-end="3323" vertical-scroll-proportion="-13.44" vertical-offset="1374" max-vertical-offset="2475">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/liberty/site_info/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="54" selection-start="3786" selection-end="3786" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2160">
+        <state line="25" column="33" selection-start="736" selection-end="736" vertical-scroll-proportion="-1.28" vertical-offset="313" max-vertical-offset="2190">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/common/models.py">
+    <entry file="file://$PROJECT_DIR$/liberty/client/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="15" selection-start="3150" selection-end="3150" vertical-scroll-proportion="0.0" vertical-offset="1545" max-vertical-offset="2280">
-          <folding />
+        <state line="2" column="48" selection-start="82" selection-end="82" vertical-scroll-proportion="0.057361376" vertical-offset="0" max-vertical-offset="523">
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/site_info/tests.py">
+    <entry file="file://$PROJECT_DIR$/liberty/employee/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="592" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/site_info/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="60" selection-start="3633" selection-end="3633" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2190">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/common/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="25" selection-start="3768" selection-end="3768" vertical-scroll-proportion="-30.8" vertical-offset="1180" max-vertical-offset="2280">
-          <folding />
+        <state line="6" column="41" selection-start="146" selection-end="219" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/liberty/client/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="34" selection-start="1497" selection-end="1497" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1005">
+        <state line="4" column="0" selection-start="114" selection-end="114" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
+          <folding>
+            <element signature="e#15#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/client/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="31" selection-start="429" selection-end="429" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/client/templates/client/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="14" selection-start="402" selection-end="427" vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="330">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/employee/tests.py">
+    <entry file="file://$PROJECT_DIR$/liberty/client/templates/client/detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="295" selection-end="338" vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="1125">
+        <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/employee/models.py">
+    <entry file="file://$PROJECT_DIR$/liberty/client/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="21" selection-start="1208" selection-end="1208" vertical-scroll-proportion="0.7659575" vertical-offset="0" max-vertical-offset="720">
-          <folding />
+        <state line="9" column="1" selection-start="266" selection-end="266" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/employee/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="248" selection-end="348" vertical-scroll-proportion="0.04315197" vertical-offset="97" max-vertical-offset="630">
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

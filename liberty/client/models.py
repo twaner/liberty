@@ -3,15 +3,15 @@ from django.db import models
 from common.models import Person
 from employee.models import Employee
 
-
+# USE 0 == False // 1 == True!
 class BusinessManager(models.Manager):
     def get_query_set(self):
-        return (super(BusinessManager, self).get_query_set().filter(is_business='True'))
+        return super(BusinessManager, self).get_query_set().filter(is_business='1')
 
 
 class PersonalManager(models.Manager):
     def get_query_set(self):
-        return (super(PersonalManager, self).get_query_set().filter(is_business='False'))
+        return super(PersonalManager, self).get_query_set().filter(is_business='0')
 
 
 class Client(Person):
@@ -27,37 +27,30 @@ class Client(Person):
     businesses = BusinessManager()
 
     def __unicode__(self):
-        if self.is_business == True:
-            return (self.business_name)
+        if self.is_business:
+            return self.business_name
         else:
-            return (u'%s %s' % (self.first_name, self.last_name))
+            return u'%s %s' % (self.first_name, self.last_name)
 
 
 class Sales_Prospect(Person):
     sales_prospect_id = models.AutoField(primary_key=True)
     # TODO - 10/6 - Make this choices
     liberty_contact = models.ForeignKey(Employee)
-    sale_type = models.CharField(max_length=40)
-    probability = models.CharField(max_length=30)
+    sale_type = models.CharField(max_length=40, blank=True)
+    probability = models.CharField(max_length=30, blank=True)
     initial_contact_date = models.DateField(null=True, blank=True)
-    comments = models.CharField(max_length=500)
+    comments = models.CharField(max_length=500, blank=True)
+    #new Fields
+    address = models.ForeignKey('common.Address', verbose_name="prospect address")
+    contact_info = models.ForeignKey('common.Contact', verbose_name="prospect contact")
+    if_client = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return (u'%s %s' % (self.first_name, self.last_name))
+        return u'%s %s' % (self.first_name, self.last_name)
 
 
-class Billing_Information(models.Model):
-    billing_id = models.AutoField(primary_key=True)
-    attention_first_name = models.CharField(max_length=30)
-    attention_last_name = models.CharField(max_length=30)
-    business_name = models.CharField(max_length=30)
-    is_business = models.BooleanField(default=False)
 
-    def __unicode__(self):
-        if self.is_business == True:
-            return (self.business_name)
-        else:
-            return (u'%s %s' % (self.attention_first_name, self.attention_last_name))
 
 
 

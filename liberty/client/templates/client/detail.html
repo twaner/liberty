@@ -1,0 +1,54 @@
+        {% comment %}
+
+{% if employee_detail %}
+    <ul>
+        <li>
+            Employee Info
+        </li>
+        <li>
+                {{employee_detail.employee_number}} {{employee_detail.first_name}}
+                {{employee_detail.last_name}} {{employee_detail.hire_date}}
+        </li>
+        <li>
+            Title(s):
+        </li>
+        {% if title_details %}
+        {% for t in title_details %}
+        <li>
+            {{ t.get_title_display }}
+        </li>
+        {% endfor %}
+        {% else %}
+        <li>
+            No titles on file
+        </li>
+        {% endif %}
+        <li>
+            Employee Address:
+        </li>
+        {% if address_detail %}
+        <li>
+            {{ address_detail }}
+        </li>
+        {% else %}
+        <li>
+            No address info.
+        </li>
+        {% endif %}
+        <li>
+            Employee Contact:
+        </li>
+        {% if contact_detail %}
+        <li>
+            {{ contact_detail }}
+        </li>
+        {% else %}
+        <li>
+            No contact information
+        </li>
+        {% endif %}
+    </ul>
+{% else %}
+        <p>No employees are available.</p>
+{% endif %}
+        {% endcomment %}

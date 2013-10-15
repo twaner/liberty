@@ -1,6 +1,7 @@
 # Common models
 from django.db import models
 
+
 # Entity Models
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
@@ -94,7 +95,9 @@ class Address(models.Model):
     zip_code = models.IntegerField("zip code", max_length=10)
 
     def __unicode__(self):
-        return (u'%s %s %s %s s%' % (self.address, self.address2, self.city, self.state.state, self.zip_code))
+        return (u'%s %s %s %s %s' % (self.address, self.address2,
+                self.city.city_name, self.state.state, self.zip_code))
+        #return(u '%s %s %s %s')
 
 # Info Models
 class Contact(models.Model):
@@ -106,12 +109,22 @@ class Contact(models.Model):
     email = models.EmailField(blank=True)
     website = models.URLField(blank=True)
 
+    def __unicode__(self):
+        return "%s%s%s-%s%s%s-%s%s%s%s" % tuple(self.phone)
 
 class Billing_Information(models.Model):
     billing_id = models.AutoField(primary_key=True)
+    attention_first_name = models.CharField(max_length=30, blank=True)
+    attention_last_name = models.CharField(max_length=30, blank=True)
+    business_name = models.CharField(max_length=35, blank=True)
+    is_business = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return (self.billing_id)
+        if self.is_business == True:
+            return (self.business_name)
+        else:
+            return (u'%s %s' % (self.attention_first_name, self.attention_last_name))
+
 
 # LibertyModels
 class Site(models.Model):
@@ -126,9 +139,9 @@ class Module_Zone(models.Model):
     location = models.CharField(max_length=100)
     name = models.CharField(max_length=40)
     number = models.CharField(max_length=20)
-    manufacturer = models.CharField(max_length=50)
-    part_number = models.CharField(max_length=50)
-    serial_number = models.CharField(max_length=30)
+    manufacturer = models.CharField(max_length=50, blank=True)
+    part_number = models.CharField(max_length=50, blank=True)
+    serial_number = models.CharField(max_length=30, blank=True)
     install_date = models.DateField(null=True, blank=True)
     install_tech = models.ForeignKey('employee.Employee')
     service = models.ForeignKey('site_info.Service_Information', verbose_name="service instance")
@@ -140,7 +153,7 @@ class Module_Zone(models.Model):
 class Equipment(models.Model):
     equipment_name = models.CharField(max_length=100)
     equipment_type = models.CharField(max_length=100)
-    equipment_notes = models.CharField(max_length=1000)
+    equipment_notes = models.CharField(max_length=1000, blank=True)
 
     def __unicode__(self):
         return (self.equipment_name)

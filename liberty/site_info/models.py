@@ -40,7 +40,7 @@ class Site_Contact(Person):
 # REGION	 SITE INFORMATION
 class Site_Information(Site):
     site_id = models.AutoField(primary_key=True)
-    client = models.ForeignKey('client.client')
+    client = models.ForeignKey('client.client',verbose_name="Client Site")
     site_call_list = models.ManyToManyField(Call_List)
     site_contact = models.ForeignKey(Site_Contact)
 
@@ -51,7 +51,7 @@ class Site_Information(Site):
 class Panel(Equipment):
     panel_id = models.AutoField(primary_key=True)
     #equipment_type = models.CharField(default='panel')
-    panel_name = models.CharField(max_length=100)
+    panel_name = models.CharField(max_length=100, blank=True)
 
 #TODO - 10/6 - Get additional panel fields
 
@@ -86,8 +86,8 @@ class Camera(Equipment):
     camera_id = models.AutoField(primary_key=True)
     #self.equipment_type = models.CharField(default='camera')
     camera_name = models.CharField(max_length=100)
-    DVR_type = models.CharField(max_length=100)
-    communication_type = models.CharField(max_length=300)
+    DVR_type = models.CharField(max_length=100, blank=True)
+    communication_type = models.CharField(max_length=300, blank=True)
 
 
 # Panel gets its location from zone or module table
@@ -103,7 +103,7 @@ class Site_Camera(models.Model):
     site_camera_id = models.AutoField(primary_key=True)
     camera_site = models.ForeignKey(Site_Information)
     camera = models.ForeignKey(Camera)
-    location = models.CharField(max_length=100)
+    location = models.CharField(max_length=100, blank=True)
 
 
 # REGION SERVICE

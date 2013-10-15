@@ -1,0 +1,16 @@
+{% comment %}
+{% if all_employees_list %}
+    <ul>
+        {% for e in all_employees_list %}
+        <li>
+            <a href="{ % url 'detailed' e.employee_id %}">
+            //<a href="/employeetest/{{ e.employee_id }}/">
+                {{e.first_name}} {{e.last_name}}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+        <p>No employees are available.</p>
+{% endif %}
+        {% endcomment %}
