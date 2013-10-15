@@ -40,7 +40,7 @@ class Site_Contact(Person):
 # REGION	 SITE INFORMATION
 class Site_Information(Site):
     site_id = models.AutoField(primary_key=True)
-    client = models.ForeignKey('client.client',verbose_name="Client Site")
+    client = models.ForeignKey('client.client', verbose_name="Client Site")
     site_call_list = models.ManyToManyField(Call_List)
     site_contact = models.ForeignKey(Site_Contact)
 

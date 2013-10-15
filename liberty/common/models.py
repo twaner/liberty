@@ -114,6 +114,7 @@ class Contact(models.Model):
 
 class Billing_Information(models.Model):
     billing_id = models.AutoField(primary_key=True)
+    #client = models.ForeignKey('client.client', related_name="")
     attention_first_name = models.CharField(max_length=30, blank=True)
     attention_last_name = models.CharField(max_length=30, blank=True)
     business_name = models.CharField(max_length=35, blank=True)

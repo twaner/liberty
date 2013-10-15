@@ -11,3 +11,13 @@ def clienttester(request):
 # More advanced test
 def detailedClient(request, client_id):
     return HttpResponse("Client id is %s" % client_id)
+
+def detail(request):
+    client_detail = Client.clients.get(pk=client_id)
+    address_detail = Address.objects.get(pk=client_detail.address_id)
+    contact_detail = Contact.objects.get(pk=client_detail.contact_info_id)
+    billing_detail = Billing_Information.objects.get(pk=client_detail.billing_id)
+
+    context = {'client_detail': client_detail, 'address_detail': address_detail,
+               'contact_detail': contact_detail, 'billing_detail': billing_detail}
+    return render(request, 'client/detail.html', context)

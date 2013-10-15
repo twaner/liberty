@@ -36,7 +36,7 @@ class Client(Person):
 class Sales_Prospect(Person):
     sales_prospect_id = models.AutoField(primary_key=True)
     # TODO - 10/6 - Make this choices
-    liberty_contact = models.ForeignKey(Employee)
+    liberty_contact = models.ForeignKey('employee.employee')
     sale_type = models.CharField(max_length=40, blank=True)
     probability = models.CharField(max_length=30, blank=True)
     initial_contact_date = models.DateField(null=True, blank=True)
