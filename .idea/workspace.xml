@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43ae2cf1-d360-43a6-b9e3-fcb6a34f994f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liberty/client/templatetags/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liberty/client/templatetags/client_extras.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/client/templates/client/detail.html" afterPath="$PROJECT_DIR$/liberty/client/templates/client/detail.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/client/templates/client/index.html" afterPath="$PROJECT_DIR$/liberty/client/templates/client/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/employee/templates/employee/index.html" afterPath="$PROJECT_DIR$/liberty/employee/templates/employee/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/client/models.py" afterPath="$PROJECT_DIR$/liberty/client/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/common/models.py" afterPath="$PROJECT_DIR$/liberty/common/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/employee/models.py" afterPath="$PROJECT_DIR$/liberty/employee/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/site_info/models.py" afterPath="$PROJECT_DIR$/liberty/site_info/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/client/urls.py" afterPath="$PROJECT_DIR$/liberty/client/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liberty/client/views.py" afterPath="$PROJECT_DIR$/liberty/client/views.py" />
@@ -30,21 +35,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/liberty/employee/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="19" selection-start="1280" selection-end="1280" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
-              <folding>
-                <element signature="e#0#54#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/liberty/client/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="235" selection-end="235" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
+            <state line="9" column="1" selection-start="223" selection-end="223" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
               <folding />
             </state>
           </provider>
@@ -53,7 +47,7 @@
       <file leaf-file-name="detail.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/liberty/client/templates/client/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="900">
+            <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="840">
               <folding />
             </state>
           </provider>
@@ -62,16 +56,16 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/liberty/client/templates/client/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="14" selection-start="402" selection-end="427" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="330">
+            <state line="10" column="10" selection-start="277" selection-end="277" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="300">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/liberty/client/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="57" selection-start="977" selection-end="977" vertical-scroll-proportion="0.41457286" vertical-offset="0" max-vertical-offset="796">
+            <state line="19" column="20" selection-start="657" selection-end="657" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
               </folding>
@@ -79,19 +73,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/liberty/common/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="116" column="5" selection-start="3396" selection-end="3396" vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="2490">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/liberty/client/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="8" selection-start="123" selection-end="123" vertical-scroll-proportion="0.0" vertical-offset="53" max-vertical-offset="900">
+            <state line="29" column="26" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.7284173" vertical-offset="0" max-vertical-offset="990">
               <folding />
             </state>
           </provider>
@@ -100,7 +85,18 @@
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/liberty/site_info/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="53" selection-start="1359" selection-end="1368" vertical-scroll-proportion="-13.2" vertical-offset="285" max-vertical-offset="2190">
+            <state line="45" column="74" selection-start="1500" selection-end="1500" vertical-scroll-proportion="-10.2" vertical-offset="420" max-vertical-offset="2265">
+              <folding>
+                <element signature="e#19#47#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client_extras.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/liberty/client/templatetags/client_extras.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
               <folding />
             </state>
           </provider>
@@ -127,27 +123,27 @@
         <option value="$PROJECT_DIR$/liberty/liberty/settings.py" />
         <option value="$PROJECT_DIR$/liberty/employee/templates/index.html" />
         <option value="$PROJECT_DIR$/liberty/employee/urls.py" />
-        <option value="$PROJECT_DIR$/liberty/employee/templates/employee/index.html" />
         <option value="$PROJECT_DIR$/liberty/employee/templates/employee/detail.html" />
-        <option value="$PROJECT_DIR$/liberty/employee/models.py" />
         <option value="$PROJECT_DIR$/liberty/liberty/urls.py" />
         <option value="$PROJECT_DIR$/liberty/employee/views.py" />
         <option value="$PROJECT_DIR$/liberty/client/admin.py" />
-        <option value="$PROJECT_DIR$/liberty/client/templates/client/index.html" />
-        <option value="$PROJECT_DIR$/liberty/client/templates/client/detail.html" />
         <option value="$PROJECT_DIR$/liberty/common/models.py" />
-        <option value="$PROJECT_DIR$/liberty/client/models.py" />
-        <option value="$PROJECT_DIR$/liberty/site_info/models.py" />
+        <option value="$PROJECT_DIR$/liberty/employee/templates/employee/index.html" />
         <option value="$PROJECT_DIR$/liberty/client/urls.py" />
+        <option value="$PROJECT_DIR$/liberty/client/templates/client/detail.html" />
         <option value="$PROJECT_DIR$/liberty/client/views.py" />
+        <option value="$PROJECT_DIR$/liberty/client/templates/client/index.html" />
+        <option value="$PROJECT_DIR$/liberty/employee/models.py" />
+        <option value="$PROJECT_DIR$/liberty/site_info/models.py" />
+        <option value="$PROJECT_DIR$/liberty/client/models.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-941" />
-    <option name="y" value="21" />
+    <option name="x" value="372" />
+    <option name="y" value="22" />
     <option name="width" value="908" />
-    <option name="height" value="993" />
+    <option name="height" value="715" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -156,7 +152,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
@@ -175,7 +171,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -332,6 +327,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="templatetags" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LibertySecurity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LibertySecurity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="liberty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -342,15 +359,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="editor.preferences.appearance" />
+    <property name="recentsLimit" value="5" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -538,7 +556,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-941" y="21" width="908" height="993" extended-state="0" />
+    <frame x="372" y="22" width="908" height="715" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -575,57 +593,9 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/liberty/liberty/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="59" selection-start="4287" selection-end="4287" vertical-scroll-proportion="0.85640365" vertical-offset="1093" max-vertical-offset="2565" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/employee/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="295" selection-end="338" vertical-scroll-proportion="-0.9192913" vertical-offset="617" max-vertical-offset="1125" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/employee/templates/employee/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="29" selection-start="537" selection-end="537" vertical-scroll-proportion="0.591716" vertical-offset="0" max-vertical-offset="840" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/employee/templates/employee/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="388" selection-end="388" vertical-scroll-proportion="0.3697183" vertical-offset="0" max-vertical-offset="568" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/liberty/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="648" selection-end="648" vertical-scroll-proportion="0.5294118" vertical-offset="0" max-vertical-offset="510" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/liberty/client/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="48" selection-start="82" selection-end="82" vertical-scroll-proportion="0.057361376" vertical-offset="0" max-vertical-offset="523" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/client/templates/client/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="14" selection-start="402" selection-end="427" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="330">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/employee/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="41" selection-start="146" selection-end="219" vertical-scroll-proportion="0.08854782" vertical-offset="0" max-vertical-offset="847">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/employee/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="19" selection-start="1280" selection-end="1280" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/liberty/common/models.py">
@@ -635,47 +605,105 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/client/models.py">
+    <entry file="file://$PROJECT_DIR$/liberty/employee/templates/employee/detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="8" selection-start="123" selection-end="123" vertical-scroll-proportion="0.0" vertical-offset="53" max-vertical-offset="900">
+        <state line="20" column="29" selection-start="537" selection-end="537" vertical-scroll-proportion="-12.5" vertical-offset="0" max-vertical-offset="840">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/employee/models.py">
+    <entry file="file://$PROJECT_DIR$/liberty/employee/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="42" selection-start="795" selection-end="800" vertical-scroll-proportion="0.5215827" vertical-offset="0" max-vertical-offset="834">
+        <state line="17" column="0" selection-start="555" selection-end="757" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/site_info/models.py">
+    <entry file="file://$PROJECT_DIR$/liberty/employee/templates/employee/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="53" selection-start="1359" selection-end="1368" vertical-scroll-proportion="-13.2" vertical-offset="285" max-vertical-offset="2190">
+        <state line="14" column="45" selection-start="394" selection-end="394" vertical-scroll-proportion="0.3853211" vertical-offset="0" max-vertical-offset="545">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/client/templates/client/detail.html">
+    <entry file="file://$PROJECT_DIR$/liberty/employee/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liberty/client/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="235" selection-end="235" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
+        <state line="4" column="26" selection-start="119" selection-end="124" vertical-scroll-proportion="0.07908612" vertical-offset="0" max-vertical-offset="569">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/liberty/client/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="57" selection-start="977" selection-end="977" vertical-scroll-proportion="0.41457286" vertical-offset="0" max-vertical-offset="796">
+        <state line="19" column="20" selection-start="657" selection-end="657" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
           <folding>
             <element signature="e#0#54#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/client/templates/client/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="10" selection-start="277" selection-end="277" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="300">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/client/templates/client/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="840">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/client/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="1" selection-start="223" selection-end="223" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/client/templatetags/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="569">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/client/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="569">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/client/templatetags/client_extras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="569">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/employee/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="39" selection-start="609" selection-end="619" vertical-scroll-proportion="0.35971224" vertical-offset="145" max-vertical-offset="750">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/site_info/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="74" selection-start="1500" selection-end="1500" vertical-scroll-proportion="-10.2" vertical-offset="420" max-vertical-offset="2265">
+          <folding>
+            <element signature="e#19#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liberty/client/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="26" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.7284173" vertical-offset="0" max-vertical-offset="990">
+          <folding />
         </state>
       </provider>
     </entry>

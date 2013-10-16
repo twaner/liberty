@@ -12,7 +12,12 @@ def clienttester(request):
 def detailedClient(request, client_id):
     return HttpResponse("Client id is %s" % client_id)
 
-def detail(request):
+def index(request):
+    client_detail = Client.clients.order_by('-client_id')
+    context = {'client_detail': client_detail}
+    return render(request, 'client/index.html', context)
+
+def detail(request, client_id):
     client_detail = Client.clients.get(pk=client_id)
     address_detail = Address.objects.get(pk=client_detail.address_id)
     contact_detail = Contact.objects.get(pk=client_detail.contact_info_id)

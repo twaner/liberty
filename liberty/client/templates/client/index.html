@@ -1,16 +1,14 @@
-{% comment %}
-{% if all_employees_list %}
+{% if client_detail %}
     <ul>
-        {% for e in all_employees_list %}
+        {% for e in client_detail %}
         <li>
-            <a href="{ % url 'detailed' e.employee_id %}">
-            //<a href="/employeetest/{{ e.employee_id }}/">
-                {{e.first_name}} {{e.last_name}}
+            <a href="/clienttest/{{ e.client_id }}/">
+                {{e.first_name}} {{e.last_name}} {{e.is_a_business}}
             </a>
         </li>
         {% endfor %}
     </ul>
 {% else %}
-        <p>No employees are available.</p>
+        <p>No clients are available.</p>
 {% endif %}
-        {% endcomment %}
+

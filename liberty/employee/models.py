@@ -22,7 +22,7 @@ class Title(models.Model):
     title = models.CharField(max_length=2, choices=TITLE_CHOICES)
 
     def __unicode__(self):
-        return (self.get_title_display())
+        return self.get_title_display()
 
 
 class Employee(Person):

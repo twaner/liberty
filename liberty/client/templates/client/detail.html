@@ -1,30 +1,14 @@
-        {% comment %}
-
-{% if employee_detail %}
+{% if client_detail %}
     <ul>
         <li>
-            Employee Info
+            Client Info
         </li>
         <li>
-                {{employee_detail.employee_number}} {{employee_detail.first_name}}
-                {{employee_detail.last_name}} {{employee_detail.hire_date}}
+            {{ client_detail.first_name }} {{ client_detail.last_name }}
         </li>
+
         <li>
-            Title(s):
-        </li>
-        {% if title_details %}
-        {% for t in title_details %}
-        <li>
-            {{ t.get_title_display }}
-        </li>
-        {% endfor %}
-        {% else %}
-        <li>
-            No titles on file
-        </li>
-        {% endif %}
-        <li>
-            Employee Address:
+            Client Address:
         </li>
         {% if address_detail %}
         <li>
@@ -36,7 +20,7 @@
         </li>
         {% endif %}
         <li>
-            Employee Contact:
+            Client Contact:
         </li>
         {% if contact_detail %}
         <li>
@@ -47,8 +31,20 @@
             No contact information
         </li>
         {% endif %}
+        <li>
+            Billing Information
+        </li>
+        {% if billing_detail %}
+        <li>
+            {{ billing_detail }}
+        </li>
+        {% else %}
+        <li>
+            No billing information
+        </li>
+        {% endif %}
     </ul>
 {% else %}
-        <p>No employees are available.</p>
+        <p>No Clients are available.</p>
 {% endif %}
-        {% endcomment %}
+
