@@ -34,6 +34,7 @@ def __unicode__(self):
 
 #return(u'%s %s' % (self.first_name, self.last_name))
 
+# TODO RENAME
 class Site_Contact(Person):
     site_contact_id = models.AutoField(primary_key=True)
     site_contact_call_list = models.ForeignKey('Call_List', null=True, blank=True)
@@ -44,8 +45,8 @@ class Site_Contact(Person):
 class Site_Information(Site):
     site_id = models.AutoField(primary_key=True)
     client = models.ForeignKey('client.client', verbose_name="Client Site")
+    # TODO - RENAME -> SOUTH IT!
     site_call_list = models.ManyToManyField('Site_Contact')
-    #site_contact = models.ForeignKey('Site_Contact')
 
     def __unicode__(self):
         return (self.name)

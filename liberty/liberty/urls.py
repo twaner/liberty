@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^employeetest/', include('employee.urls', namespace="employee")),
     url(r'^clienttest/', include('client.urls', namespace="client")),
+    url(r'site_infotest/', include('site_info.urls', namespace="site_info"))
     # Examples:
     # url(r'^$', 'liberty.views.home', name='home'),
     # url(r'^liberty/', include('liberty.foo.urls')),

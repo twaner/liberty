@@ -1,0 +1,18 @@
+{% if site_detail %}
+    <p>Site Information</p>
+    <ul>
+        {% for s in site_detail %}
+        <li>
+            <a href="/site_infotest/{{ s.site_id }}/">
+                {{ s.client.first_name}} {{ s.client.last_name }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+        <p>No Sites are available.</p>
+{% endif %}
+        {% comment %}
+//<a href="/employeetest/{{ e.employee_id }}/">
+    <a href="{ % url 'detailed' e.employee_id %}">
+    {% endcomment %}
