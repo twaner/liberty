@@ -4,7 +4,6 @@ from site_info import views
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     url(r'^(?P<site_id>\d+)/$',
-        views.testconnection, name='detailed'),
-    # ex employeetest/1/info
+        views.detail, name='detail'),
 
 )

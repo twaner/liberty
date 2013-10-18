@@ -21,7 +21,7 @@ def index(request):
     return render(request, 'employee/index.html', context)
 
 
-def detailed(request, employee_id):
+def detaileder(request, employee_id):
     employee_detail = Employee.objects.get(pk=employee_id)
     context = {'employee_detail': employee_detail}
     return render(request, 'employee/detail.html', context)

@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from common.models import Site, Module_Zone, Equipment, Person
 
 # CALL LIST
-class Call_List(models.Model):
+class Call_List_Details(models.Model):
     GENERAL = 'G'
     BURG = 'B'
     FIRE = 'F'
@@ -22,10 +22,10 @@ class Call_List(models.Model):
         (ALTERNATE2, 'Alternate Call List 2'),
     )
 
-    call_list_id = models.AutoField(primary_key=True)
-    call_list_type = models.CharField(max_length=2, choices=CALL_LIST_TYPE)
+    call_list_details_id = models.AutoField(primary_key=True)
+    call_list_details_type = models.CharField(max_length=2, choices=CALL_LIST_TYPE)
     #call_list_site = models.ForeignKey(Site_Information)
-    call_order = models.CharField(max_length=30)
+    order = models.CharField(max_length=30)
     enabled = models.BooleanField(default=False)
 
 
@@ -35,21 +35,23 @@ def __unicode__(self):
 #return(u'%s %s' % (self.first_name, self.last_name))
 
 # TODO RENAME
-class Site_Contact(Person):
-    site_contact_id = models.AutoField(primary_key=True)
-    site_contact_call_list = models.ForeignKey('Call_List', null=True, blank=True)
+class Call_List(Person):
+    call_list_id = models.AutoField(primary_key=True)
+    call_list_detail = models.ForeignKey('Call_List_Details', verbose_name="call list list details",
+                                         null=True, blank=True)
     # NEW
-    site_contact_info = models.ForeignKey('common.Contact', null=True, blank=True)
+    call_list_contact = models.ForeignKey('common.Contact', null=True, blank=True)
 
 # REGION	 SITE INFORMATION
 class Site_Information(Site):
     site_id = models.AutoField(primary_key=True)
-    client = models.ForeignKey('client.client', verbose_name="Client Site")
+    # specific info for the client - not related to call list
+    site_client = models.ForeignKey('client.client', verbose_name="Client Site")
     # TODO - RENAME -> SOUTH IT!
-    site_call_list = models.ManyToManyField('Site_Contact')
+    site_call_list = models.ManyToManyField('Call_List')
 
     def __unicode__(self):
-        return (self.name)
+        return u'%s %s' % (self.client.first_name, self.client.last_name)
 
 # PANEL OBJECT
 class Panel(Equipment):

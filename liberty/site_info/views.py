@@ -16,3 +16,11 @@ def index(request):
     site_detail = Site_Information.objects.order_by('-site_id')
     context = {'site_detail': site_detail}
     return render(request, 'site_info/index.html', context)
+
+def detail(request, site_id):
+    site_detail = Site_Information.objects.get(pk=site_id)
+    site_worker = Site_Contact.objects.get(site_contact_info_id = site_detail.site_call_list)
+    context = {'site_detail': site_detail, 'site_worker': site_worker}
+    return render(request, 'site_info/detail.html', context)
+
+
