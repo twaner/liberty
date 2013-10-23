@@ -2,9 +2,14 @@ from django.conf.urls import patterns, url
 from employee import views
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='tester'),
+    url(r'^$', views.indexer, name='indexer'),
     url(r'^(?P<employee_id>\d+)/$',
         views.detailed, name='detailed'),
-    # ex employeetest/1/info
+    url(r'^search-form/$',
+        views.search_form, name='search_form'),
+    url(r'^search/$', views.search, name='search'),
+    url(r'^addemployee/$', views.addemployee, name='addemployee'),
+    url(r'test/$', views.testing, name='testing'),
+    url(r'index/$', views.index, name="index")
 
 )

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load bootstrap_toolkit %}
+
+{% block extra_head %}
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+<p>Test addemployee.html.</p>
+
+<form class="form-horizontal" action="" method="post">
+        {% csrf_token %}
+        {{ form|as_bootstrap:layout }}
+        {% if layout == "horizontal" %}
+            <p class="form-actions">
+                <input type="submit" value="Submit" class="btn btn-primary">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Employee Information</legend>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="firstname">First Name</label>
+  <div class="controls">
+    <input id="firstname" name="firstname" type="text" placeholder="first name" class="input-large" required="">
+
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="lastname">Last Name</label>
+  <div class="controls">
+    <input id="lastname" name="lastname" type="text" placeholder="last name" class="input-large" required="">
+
+  </div>
+</div>
+
+<!-- Select Multiple -->
+<div class="control-group">
+  <label class="control-label" for="title">Titles</label>
+  <div class="controls">
+    <select id="title" name="title" class="input-medium" multiple="multiple">
+      <option>Officer</option>
+      <option>Technician</option>
+      <option>Sales</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="hiredate">Hire Date</label>
+  <div class="controls">
+    <input id="hiredate" name="hiredate" type="text" placeholder="hire date" class="input-medium" required="">
+
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="paytype">Pay Type</label>
+  <div class="controls">
+    <input id="paytype" name="paytype" type="text" placeholder="pay type" class="input-medium" required="">
+
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="control-group">
+  <label class="control-label" for="payrate">Pay Rate</label>
+  <div class="controls">
+    <select id="payrate" name="payrate" class="input-small">
+      <option>$10.00</option>
+      <option>$20.00</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="terminationdate">Termination Date</label>
+  <div class="controls">
+    <input id="terminationdate" name="terminationdate" type="text" placeholder="termination date" class="input-medium">
+
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="control-group">
+  <label class="control-label" for="terminationreason">Termination Reason</label>
+  <div class="controls">
+    <textarea id="terminationreason" name="terminationreason">Termination Reason</textarea>
+  </div>
+</div>
+     </p>
+        {% else %}
+            <input type="submit" value="Submit" class="btn btn-primary">
+        {% endif %}
+    </form>
+
+</fieldset>
+</form>
+
+{% endblock %}

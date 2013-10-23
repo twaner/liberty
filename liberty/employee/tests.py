@@ -30,7 +30,7 @@ class SimpleTest(TestCase):
                                    city=c, state=s, zip_code=12401)
         a.save()
 
-        d = str( dt.datetime.now())[:10]
+        d = str(dt.datetime.now())[:10]
 
         # contact info
         con = Contact.objects.create(phone="876123409876",

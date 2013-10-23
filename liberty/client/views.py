@@ -15,7 +15,7 @@ def detailedClient(request, client_id):
 def index(request):
     client_detail = Client.clients.order_by('-client_id')
     context = {'client_detail': client_detail}
-    return render(request, 'client/index.html', context)
+    return render(request, 'client/indexer.html', context)
 
 def detail(request, client_id):
     client_detail = Client.clients.get(pk=client_id)

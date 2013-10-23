@@ -1,0 +1,15 @@
+<p>You searched for: <strong>{{ query }}</strong></p>
+
+{% if employees %}
+    <p>Found {{ employees|length }} employee{{ employees|pluralize }}.</p>
+    <ul>
+        {% for e in employees %}
+        <li>
+            <a href="{% url 'employee:detailed' e.employee_id %}">
+            {{ e.first_name }} {{ e.last_name }}
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No employees matched your search criteria.</p>
+{% endif %}

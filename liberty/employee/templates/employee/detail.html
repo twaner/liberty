@@ -7,10 +7,10 @@
                 {{employee_detail.employee_number}} {{employee_detail.first_name}}
                 {{employee_detail.last_name}} {{employee_detail.hire_date}}
         </li>
-        <li>
-            Title(s):
-        </li>
         {% if title_details %}
+        <li>
+            Employee has {{ title_details|length }} title{{ title_details|pluralize }}.
+        </li>
         {% for t in title_details %}
         <li>
             {{ t.get_title_display }}

@@ -24,17 +24,15 @@ class Call_List_Details(models.Model):
 
     call_list_details_id = models.AutoField(primary_key=True)
     call_list_details_type = models.CharField(max_length=2, choices=CALL_LIST_TYPE)
-    #call_list_site = models.ForeignKey(Site_Information)
     order = models.CharField(max_length=30)
     enabled = models.BooleanField(default=False)
 
 
 def __unicode__(self):
-    return self.call_list_type__display()
+    return self.get_call_list_details_type_display()
 
 #return(u'%s %s' % (self.first_name, self.last_name))
 
-# TODO RENAME
 class Call_List(Person):
     call_list_id = models.AutoField(primary_key=True)
     call_list_detail = models.ForeignKey('Call_List_Details', verbose_name="call list list details",
@@ -42,16 +40,20 @@ class Call_List(Person):
     # NEW
     call_list_contact = models.ForeignKey('common.Contact', null=True, blank=True)
 
+    def __unicode__(self):
+        return u'%s' % (self.call_list_detail.get_call_list_details_type_display())
+
 # REGION	 SITE INFORMATION
 class Site_Information(Site):
     site_id = models.AutoField(primary_key=True)
     # specific info for the client - not related to call list
     site_client = models.ForeignKey('client.client', verbose_name="Client Site")
-    # TODO - RENAME -> SOUTH IT!
+    #q = si.site_call_list.all()
+    #si.site_call_list.add(cl)
     site_call_list = models.ManyToManyField('Call_List')
 
     def __unicode__(self):
-        return u'%s %s' % (self.client.first_name, self.client.last_name)
+        return u'%s %s' % (self.site_client.first_name, self.site_client.last_name)
 
 # PANEL OBJECT
 class Panel(Equipment):

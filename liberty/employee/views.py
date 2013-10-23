@@ -3,8 +3,10 @@ from django.http import HttpResponse
 from employee.models import Employee, Title
 from common.models import Address, Contact
 
+
 def tester(request):
     return HttpResponse("Test view working!")
+
 
 def testconnection(request, employee_id):
     return HttpResponse("Employee id is %s" % employee_id)
@@ -15,16 +17,18 @@ def bettertest(request):
     output = ', '.join([e.first_name for e in all_employees_list])
     return HttpResponse(output)
 
-def index(request):
+
+def indexer(request):
     all_employees_list = Employee.objects.order_by('-employee_id')
     context = {'all_employees_list': all_employees_list}
-    return render(request, 'employee/index.html', context)
+    return render(request, 'employee/indexer.html', context)
 
 
 def detaileder(request, employee_id):
     employee_detail = Employee.objects.get(pk=employee_id)
     context = {'employee_detail': employee_detail}
     return render(request, 'employee/detail.html', context)
+
 
 def detailed(request, employee_id):
     employee_detail = Employee.objects.get(pk=employee_id)
@@ -34,3 +38,26 @@ def detailed(request, employee_id):
     context = {'employee_detail': employee_detail, 'address_detail': address_detail,
                'contact_detail': contact_detail, 'title_details': title_details}
     return render(request, 'employee/detail.html', context)
+
+# FORMS
+def index(request):
+    return render(request, "employee/index.html")
+
+def testing(request):
+    return render(request, 'employee/test.html')
+
+def search_form(request):
+    return render(request, 'employee/search_form.html')
+
+
+def search(request):
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        employees = Employee.objects.filter(first_name__icontains=q)
+        return render(request, 'employee/search_results.html',
+                      {'employees': employees, 'query': q})
+    else:
+        return HttpResponse('Please submit a search term.')
+
+def addemployee(request):
+    return render(request, 'employee/addemployee.html')
