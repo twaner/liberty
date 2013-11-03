@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from employee.models import Employee, Title
-from common.models import Address, Contact
+from django.http import HttpResponse, HttpResponseRedirect
+from employee.models import Employee, Title, EmployeeForm, TitleForm
+from common.models import Address, Contact, AddressForm, ContactForm
 
 
 def tester(request):
@@ -61,3 +61,28 @@ def search(request):
 
 def addemployee(request):
     return render(request, 'employee/addemployee.html')
+
+"""
+def employeeform(request):
+    if request.method == 'POST': # If form has been submitted
+        form = EmployeeForm(request.POST) # A form bound to POST data
+        if form.is_valid():
+            #process clean data
+            return HttpResponseRedirect('/thanks/')
+        else:
+            form = EmployeeForm() # unbound form
+
+    return render(request, 'addemployee.html', {
+        'form': form
+        })
+"""
+def titleform(request):
+    form = TitleForm()
+
+    return render(request, 'title.html', {'form': form})
+
+def empform(request):
+    form = EmployeeForm()
+    form1 = AddressForm()
+
+    return render(request, 'employee/empform.html', {'form': form, 'form1': form1})

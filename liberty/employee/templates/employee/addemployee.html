@@ -1,21 +1,11 @@
 {% extends 'base.html' %}
+
 {% load bootstrap_toolkit %}
 
-{% block extra_head %}
-    {{ form.media }}
-{% endblock %}
-
 {% block content %}
-<p>Test addemployee.html.</p>
+{{ form|as_bootstrap }}
 
-<form class="form-horizontal" action="" method="post">
-        {% csrf_token %}
-        {{ form|as_bootstrap:layout }}
-        {% if layout == "horizontal" %}
-            <p class="form-actions">
-                <input type="submit" value="Submit" class="btn btn-primary">
 <fieldset>
-
 <!-- Form Name -->
 <legend>Employee Information</legend>
 
@@ -52,10 +42,9 @@
 <!-- Text input-->
 <div class="control-group">
   <label class="control-label" for="hiredate">Hire Date</label>
-  <div class="controls">
-    <input id="hiredate" name="hiredate" type="text" placeholder="hire date" class="input-medium" required="">
-
-  </div>
+  <div class="input-append">
+            <input data-bootstrap-widget="datepicker" data-date-format="yyyy-mm-dd" data-date-language="en-US" id="id_date" name="date" type="text" /><span class="add-on"><i class="icon-calendar"></i></span>
+        </div>
 </div>
 
 <!-- Text input-->
@@ -82,10 +71,12 @@
 <div class="control-group">
   <label class="control-label" for="terminationdate">Termination Date</label>
   <div class="controls">
-    <input id="terminationdate" name="terminationdate" type="text" placeholder="termination date" class="input-medium">
-
+    <input data-bootstrap-widget="datepicker" data-date-format="yyyy-mm-dd" data-date-language="en-US"
+    id="terminationdate" name="terminationdate" type="text" placeholder="termination date" class="input-medium">
+      <span class="add-on"><i class="icon-calendar"></i></span>
+        </div>
   </div>
-</div>
+
 
 <!-- Textarea -->
 <div class="control-group">
@@ -94,13 +85,8 @@
     <textarea id="terminationreason" name="terminationreason">Termination Reason</textarea>
   </div>
 </div>
-     </p>
-        {% else %}
-            <input type="submit" value="Submit" class="btn btn-primary">
-        {% endif %}
-    </form>
 
 </fieldset>
-</form>
+
 
 {% endblock %}
