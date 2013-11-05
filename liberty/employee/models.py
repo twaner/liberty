@@ -29,15 +29,15 @@ class Title(models.Model):
 
 
 class Employee(Person):
-    COMMISSION = 'COM',
-    HOURLY = 'HR',
-    SALARY = 'SAL',
-    OTHER = 'OT',
+    """COM = 'COM',
+    HR = 'HR',
+    SAL = 'SAL',
+    OT = 'OT', """
     PAY_TYPE_CHOICES = (
-        (COMMISSION, 'Commission'),
-        (HOURLY, 'Hourly'),
-        (SALARY, 'Salary'),
-        (OTHER, 'Other'),
+        ('COM', 'Commission'),
+        ('HR', 'Hourly'),
+        ('SAL', 'Salary'),
+        ('OT', 'Other'),
     )
     employee_id = models.AutoField(primary_key=True)
     employee_number = models.IntegerField(max_length=10)
@@ -45,8 +45,8 @@ class Employee(Person):
     address = models.ForeignKey('common.Address')
     contact_info = models.ForeignKey('common.Contact')
     hire_date = models.DateField()
-    pay_type = models.CharField(max_length=3, choices=PAY_TYPE_CHOICES, default=HOURLY)
-    pay_rate = models.DecimalField("employee pay rate", max_digits=5, decimal_places=2, blank=True)
+    pay_type = models.CharField(max_length=3, choices=PAY_TYPE_CHOICES, default='HR')
+    pay_rate = models.DecimalField("employee pay rate", max_digits=10, decimal_places=2, blank=True)
     termination_date = models.DateField(null=True, blank=True)
     termination_reason = models.CharField(max_length=300, blank=True)
     #e.e_title.add(t)

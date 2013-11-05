@@ -94,26 +94,37 @@ def titleform1(request):
 
 
 def empform(request):
-    print("empform view called")
+    print("empform long view called")
     if request.method == 'POST': # If form has been submitted...
         print("POST ==")
         form = AddEmployeeForm(request.POST)
         form1 = AddressForm(request.POST)
         form2 = EmployeeContactForm(request.POST)
-        if form.is_valid():
-        #if form.is_valid() and form1.is_valid() and form2.is_valid():
+        f_valid = form.is_valid()
+        f1_valid = form1.is_valid()
+        f2_valid = form2.is_valid()
+        #debugging
+        print("Form validation: ", f_valid, "1:", f1_valid, "2:", f2_valid)
+        print(request.POST.get('pay_type'))
+
+        if form.is_valid() and form1.is_valid() and form2.is_valid():
             # city name from form
             city_n = request.POST.get('city_name')
+
+            print(city_n)
+
             # check to see if that city is in db i.e. count > 1
             city = City.objects.filter(city_name__icontains=city_n).count()
             # if exists get object from db else create new city object and save.
             c = City
             if city > 1:
+                # assign value to City variable
                 c = City.objects.get(city_name__icontains=city_n)
             else:
+                # save new city
                 c = City(city_name=city_n)
                 c.save()
-                # address
+            # address
             address = request.POST.get('address')
             address2 = request.POST.get('address2')
             state = request.POST.get('state')
@@ -158,7 +169,7 @@ def empform(request):
 
 
 def titleform(request):
-    print("title view called")
+    print("titleform view called")
     if request.method == 'POST':
         print("POST called")
         form = AddEmployeeForm()
@@ -173,7 +184,7 @@ def titleform(request):
 
 
 def empform1(request):
-    print("empform view called")
+    print("empform1 view called")
     if request.method == 'POST': # If form has been submitted...
         print("POST ==")
         print("form constructors")
