@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from employee.models import Employee, Title, EmployeeForm, TitleForm
-from common.models import Address, Contact, AddressForm, ContactForm
+from employee.models import Employee, Title, EmployeeForm, TitleForm, AddEmployeeForm
+from common.models import Address, Contact, City, AddressForm, EmployeeContactForm
 
 
 def tester(request):
@@ -43,8 +43,10 @@ def detailed(request, employee_id):
 def index(request):
     return render(request, "employee/index.html")
 
+
 def testing(request):
     return render(request, 'employee/test.html')
+
 
 def search_form(request):
     return render(request, 'employee/search_form.html')
@@ -59,8 +61,10 @@ def search(request):
     else:
         return HttpResponse('Please submit a search term.')
 
+
 def addemployee(request):
     return render(request, 'employee/addemployee.html')
+
 
 """
 def employeeform(request):
@@ -76,13 +80,112 @@ def employeeform(request):
         'form': form
         })
 """
-def titleform(request):
-    form = TitleForm()
 
+
+def titleform1(request):
+    print("title view called")
+    if request.method == 'POST':
+        print("POST called")
+        form = TitleForm()
+    else:
+        print('ELSE CALLED')
+        form = TitleForm()
     return render(request, 'title.html', {'form': form})
 
-def empform(request):
-    form = EmployeeForm()
-    form1 = AddressForm()
 
-    return render(request, 'employee/empform.html', {'form': form, 'form1': form1})
+def empform(request):
+    print("empform view called")
+    if request.method == 'POST': # If form has been submitted...
+        print("POST ==")
+        form = AddEmployeeForm(request.POST)
+        form1 = AddressForm(request.POST)
+        form2 = EmployeeContactForm(request.POST)
+        if form.is_valid():
+        #if form.is_valid() and form1.is_valid() and form2.is_valid():
+            # city name from form
+            city_n = request.POST.get('city_name')
+            # check to see if that city is in db i.e. count > 1
+            city = City.objects.filter(city_name__icontains=city_n).count()
+            # if exists get object from db else create new city object and save.
+            c = City
+            if city > 1:
+                c = City.objects.get(city_name__icontains=city_n)
+            else:
+                c = City(city_name=city_n)
+                c.save()
+                # address
+            address = request.POST.get('address')
+            address2 = request.POST.get('address2')
+            state = request.POST.get('state')
+            zip_code = request.POST.get('zip_code')
+            a = Address(address=address, address2=address2, city=c, state=state,
+                        zip_code=zip_code)
+            a.save()
+
+            # contact
+            phone = request.POST.get('phone')
+            cell = request.POST.get('cell')
+            email = request.POST.get('email')
+            con = Contact(phone=phone, cell=cell, email=email)
+            con.save()
+
+            # employee
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            employee_number = request.POST.get('employee_number')
+            hire_date = request.POST.get('hire_date')
+            pay_type = request.POST.get('pay_type')
+            pay_rate = request.POST.get('pay_rate')
+            e = Employee(first_name=first_name, last_name=last_name, employee_number=employee_number,
+                         hire_date=hire_date, pay_type=pay_type, pay_rate=pay_rate)
+            e.save()
+            # handle m2m field
+            [e.e_title.add(et) for et in request.POST.getlist('e_title')]
+            form.save_m2m()
+
+            return HttpResponseRedirect('/index/')
+    else:
+        # unbound forms
+        form = AddEmployeeForm()
+        form1 = AddressForm()
+        form2 = EmployeeContactForm()
+
+    return render(request, 'title.html', {'form': form, 'form1': form1,
+                                          'form2': form2})
+
+
+""" """
+
+
+def titleform(request):
+    print("title view called")
+    if request.method == 'POST':
+        print("POST called")
+        form = AddEmployeeForm()
+        form1 = AddressForm(request.POST)
+        form2 = EmployeeContactForm(request.POST)
+    else:
+        print('ELSE CALLED!!!')
+        form = AddEmployeeForm()
+        form1 = AddressForm()
+        form2 = EmployeeContactForm()
+    return render(request, 'title.html', {'form': form, 'form1': form1, 'form2': form2})
+
+
+def empform1(request):
+    print("empform view called")
+    if request.method == 'POST': # If form has been submitted...
+        print("POST ==")
+        print("form constructors")
+        form = AddEmployeeForm(request.POST)
+        form1 = AddressForm(request.POST)
+        form2 = EmployeeContactForm(request.POST)
+    else:
+        # unbound forms
+        print("ELSE CALLED!!!")
+        form = AddEmployeeForm()
+        form1 = AddressForm()
+        form2 = EmployeeContactForm()
+
+    return render(request, 'employee/empform.html', {'form': form, 'form1': form1,
+                                                     'form2': form2})

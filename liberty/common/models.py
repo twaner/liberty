@@ -5,58 +5,58 @@ from django.forms import ModelForm
 
 # Choices
 STATE_CHOICES = (
-        ('Alabama', 'AL'),
-        ('Alaska', 'AK'),
-        ('Arizona', 'AZ'),
-        ('Arkansas', 'AR'),
-        ('California', 'CA'),
-        ('Colorado', 'CO'),
-        ('Connecticut', 'CT'),
-        ('Delaware', 'DE'),
-        ('District of Columbia', 'DC'),
-        ('Florida', 'FL'),
-        ('Georgia', 'GA'),
-        ('Hawaii', 'HI'),
-        ('Idaho', 'ID'),
-        ('Illinois', 'IL'),
-        ('Indiana', 'IN'),
-        ('Iowa', 'IA'),
-        ('Kansas', 'KS'),
-        ('Kentucky', 'KY'),
-        ('Louisiana', 'LA'),
-        ('Maine', 'ME'),
-        ('Maryland', 'MD'),
-        ('Massachusetts', 'MA'),
-        ('Michigan', 'MI'),
-        ('Minnesota', 'MN'),
-        ('Mississippi', 'MS'),
-        ('Missouri', 'MO'),
-        ('Montana', 'MT'),
-        ('Nebraska', 'NE'),
-        ('Nevada', 'NV'),
-        ('New Hampshire', 'NH'),
-        ('New Jersey', 'NJ'),
-        ('New Mexico', 'NM'),
-        ('New York', 'NY'),
-        ('North Carolina', 'NC'),
-        ('North Dakota', 'ND'),
-        ('Ohio', 'OH'),
-        ('Oklahoma', 'OK'),
-        ('Oregon', 'OR'),
-        ('Pennsylvania', 'PA'),
-        ('Rhode Island', 'RI'),
-        ('South Carolina', 'SC'),
-        ('South Dakota', 'SD'),
-        ('Tennessee', 'TN'),
-        ('Texas', 'TX'),
-        ('Utah', 'UT' ),
-        ('Vermont', 'VT'),
-        ('Virginia', 'VA'),
-        ('Washington', 'WA'),
-        ('West Virginia', 'WV'),
-        ('Wisconsin', 'WI'),
-        ('Wyoming', 'WY'),
-    )
+    ('Alabama', 'AL'),
+    ('Alaska', 'AK'),
+    ('Arizona', 'AZ'),
+    ('Arkansas', 'AR'),
+    ('California', 'CA'),
+    ('Colorado', 'CO'),
+    ('Connecticut', 'CT'),
+    ('Delaware', 'DE'),
+    ('District of Columbia', 'DC'),
+    ('Florida', 'FL'),
+    ('Georgia', 'GA'),
+    ('Hawaii', 'HI'),
+    ('Idaho', 'ID'),
+    ('Illinois', 'IL'),
+    ('Indiana', 'IN'),
+    ('Iowa', 'IA'),
+    ('Kansas', 'KS'),
+    ('Kentucky', 'KY'),
+    ('Louisiana', 'LA'),
+    ('Maine', 'ME'),
+    ('Maryland', 'MD'),
+    ('Massachusetts', 'MA'),
+    ('Michigan', 'MI'),
+    ('Minnesota', 'MN'),
+    ('Mississippi', 'MS'),
+    ('Missouri', 'MO'),
+    ('Montana', 'MT'),
+    ('Nebraska', 'NE'),
+    ('Nevada', 'NV'),
+    ('New Hampshire', 'NH'),
+    ('New Jersey', 'NJ'),
+    ('New Mexico', 'NM'),
+    ('New York', 'NY'),
+    ('North Carolina', 'NC'),
+    ('North Dakota', 'ND'),
+    ('Ohio', 'OH'),
+    ('Oklahoma', 'OK'),
+    ('Oregon', 'OR'),
+    ('Pennsylvania', 'PA'),
+    ('Rhode Island', 'RI'),
+    ('South Carolina', 'SC'),
+    ('South Dakota', 'SD'),
+    ('Tennessee', 'TN'),
+    ('Texas', 'TX'),
+    ('Utah', 'UT' ),
+    ('Vermont', 'VT'),
+    ('Virginia', 'VA'),
+    ('Washington', 'WA'),
+    ('West Virginia', 'WV'),
+    ('Wisconsin', 'WI'),
+    ('Wyoming', 'WY'),
+)
 
 # Entity Models
 class Person(models.Model):
@@ -147,13 +147,13 @@ class Address(models.Model):
     address = models.CharField("address", max_length=30)
     address2 = models.CharField("address 2", max_length=30)
     city = models.ForeignKey(City)
-    state = models.ForeignKey(State)
+    state = models.CharField(max_length=30, choices=STATE_CHOICES, default='NY')
+    #state = models.ForeignKey(State)
     zip_code = models.IntegerField("zip code", max_length=10)
 
     def __unicode__(self):
         return (u'%s %s %s %s %s' % (self.address, self.address2,
-                self.city.city_name, self.state.state, self.zip_code))
-        #return(u '%s %s %s %s')
+                                     self.city.city_name, self.state, self.zip_code))
 
 # Info Models
 class Contact(models.Model):
@@ -167,6 +167,7 @@ class Contact(models.Model):
 
     def __unicode__(self):
         return "%s%s%s-%s%s%s-%s%s%s%s" % tuple(self.phone)
+
 
 class Billing_Information(models.Model):
     billing_id = models.AutoField(primary_key=True)
@@ -217,10 +218,22 @@ class Equipment(models.Model):
 
 # ModelForms
 class AddressForm(ModelForm):
-    class Meta:
 
+    class Meta:
         model = Address
+def __init__(self, *args, **kwargs):
+    super(AddressForm, self).__init__(*args, **kwargs)
+    self.fields['state'].value = "NY"
 
 class ContactForm(ModelForm):
     class Meta:
         model = Contact
+
+class CityForm(ModelForm):
+    class Meta:
+        model = City
+
+class EmployeeContactForm(ModelForm):
+    class Meta:
+        model = Contact
+        exclude = ('phone_extension','office_phone', 'office_phone_extension', 'website',)
