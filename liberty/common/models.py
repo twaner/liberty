@@ -1,7 +1,5 @@
 # Common models
 from django.db import models
-from django.forms import ModelForm
-
 
 # Choices
 STATE_CHOICES = (
@@ -145,7 +143,7 @@ class State(models.Model):
 
 class Address(models.Model):
     address = models.CharField("address", max_length=30)
-    address2 = models.CharField("address 2", max_length=30)
+    address2 = models.CharField("address 2", max_length=30, blank=True)
     city = models.ForeignKey(City)
     state = models.CharField(max_length=30, choices=STATE_CHOICES, default='NY')
     #state = models.ForeignKey(State)
@@ -158,10 +156,10 @@ class Address(models.Model):
 # Info Models
 class Contact(models.Model):
     phone = models.CharField("primary phone", max_length=13)
-    phone_extension = models.CharField("primary phone extension", max_length=10)
+    phone_extension = models.CharField("primary phone extension", max_length=10, blank=True)
     cell = models.CharField("cell phone", max_length=12)
-    office_phone = models.CharField("office phone", max_length=13)
-    office_phone_extension = models.CharField("office phone extension", max_length=10)
+    office_phone = models.CharField("office phone", max_length=13, blank=True)
+    office_phone_extension = models.CharField("office phone extension", max_length=10, blank=True)
     email = models.EmailField(blank=True)
     website = models.URLField(blank=True)
 
@@ -216,24 +214,3 @@ class Equipment(models.Model):
     def __unicode__(self):
         return (self.equipment_name)
 
-# ModelForms
-class AddressForm(ModelForm):
-
-    class Meta:
-        model = Address
-def __init__(self, *args, **kwargs):
-    super(AddressForm, self).__init__(*args, **kwargs)
-    self.fields['state'].value = "NY"
-
-class ContactForm(ModelForm):
-    class Meta:
-        model = Contact
-
-class CityForm(ModelForm):
-    class Meta:
-        model = City
-
-class EmployeeContactForm(ModelForm):
-    class Meta:
-        model = Contact
-        exclude = ('phone_extension','office_phone', 'office_phone_extension', 'website',)

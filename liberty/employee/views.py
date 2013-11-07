@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from employee.models import Employee, Title, EmployeeForm, TitleForm, AddEmployeeForm
-from common.models import Address, Contact, City, AddressForm, EmployeeContactForm
+from employee.models import Employee, Title
+from employee.forms import EmployeeForm, TitleForm, AddEmployeeForm
+from common.models import Address, Contact, City
+from common.forms import AddressForm, EmployeeContactForm, CityForm
 
 
 def tester(request):
@@ -95,36 +97,43 @@ def titleform1(request):
 
 def empform(request):
     print("empform long view called")
-    if request.method == 'POST': # If form has been submitted...
+    if request.method == 'POST':  # If form has been submitted...
         print("POST ==")
         form = AddEmployeeForm(request.POST)
         form1 = AddressForm(request.POST)
         form2 = EmployeeContactForm(request.POST)
+        #form3 = CityForm(request.POST)
         f_valid = form.is_valid()
         f1_valid = form1.is_valid()
         f2_valid = form2.is_valid()
         #debugging
         print("Form validation: ", f_valid, "1:", f1_valid, "2:", f2_valid)
         print(request.POST.get('pay_type'))
+        print(request.POST.get('city-autocomplete'))
+        print(request.POST.get('city'))
 
         if form.is_valid() and form1.is_valid() and form2.is_valid():
             # city name from form
-            city_n = request.POST.get('city_name')
+            city_n = request.POST.get('city')
 
-            print(city_n)
+            #print(City.objects.get(city_n))
+            print(type(city_n))
 
             # check to see if that city is in db i.e. count > 1
-            city = City.objects.filter(city_name__icontains=city_n).count()
+            #city = City.objects.filter(city_name__icontains=city_n).count()
             # if exists get object from db else create new city object and save.
             c = City
-            if city > 1:
+            if city_n > 1:
                 # assign value to City variable
-                c = City.objects.get(city_name__icontains=city_n)
+                c = City.objects.get(pk=city_n)
+                #c = City.objects.get(city_name__icontains=city_n)
             else:
                 # save new city
                 c = City(city_name=city_n)
                 c.save()
             # address
+            print(c.city_name)
+
             address = request.POST.get('address')
             address2 = request.POST.get('address2')
             state = request.POST.get('state')
@@ -148,18 +157,20 @@ def empform(request):
             pay_type = request.POST.get('pay_type')
             pay_rate = request.POST.get('pay_rate')
             e = Employee(first_name=first_name, last_name=last_name, employee_number=employee_number,
-                         hire_date=hire_date, pay_type=pay_type, pay_rate=pay_rate)
+                         address=a, contact_info=con, hire_date=hire_date, pay_type=pay_type,
+                         pay_rate=pay_rate)
             e.save()
             # handle m2m field
             [e.e_title.add(et) for et in request.POST.getlist('e_title')]
-            form.save_m2m()
+            #e.save_m2m()
 
-            return HttpResponseRedirect('/index/')
+            return HttpResponseRedirect('/employeetest/index/')
     else:
         # unbound forms
         form = AddEmployeeForm()
         form1 = AddressForm()
         form2 = EmployeeContactForm()
+        #form3 = CityForm()
 
     return render(request, 'title.html', {'form': form, 'form1': form1,
                                           'form2': form2})
