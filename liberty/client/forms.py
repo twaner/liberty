@@ -7,3 +7,8 @@ class ClientForm(ModelForm):
     class Meta:
         model = Client
         exclude = ('address', 'contact_info', 'billing',)
+
+class Sales_ProspectForm(ModelForm):
+    class Meta:
+        model = Sales_Prospect
+        exclude = ('address', 'contact_info',)

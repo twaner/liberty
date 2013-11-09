@@ -1,12 +1,26 @@
-{% if client_detail %}
+{% extends 'base.html' %}
+{% load bootstrap_toolkit %}
+
+{% block content %}
+
+{% if client_detail or business_client %}
     <ul>
         <li>
             Client Info
         </li>
+        {% if client_detail %}
         <li>
             {{ client_detail.first_name }} {{ client_detail.last_name }}
         </li>
-
+        {% endif %}
+        {% if business_client %}
+        <li>
+            {{ business_client.business_name }}
+        </li>
+        <li>
+            {{ business_client.first_name }} {{ business_client.last_name }}
+        </li>
+        {% endif %}
         <li>
             Client Address:
         </li>
@@ -48,3 +62,4 @@
         <p>No Clients are available.</p>
 {% endif %}
 
+{% endblock %}

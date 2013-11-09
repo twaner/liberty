@@ -42,7 +42,6 @@ class Client(Person):
 
 class Sales_Prospect(Person):
     sales_prospect_id = models.AutoField(primary_key=True)
-    # TODO - 10/6 - Make this choices and Optional
     liberty_contact = models.ForeignKey('employee.Employee', null=True, blank=True)
     sale_type = models.CharField(max_length=40, blank=True)
     probability = models.CharField(max_length=30, blank=True)
@@ -50,7 +49,9 @@ class Sales_Prospect(Person):
     comments = models.CharField(max_length=500, blank=True)
     address = models.ForeignKey('common.Address', verbose_name="prospect address", null=True, blank=True)
     contact_info = models.ForeignKey('common.Contact', verbose_name="prospect contact", null=True, blank=True)
-    if_client = models.BooleanField(default=False)
+    # 11-9 changed to is_client from if_client
+    # business logic should transfer information to client if true!
+    is_client = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u'%s %s' % (self.first_name, self.last_name)

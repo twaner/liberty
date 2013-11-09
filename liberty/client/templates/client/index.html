@@ -1,9 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap_toolkit %}
+
+{% block content %}
+    <p>Liberty Security Services Client List</p>
+    <p>Select a client to view details</p>
+    <p>Residential Clients</p>
 {% if client_detail %}
     <ul>
         {% for e in client_detail %}
         <li>
             <a href="/clienttest/{{ e.client_id }}/">
-                {{e.first_name}} {{e.last_name}} {{e.is_a_business}}
+                {{e.first_name}} {{e.last_name}} <!--{{e.is_a_business}}-->
             </a>
         </li>
         {% endfor %}
@@ -12,3 +19,18 @@
         <p>No clients are available.</p>
 {% endif %}
 
+<p>Business Clients</p>
+{% if business_client %}
+   <ul>
+        {% for b in business_client %}
+        <li>
+            <a href="/clienttest/{{ b.client_id }}/">
+              {{ b.business_name }} <!--{{e.is_a_business}}-->
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+        <p>No clients are available.</p>
+{% endif %}
+{% endblock %}
