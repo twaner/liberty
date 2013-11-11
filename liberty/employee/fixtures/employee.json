@@ -1,0 +1,141 @@
+[
+{
+    "pk": 1, 
+    "model": "employee.title", 
+    "fields": {
+        "title": "T"
+    }
+},
+{
+    "pk": 2, 
+    "model": "employee.title", 
+    "fields": {
+        "title": "O"
+    }
+},
+{
+    "pk": 3, 
+    "model": "employee.title", 
+    "fields": {
+        "title": "M"
+    }
+},
+{
+    "pk": 4, 
+    "model": "employee.title", 
+    "fields": {
+        "title": "S"
+    }
+},
+{
+    "pk": 5, 
+    "model": "employee.title", 
+    "fields": {
+        "title": "C"
+    }
+},
+{
+    "pk": 6, 
+    "model": "employee.title", 
+    "fields": {
+        "title": "I"
+    }
+},
+{
+    "pk": 1, 
+    "model": "employee.employee", 
+    "fields": {
+        "pay_type": "HR", 
+        "first_name": "Johnny", 
+        "last_name": "Test", 
+        "termination_reason": "", 
+        "contact_info": 1, 
+        "hire_date": "2012-10-11", 
+        "employee_number": 999, 
+        "termination_date": null, 
+        "address": 2, 
+        "pay_rate": "20.00", 
+        "e_title": [
+            1, 
+            2
+        ]
+    }
+},
+{
+    "pk": 2, 
+    "model": "employee.employee", 
+    "fields": {
+        "pay_type": "HR", 
+        "first_name": "Taiowa", 
+        "last_name": "Waner", 
+        "termination_reason": "", 
+        "contact_info": 7, 
+        "hire_date": "2013-11-05", 
+        "employee_number": 4321, 
+        "termination_date": null, 
+        "address": 8, 
+        "pay_rate": "45.00", 
+        "e_title": [
+            2
+        ]
+    }
+},
+{
+    "pk": 3, 
+    "model": "employee.employee", 
+    "fields": {
+        "pay_type": "HR", 
+        "first_name": "Taiowa", 
+        "last_name": "Waner", 
+        "termination_reason": "", 
+        "contact_info": 8, 
+        "hire_date": "2013-11-05", 
+        "employee_number": 4321, 
+        "termination_date": null, 
+        "address": 9, 
+        "pay_rate": "45.00", 
+        "e_title": [
+            2
+        ]
+    }
+},
+{
+    "pk": 4, 
+    "model": "employee.employee", 
+    "fields": {
+        "pay_type": "HR", 
+        "first_name": "Taiowa", 
+        "last_name": "Waner", 
+        "termination_reason": "", 
+        "contact_info": 9, 
+        "hire_date": "2013-11-05", 
+        "employee_number": 44, 
+        "termination_date": null, 
+        "address": 10, 
+        "pay_rate": "45.00", 
+        "e_title": [
+            2
+        ]
+    }
+},
+{
+    "pk": 5, 
+    "model": "employee.employee", 
+    "fields": {
+        "pay_type": "COM", 
+        "first_name": "Steve", 
+        "last_name": "Testform", 
+        "termination_reason": "", 
+        "contact_info": 10, 
+        "hire_date": "2013-10-08", 
+        "employee_number": 88, 
+        "termination_date": null, 
+        "address": 11, 
+        "pay_rate": "10.00", 
+        "e_title": [
+            3, 
+            4
+        ]
+    }
+}
+]

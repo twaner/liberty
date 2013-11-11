@@ -155,9 +155,9 @@ class Address(models.Model):
 
 # Info Models
 class Contact(models.Model):
-    phone = models.CharField("primary phone", max_length=13)
+    phone = models.CharField("primary phone", max_length=13, blank=True)
     phone_extension = models.CharField("primary phone extension", max_length=10, blank=True)
-    cell = models.CharField("cell phone", max_length=12)
+    cell = models.CharField("cell phone", max_length=12, blank=True)
     office_phone = models.CharField("office phone", max_length=13, blank=True)
     office_phone_extension = models.CharField("office phone extension", max_length=10, blank=True)
     email = models.EmailField(blank=True)

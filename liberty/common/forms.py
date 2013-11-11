@@ -18,6 +18,7 @@ class AddressFormNotAuto(ModelForm):
         model = Address
         exclude = ('city',)
 
+
 class CityFormNotAuto(ModelForm):
     class Meta:
         model = City

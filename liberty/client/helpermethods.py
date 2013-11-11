@@ -1,5 +1,6 @@
 from models import Client, Sales_Prospect
 from common.helpermethods import boolean_helper
+from employee.models import Employee
 
 def create_client(request, *args):
     #client
@@ -33,15 +34,20 @@ def create_client(request, *args):
 def create_sales_prospect(request, *args):
     first_name = request.POST.get('first_name')
     last_name = request.POST.get('last_name')
-    liberty_contact = request.POST('liberty_contact')
-    sale_type = request.POST('sale_type')
-    probability = request.POST('probability')
-    initial_contact_date = request.POST('initial_contact_date')
-    comments = request.POST('comments')
-    is_client = request.POST('is_client')
-    #handle is client
-    client = boolean_helper(is_client)
-    sales = Sales_Prospect(first_name=first_name, last_name=last_name,liberty_contact=liberty_contact,sale_type=sale_type,
-                           probability=probability, initial_contact_date=initial_contact_date, comments=comments,
-                           is_client=is_client, address=args[0], contact_info=args[1])
+    #liberty_contact = request.POST.get('liberty_contact')
+    liberty_contact = Employee.objects.get(pk=request.POST.get('liberty_contact'))
+    sale_type = request.POST.get('sale_type')
+    probability = request.POST.get('probability')
+    initial_contact_date = request.POST.get('initial_contact_date')
+    comments = request.POST.get('comments')
+    is_client = False
+    #handle is client --> address=None, contact_info=None
+    #client = boolean_helper(is_client)
+    if len(args) == 1:
+        address = None
+    else:
+        address = args[1]
+    sales = Sales_Prospect(first_name=first_name, last_name=last_name, liberty_contact=liberty_contact,
+                           sale_type=sale_type, probability=probability, initial_contact_date=initial_contact_date,
+                           comments=comments, address=address, contact_info=args[0], is_client=is_client)
     sales.save()

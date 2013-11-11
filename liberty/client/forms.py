@@ -11,4 +11,8 @@ class ClientForm(ModelForm):
 class Sales_ProspectForm(ModelForm):
     class Meta:
         model = Sales_Prospect
-        exclude = ('address', 'contact_info',)
+        exclude = ('address', 'contact_info', 'is_client',)
+        widgets = {
+            'initial_contact_date': BootstrapDateInput, 'termination_date': BootstrapDateInput,
+            'comments': Textarea(attrs={'cols': 160, 'rows': 10})
+        }

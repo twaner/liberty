@@ -77,36 +77,49 @@ def addclient(request):
 
     return render(request, 'client/addclient.html', {'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
 
-def add_sales_prospect(request):
+def addsalesprospect(request):
     print("Add sales prospect called!")
     if request.method == 'POST':
-        form_sp = Sales_ProspectForm(request.POST)
-        form_c = CityFormNotAuto(request.POST)
-        form_af = AddressFormNotAuto(request.POST)
-        form_cf = ContactForm(request.POST)
-        # sweet validation
-        f_valid = form_sp.is_valid()
-        f1_valid = form_c.is_valid()
-        f2_valid = form_cf.is_valid()
-        f3_valid = form_cf.is_valid()
+        form = Sales_ProspectForm(request.POST)
+        form1 = CityFormNotAuto(request.POST)
+        form2 = AddressFormNotAuto(request.POST)
+        form3 = ContactForm(request.POST)
+        #check if address is showing
+        show_address = request.POST.get('showaddress')
+        print("show address value", show_address)
+        f_valid = form.is_valid()
+        f3_valid = form3.is_valid()
+        # address is entered
+        if show_address != 'None':
+            # sweet validation
+            f1_valid = form1.is_valid()
+            f2_valid = form2.is_valid()
 
-        print("Form validation: ", f_valid, "1:", f1_valid, "2:", f2_valid, '3:', f3_valid)
+            print("Form validation: ", f_valid, "1:", f1_valid, "2:", f2_valid, '3:', f3_valid)
 
-        if form.is_valid() and form1.is_valid() and form2.is_valid() and form3.is_valid():
-            #city
-            city_f = request.POST.get('city_name')
-            c = city_worker(request, city_f)
+            if form.is_valid() and form1.is_valid() and form2.is_valid() and form3.is_valid():
+                #city
+                city_f = request.POST.get('city_name')
+                c = city_worker(request, city_f)
+                # address
+                a = create_address(request, c)
+                # contact
+                con = create_contact(request)
+                #sales prospect
+                create_sales_prospect(address=a, contact_info=con)
 
-            # address
-            a = create_address(request, c)
-
-            # contact
+                #handle success!
+                return HttpResponseRedirect('/clienttest/index/')
+        # no address entered
+        print("Form validation: ", f_valid, "3: ", f3_valid)
+        if f_valid and f3_valid:
             con = create_contact(request)
+            create_sales_prospect(request, con)
 
     else:
-        form_sp = Sales_ProspectForm()
-        form_c = CityFormNotAuto()
-        form_af = AddressFormNotAuto()
-        form_cf = ContactForm()
+        form = Sales_ProspectForm()
+        form1 = CityFormNotAuto()
+        form2 = AddressFormNotAuto()
+        form3 = ContactForm()
 
-    return render(request, 'client/addclient.html', {'form_sp': form_sp, 'form_c': form_c, 'form_af': form_af, 'form_cf': form_cf})
+    return render(request, 'client/addsalescontact.html', {'form': form, 'form1': form1, 'form2': form2, 'form3': form3})

@@ -55,11 +55,14 @@ def boolean_helper(*args):
     @param args: boolean field from form
     @return: boolean
     """
+    worker = True
     print('before if boolean', args[0])
     if args[0] == 'None':
         worker = False
         print('is bus == none', args[0])
+    """
     elif args[0] == 'on':
         print('is business == on', args[0])
         worker = True
+    """
     return worker

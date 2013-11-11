@@ -1,16 +1,42 @@
 {% extends 'base.html' %}
 {% load bootstrap_toolkit %}
 {% block content %}
+<script type="text/javascript">
+    function fnchecked(blnchecked){
+        if(blnchecked)
+        {
+        document.getElementById("address").style.display = "";
+        }
+        else
+        {
+        document.getElementById("address").style.display = "none";
+        }
+    }
+</script>
 
     <p>Add a sales contact.</p>
     <form action="" method="post">
     {% csrf_token %}
     {{ form }}
+    {% block address %}
+    <!-- address is optional for sales clients -->
+    <tr><th>
+        <label >Select to contact address</label>
+    </th><td>
+        <input type="checkbox" name="showaddress" id="showaddress" onclick="fnchecked(this.checked);"
+                value="show">
+    </td></tr>
+    <br />
+    <div id="address" style="display:none">
 
+    <br />
+    <p>Enter sales contact address</p>
     {{ form2 }}
 
     {{ form1 }}
-
+    </div>
+    {% endblock %}
+    <!-- end address -->
     {{ form3 }}
 
     <div class="form-actions">

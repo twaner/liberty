@@ -3,7 +3,7 @@ This file demonstrates writing tests using the unittest module. These will pass
 when you run "manage.py test".
 
 Replace this with more appropriate tests for your application.
-"""
+
 
 from django.test import TestCase
 import datetime as dt
@@ -67,3 +67,4 @@ class SimpleTest(TestCase):
         f = e.worker_is()
         self.assertEqual(f, "T", "Employee title doesn't match")
 
+"""

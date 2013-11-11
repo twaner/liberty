@@ -1,7 +1,9 @@
-from django.test import TestCase
+from django.test import TestCase, Client as C
+from django.utils import unittest
 import datetime as dt
 from common.models import Address, City, State, Contact, Billing_Information
 from client.models import Client, Sales_Prospect
+
 
 class SimpleTest(TestCase):
     def setUp(self):
@@ -25,14 +27,14 @@ class SimpleTest(TestCase):
         cl = Client(first_name="Steve", last_name="Jones", client_number=4545)
         cl.save()
 
-        testa = Address(address="54 Tester St",address2="Apt 2b", city=c,
+        testa = Address(address="54 Tester St", address2="Apt 2b", city=c,
                         state=s, zip_code=12409)
 
         testa.save()
 
         # Client Address and Contact Info
         aa = Address(address="44 Test Ave", address2="Unit 2", city=c,
-                    state=s, zip_code=12408)
+                     state=s, zip_code=12408)
         aa.save()
 
         cl.address = aa
@@ -43,6 +45,18 @@ class SimpleTest(TestCase):
 
     def test_client_exist(self):
         client = Client.clients.get(client_number=4545)
-        self.assertTrue(client.first_name== "Steve")
+        self.assertTrue(client.first_name == "Steve")
 
 
+class BasicTest(unittest.TestCase):
+    def setup(self):
+        self.client = C()
+
+    def test_details(self):
+        # Issue a GET request.
+        response = self.client.get('/clienttest/index/')
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+        self.assertGreater(len(response.context['client_detail']),1)

@@ -6,4 +6,5 @@ urlpatterns = patterns('',
     url(r'^(?P<client_id>\d+)/$',
         views.detail, name='detail'),
     url(r'^addclient', views.addclient, name='addclient'),
+    url(r'^addsalesprospect', views.addsalesprospect, name='addsalesprospect'),
 )
