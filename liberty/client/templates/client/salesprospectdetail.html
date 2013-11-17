@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load bootstrap_toolkit %}
+
+{% block content %}
+
+{% if sales_prospect_detail %}
+    <ul>
+        <li>
+            Sales Prospect Information Info
+        </li>
+        {% if sales_prospect_detail %}
+        <li>
+            {{ sales_prospect_detail.first_name }} {{ sales_prospect_detail.last_name }}
+        </li>
+        {% endif %}
+
+        <li>
+            Prospect Address:
+        </li>
+        {% if address_detail %}
+        <li>
+            {{ address_detail }}
+        </li>
+        {% else %}
+        <li>
+            No address info.
+        </li>
+        {% endif %}
+        <li>
+            Prospect Contact:
+        </li>
+        {% if contact_detail %}
+        <li>
+            {{ contact_detail }}
+        </li>
+        {% else %}
+        <li>
+            No contact information
+        </li>
+        {% endif %}
+        <li>
+    </ul>
+{% else %}
+        <p>No Sales Prospects are available.</p>
+{% endif %}
+
+{% endblock %}

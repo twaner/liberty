@@ -4,6 +4,8 @@ from employee.models import Employee, Title
 from employee.forms import EmployeeForm, TitleForm, AddEmployeeForm
 from common.models import Address, Contact, City
 from common.forms import AddressForm, EmployeeContactForm, CityForm
+from helpermethods import create_employee
+from common.helpermethods import city_worker, create_address, create_employee_contact, handle_auto_city
 
 
 def tester(request):
@@ -21,9 +23,9 @@ def bettertest(request):
 
 
 def indexer(request):
-    all_employees_list = Employee.objects.order_by('-employee_id')
+    all_employees_list = Employee.objects.order_by('last_name')
     context = {'all_employees_list': all_employees_list}
-    return render(request, 'employee/indexer.html', context)
+    return render(request, 'employee/index.html', context)
 
 
 def detaileder(request, employee_id):
@@ -32,7 +34,7 @@ def detaileder(request, employee_id):
     return render(request, 'employee/detail.html', context)
 
 
-def detailed(request, employee_id):
+def details(request, employee_id):
     employee_detail = Employee.objects.get(pk=employee_id)
     address_detail = Address.objects.get(pk=employee_detail.address_id)
     contact_detail = Contact.objects.get(pk=employee_detail.contact_info_id)
@@ -104,65 +106,29 @@ def empform(request):
         form2 = EmployeeContactForm(request.POST)
         #form3 = CityForm(request.POST)
         f_valid = form.is_valid()
-        f1_valid = form1.is_valid()
+
+        # Handle autocomplete
+        cc = handle_auto_city(request)
+        if cc != "None":
+            f1_valid = True
+        else:
+            f1_valid = False
         f2_valid = form2.is_valid()
         #debugging
         print("Form validation: ", f_valid, "1:", f1_valid, "2:", f2_valid)
         print(request.POST.get('pay_type'))
-        print(request.POST.get('city-autocomplete'))
-        print(request.POST.get('city'))
+        print("City auto ", request.POST.get('city-autocomplete'))
+        print("City", request.POST.get('city'))
+        print("City from handle:", cc)
 
-        if form.is_valid() and form1.is_valid() and form2.is_valid():
-            # city name from form
-            city_n = request.POST.get('city')
-
-            #print(City.objects.get(city_n))
-            print(type(city_n))
-
-            # check to see if that city is in db i.e. count > 1
-            #city = City.objects.filter(city_name__icontains=city_n).count()
-            # if exists get object from db else create new city object and save.
-            c = City
-            if city_n > 1:
-                # assign value to City variable
-                c = City.objects.get(pk=city_n)
-                #c = City.objects.get(city_name__icontains=city_n)
-            else:
-                # save new city
-                c = City(city_name=city_n)
-                c.save()
+        if form.is_valid() and f1_valid and form2.is_valid():
+            c = city_worker(request, cc)
             # address
-            print(c.city_name)
-
-            address = request.POST.get('address')
-            address2 = request.POST.get('address2')
-            state = request.POST.get('state')
-            zip_code = request.POST.get('zip_code')
-            a = Address(address=address, address2=address2, city=c, state=state,
-                        zip_code=zip_code)
-            a.save()
-
+            a = create_address(request, c)
             # contact
-            phone = request.POST.get('phone')
-            cell = request.POST.get('cell')
-            email = request.POST.get('email')
-            con = Contact(phone=phone, cell=cell, email=email)
-            con.save()
-
-            # employee
-            first_name = request.POST.get('first_name')
-            last_name = request.POST.get('last_name')
-            employee_number = request.POST.get('employee_number')
-            hire_date = request.POST.get('hire_date')
-            pay_type = request.POST.get('pay_type')
-            pay_rate = request.POST.get('pay_rate')
-            e = Employee(first_name=first_name, last_name=last_name, employee_number=employee_number,
-                         address=a, contact_info=con, hire_date=hire_date, pay_type=pay_type,
-                         pay_rate=pay_rate)
-            e.save()
-            # handle m2m field
-            [e.e_title.add(et) for et in request.POST.getlist('e_title')]
-            #e.save_m2m()
+            con = create_employee_contact(request)
+            #sales prospect
+            e = create_employee(request, a, con)
 
             return HttpResponseRedirect('/employeetest/index/')
     else:
@@ -211,3 +177,56 @@ def empform1(request):
 
     return render(request, 'employee/empform.html', {'form': form, 'form1': form1,
                                                      'form2': form2})
+
+
+"""
+         # city name from form
+            city_n = request.POST.get('city')
+
+            #print(City.objects.get(city_n))
+            print(type(city_n))
+
+            # check to see if that city is in db i.e. count > 1
+            #city = City.objects.filter(city_name__icontains=city_n).count()
+            # if exists get object from db else create new city object and save.
+            c = City
+            if city_n > 1:
+                # assign value to City variable
+                c = City.objects.get(pk=city_n)
+                #c = City.objects.get(city_name__icontains=city_n)
+            else:
+                # save new city
+                c = City(city_name=city_n)
+                c.save()
+            # address
+            print(c.city_name)
+
+            address = request.POST.get('address')
+            address2 = request.POST.get('address2')
+            state = request.POST.get('state')
+            zip_code = request.POST.get('zip_code')
+            a = Address(address=address, address2=address2, city=c, state=state,
+                        zip_code=zip_code)
+            a.save()
+
+            # contact
+            phone = request.POST.get('phone')
+            cell = request.POST.get('cell')
+            email = request.POST.get('email')
+            con = Contact(phone=phone, cell=cell, email=email)
+            con.save()
+
+            # employee
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            employee_number = request.POST.get('employee_number')
+            hire_date = request.POST.get('hire_date')
+            pay_type = request.POST.get('pay_type')
+            pay_rate = request.POST.get('pay_rate')
+            e = Employee(first_name=first_name, last_name=last_name, employee_number=employee_number,
+                         address=a, contact_info=con, hire_date=hire_date, pay_type=pay_type,
+                         pay_rate=pay_rate)
+            e.save()
+            # handle m2m field
+            [e.e_title.add(et) for et in request.POST.getlist('e_title')]
+            #e.save_m2m() """

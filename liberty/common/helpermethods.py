@@ -36,6 +36,18 @@ def create_contact(request):
     con.save()
     return con
 
+def create_employee_contact(request):
+    """
+    Takes a request and returns a contact
+    @param request:
+    @return: Contact Object
+    """
+    phone = request.POST.get('phone')
+    cell = request.POST.get('cell')
+    email = request.POST.get('email')
+    con = Contact(phone=phone, cell=cell, email=email)
+    con.save()
+    return con
 
 def city_worker(request, city):
     """
@@ -66,3 +78,50 @@ def boolean_helper(*args):
         worker = True
     """
     return worker
+
+def handle_auto_city(request):
+    """
+    Takes city from form and checks if it exists
+    @param request:
+    @return:
+    """
+    ac = request.POST.get('city-autocomplete')
+    c = request.POST.get('city')
+    if ac != '':
+        print "AC IS NOT NONE"
+        return ac
+    elif c != '':
+        print "C IS NONE"
+        try:
+            c = City.objects.get(pk=c)
+        except City.DoesNotExist:
+            c = City.objects.get_or_create(city_name=c)
+            c.save()
+        return c.city_name
+    else:
+        print "ELSE"
+        return "None"
+
+
+def handle_auto_city(request):
+    """
+    Takes city from form and checks if it exists
+    @param request:
+    @return:
+    """
+    ac = request.POST.get('city-autocomplete')
+    c = request.POST.get('city')
+    if ac != '':
+        print "AC IS NOT NONE"
+        return ac
+    elif c != '':
+        print "C IS NONE"
+        try:
+            c = City.objects.get(pk=c)
+        except City.DoesNotExist:
+            c = City.objects.get_or_create(city_name=c)
+            c.save()
+        return c.city_name
+    else:
+        print "ELSE"
+        return "None"

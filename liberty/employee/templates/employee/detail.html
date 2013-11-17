@@ -1,11 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap_toolkit %}
+
+{% block content %}
 {% if employee_detail %}
     <ul>
         <li>
             Employee Info
         </li>
         <li>
-                {{employee_detail.employee_number}} {{employee_detail.first_name}}
-                {{employee_detail.last_name}} {{employee_detail.hire_date}}
+                {{employee_detail.employee_number}}
+        </li>
+        <li>
+                {{employee_detail.first_name}}
+                {{employee_detail.last_name}}
+        </li>
+        <li>
+                {{employee_detail.hire_date}}
         </li>
         {% if title_details %}
         <li>
@@ -49,3 +59,5 @@
 {% else %}
         <p>No employees are available.</p>
 {% endif %}
+
+{% endblock %}

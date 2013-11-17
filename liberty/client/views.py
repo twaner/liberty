@@ -50,21 +50,17 @@ def addclient(request):
         f1_valid = form1.is_valid()
         f2_valid = form2.is_valid()
         f3_valid = form3.is_valid()
-
         # debugging
-        print("Form validation: ", f_valid, "1:", f1_valid, "2:", f2_valid, '3:', f3_valid)
+        #print("Form validation: ", f_valid, "1:", f1_valid, "2:", f2_valid, '3:', f3_valid)
 
         if form.is_valid() and form1.is_valid() and form2.is_valid() and form3.is_valid():
             #city
             city_f = request.POST.get('city_name')
             c = city_worker(request, city_f)
-
             # address
             a = create_address(request, c)
-
             # contact
             con = create_contact(request)
-
             #client
             create_client(request, a, con)
             return HttpResponseRedirect('/clienttest/index/')
@@ -123,3 +119,37 @@ def addsalesprospect(request):
         form3 = ContactForm()
 
     return render(request, 'client/addsalescontact.html', {'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
+
+
+def salesprospectindex(request):
+    sales_prospect_detail = Sales_Prospect.objects.all().order_by('last_name')
+    context = {'sales_prospect_detail': sales_prospect_detail}
+    return render(request, 'client/salesprospectindex.html', context)
+
+
+def salesprospectdetails(request, sales_prospect_id):
+    sales_prospect_detail = Sales_Prospect.objects.get(pk=sales_prospect_id)
+    try:
+        address_detail = Address.objects.get(pk=sales_prospect_detail.address_id)
+    except Address.DoesNotExist:
+        address_detail = None
+    contact_detail = Contact.objects.get(pk=sales_prospect_detail.contact_info_id)
+    context = {'sales_prospect_detail': sales_prospect_detail, 'address_detail': address_detail,
+               'contact_detail': contact_detail}
+    print(sales_prospect_detail)
+    return render(request, 'client/salesprospectdetail.html', context)
+
+
+"""
+def detail(request, client_id):
+    client_detail = Client.clients.get(pk=client_id)
+    address_detail = Address.objects.get(pk=client_detail.address_id)
+    contact_detail = Contact.objects.get(pk=client_detail.contact_info_id)
+    try:
+        billing_detail = Billing_Information.objects.get(pk=client_detail.billing_id)
+    except Billing_Information.DoesNotExist:
+        billing_detail = None
+    context = {'client_detail': client_detail, 'address_detail': address_detail,
+               'contact_detail': contact_detail, 'billing_detail': billing_detail}
+    return render(request, 'client/detail.html', context)
+"""

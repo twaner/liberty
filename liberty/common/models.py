@@ -126,7 +126,7 @@ class State(models.Model):
         ('South Dakota', 'SD'),
         ('Tennessee', 'TN'),
         ('Texas', 'TX'),
-        ('Utah', 'UT' ),
+        ('Utah', 'UT'),
         ('Vermont', 'VT'),
         ('Virginia', 'VA'),
         ('Washington', 'WA'),
@@ -147,7 +147,8 @@ class Address(models.Model):
     city = models.ForeignKey(City)
     state = models.CharField(max_length=30, choices=STATE_CHOICES, default='NY')
     #state = models.ForeignKey(State)
-    zip_code = models.IntegerField("zip code", max_length=10)
+    zip_code = models.CharField("zip code", max_length=10)
+    #zip_code = models.IntegerField("zip code", max_length=10)
 
     def __unicode__(self):
         return (u'%s %s %s %s %s' % (self.address, self.address2,

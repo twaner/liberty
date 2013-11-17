@@ -7,8 +7,10 @@
     <title>Liberty Security Services</title>
     <meta name="description" content="">
     <meta name="author" content="Taiowa Waner">
+
     {% bootstrap_stylesheet_tag %}
-    {% bootstrap_stylesheet_tag "responsive" %}
+    #{% bootstrap_stylesheet_tag "responsive" %}
+
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -18,11 +20,13 @@
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <!-- Breaks dropdown menu
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    -->
 
     <link href="/static/datepicker/css/datepicker.css" type="text/css" media="screen" rel="stylesheet" />
-<script type="text/javascript" src="/static/datepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="/static/bootstrap_toolkit/js/init_datepicker.js"></script>
+    <script type="text/javascript" src="/static/datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="/static/bootstrap_toolkit/js/init_datepicker.js"></script>
     {% include 'autocomplete_light/static.html' %}
     {% bootstrap_javascript_tag %}
     {% block extra_head %}{% endblock %}
@@ -48,6 +52,9 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Client<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'client:index' %}">Client Home</a> </li>
+                        <li><a href="{% url 'client:addclient' %}">Add Client</a></li>
+                        <li><a href="{% url 'client:salesprospectindex' %}">Sales Prospect Home</a></li>
+                        <li><a href="{% url 'client:addsalesprospect' %}">Add Sales Prospect</a></li>
                     </ul>
                 </li>
                  <li class="dropdown">
