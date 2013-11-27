@@ -21,6 +21,8 @@ def index(request):
     client_detail = Client.clients.filter(is_business=False).order_by('last_name')
     business_client = Client.clients.filter(is_business=True).order_by('last_name')
     context = {'client_detail': client_detail, 'business_client': business_client}
+    print("CD", client_detail)
+    print("BD", business_client)
     return render(request, 'client/index.html', context)
 
 
@@ -51,7 +53,7 @@ def addclient(request):
         f2_valid = form2.is_valid()
         f3_valid = form3.is_valid()
         # debugging
-        #print("Form validation: ", f_valid, "1:", f1_valid, "2:", f2_valid, '3:', f3_valid)
+        print("Form validation: ", f_valid, "1:", f1_valid, "2:", f2_valid, '3:', f3_valid)
 
         if form.is_valid() and form1.is_valid() and form2.is_valid() and form3.is_valid():
             #city
@@ -105,7 +107,7 @@ def addsalesprospect(request):
                 create_sales_prospect(address=a, contact_info=con)
 
                 #handle success!
-                return HttpResponseRedirect('/clienttest/index/')
+                return HttpResponseRedirect('/salesprospectindex/index/')
         # no address entered
         print("Form validation: ", f_valid, "3: ", f3_valid)
         if f_valid and f3_valid:

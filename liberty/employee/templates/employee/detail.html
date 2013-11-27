@@ -3,6 +3,9 @@
 
 {% block content %}
 {% if employee_detail %}
+    <a href="{% url 'employee:editemployee' employee_detail.employee_id %}">
+        Edit Employee Information
+    </a>
     <ul>
         <li>
             Employee Info

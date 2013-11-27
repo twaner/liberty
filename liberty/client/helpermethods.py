@@ -14,6 +14,7 @@ def create_client(request, *args):
     client_number = request.POST.get('client_number')
     business_name = request.POST.get('business_name')
     is_business = request.POST.get('is_business')
+    print("BUS", is_business)
     # is business
     business = boolean_helper(is_business)
     """
@@ -34,8 +35,12 @@ def create_client(request, *args):
 def create_sales_prospect(request, *args):
     first_name = request.POST.get('first_name')
     last_name = request.POST.get('last_name')
-    #liberty_contact = request.POST.get('liberty_contact')
-    liberty_contact = Employee.objects.get(pk=request.POST.get('liberty_contact'))
+    # handle no liberty contact
+    #if liberty_contact = request.POST.get('liberty_contact') != ''
+    try:
+        liberty_contact = Employee.objects.get(pk=request.POST.get('liberty_contact'))
+    except ValueError:
+        liberty_contact = None
     sale_type = request.POST.get('sale_type')
     probability = request.POST.get('probability')
     initial_contact_date = request.POST.get('initial_contact_date')

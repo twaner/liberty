@@ -3,9 +3,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from employee.models import Employee, Title
 from employee.forms import EmployeeForm, TitleForm, AddEmployeeForm
 from common.models import Address, Contact, City
-from common.forms import AddressForm, EmployeeContactForm, CityForm
-from helpermethods import create_employee
-from common.helpermethods import city_worker, create_address, create_employee_contact, handle_auto_city
+from common.forms import AddressForm, EmployeeContactForm, CityForm, AddressForm1
+from helpermethods import create_employee, update_employee
+from common.helpermethods import city_worker, create_address, create_employee_contact, handle_auto_city, update_address,update_employee_contact
 
 
 def tester(request):
@@ -70,22 +70,6 @@ def addemployee(request):
     return render(request, 'employee/addemployee.html')
 
 
-"""
-def employeeform(request):
-    if request.method == 'POST': # If form has been submitted
-        form = EmployeeForm(request.POST) # A form bound to POST data
-        if form.is_valid():
-            #process clean data
-            return HttpResponseRedirect('/thanks/')
-        else:
-            form = EmployeeForm() # unbound form
-
-    return render(request, 'addemployee.html', {
-        'form': form
-        })
-"""
-
-
 def titleform1(request):
     print("title view called")
     if request.method == 'POST':
@@ -98,31 +82,46 @@ def titleform1(request):
 
 
 def empform(request):
-    print("empform long view called")
+    print("EMPFORM LONG VIEW CALLED")
     if request.method == 'POST':  # If form has been submitted...
         print("POST ==")
         form = AddEmployeeForm(request.POST)
         form1 = AddressForm(request.POST)
         form2 = EmployeeContactForm(request.POST)
-        #form3 = CityForm(request.POST)
         f_valid = form.is_valid()
+        f2_valid = form2.is_valid()
 
         # Handle autocomplete
+        print("City auto / type", request.POST.get('city-autocomplete'), type(request.POST.get('city-autocomplete')))
+        print("City", request.POST.get('city'), type(request.POST.get('city')))
+
         cc = handle_auto_city(request)
         if cc != "None":
             f1_valid = True
         else:
             f1_valid = False
-        f2_valid = form2.is_valid()
+
+        c = city_worker(request, cc)
+        print("CITY WORKER: TYPE / ID", c, type(c), c.city_id)
+        if form1.is_valid():
+            form1.save(commit=False)
+            form1.city = c.city_id
+            print "FORM1 city, pk", form1.city
+            form1.save()
+        q = create_employee(request, c, form1)
+        if not form1.is_valid():
+            print form1.errors
+        print "ADDRESSFORM VALID: ", form1.is_valid()
+
         #debugging
         print("Form validation: ", f_valid, "1:", f1_valid, "2:", f2_valid)
         print(request.POST.get('pay_type'))
-        print("City auto ", request.POST.get('city-autocomplete'))
-        print("City", request.POST.get('city'))
+        print("City auto / type", request.POST.get('city-autocomplete'), type(request.POST.get('city-autocomplete')))
+        print("City", request.POST.get('city'), type(request.POST.get('city')))
         print("City from handle:", cc)
 
-        if form.is_valid() and f1_valid and form2.is_valid():
-            c = city_worker(request, cc)
+        if form.is_valid() and form1.is_valid() and form2.is_valid():
+            #c = city_worker(request, cc)
             # address
             a = create_address(request, c)
             # contact
@@ -142,7 +141,56 @@ def empform(request):
                                           'form2': form2})
 
 
-""" """
+def editemployee(request, employee_id):
+    # bound form
+    e = Employee.objects.get(pk=employee_id)
+    a = Address.objects.get(pk=e.address_id)
+    c = Contact.objects.get(pk=e.contact_info_id)
+    title_details = e.e_title.all()
+    # create data dictionaries
+    employee = {'first_name': e.first_name, 'last_name': e.last_name,
+                'employee_number': e.employee_number, 'e_title': title_details,
+                'hire_date': e.hire_date, 'pay_type': e.pay_type, 'pay_rate': e.pay_rate,
+                'termination_date': e.termination_date, 'termination_reason': e.termination_reason
+    }
+    address = {'address': a.address, 'address2': a.address2, 'city': a.city_id,
+               'state': a.state, 'zip_code': a.zip_code
+    }
+    contact = {'phone': c.phone, 'cell': c.cell, 'email': c.email}
+
+    #TODO Handle submit button pressed
+    if request.method == 'POST':
+        f = EmployeeForm(request.POST)
+        f1 = AddressForm(request.POST)
+        f2 = EmployeeContactForm(request.POST)
+        f_v = f.is_valid()
+        f2_v = f2.is_valid()
+
+        #city
+        cc = handle_auto_city(request)
+        if cc != "None":
+            f1_valid = True
+        else:
+            f1_valid = False
+
+        c = city_worker(request, cc)
+
+        if f_v and f2_v and f1_valid:
+            # address
+            a = update_address(request, address)
+            # contact
+            con = update_employee_contact(request, contact)
+            #sales prospect
+            e = update_employee(request, employee, a, con)
+
+        return HttpResponseRedirect('/employeetest/index/')
+    else:
+        # redisplay bound form
+        form = EmployeeForm(employee)
+        form1 = AddressForm(address)
+        form2 = EmployeeContactForm(contact)
+    return render(request, 'employee/editemployee.html', {'form': form, 'form1': form1,
+                                                          'form2': form2})
 
 
 def titleform(request):
@@ -230,3 +278,18 @@ def empform1(request):
             # handle m2m field
             [e.e_title.add(et) for et in request.POST.getlist('e_title')]
             #e.save_m2m() """
+
+"""
+def employeeform(request):
+    if request.method == 'POST': # If form has been submitted
+        form = EmployeeForm(request.POST) # A form bound to POST data
+        if form.is_valid():
+            #process clean data
+            return HttpResponseRedirect('/thanks/')
+        else:
+            form = EmployeeForm() # unbound form
+
+    return render(request, 'addemployee.html', {
+        'form': form
+        })
+"""

@@ -15,4 +15,7 @@ urlpatterns = patterns('',
     #url(r'addemployee/$', views.employeeform, name='employeeform'),
     url(r'title/$', views.titleform, name='titleform'),
     url(r'empform/$', views.empform, name='empform'),
+    url(r'editemployee/(?P<employee_id>\d+)/$', views.editemployee,
+        name='editemployee'),
+    #r'^salesprospectdetail/(?P<sales_prospect_id>\d+)/$',
 )

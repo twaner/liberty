@@ -144,7 +144,7 @@ class State(models.Model):
 class Address(models.Model):
     address = models.CharField("address", max_length=30)
     address2 = models.CharField("address 2", max_length=30, blank=True)
-    city = models.ForeignKey(City)
+    city = models.ForeignKey(City, blank=True)
     state = models.CharField(max_length=30, choices=STATE_CHOICES, default='NY')
     #state = models.ForeignKey(State)
     zip_code = models.CharField("zip code", max_length=10)

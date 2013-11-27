@@ -11,12 +11,29 @@ def create_address(request, city):
     address = request.POST.get('address')
     address2 = request.POST.get('address2')
     state = request.POST.get('state')
+    print("create_address:CITY", city)
     zip_code = request.POST.get('zip_code')
     a = Address(address=address, address2=address2, city=city, state=state,
                 zip_code=zip_code)
     a.save()
     return a
 
+
+def update_address(request, address):
+    """
+    Updates an Address object
+    @param request: request data
+    @param address: address object. validated in view
+    @return: updated address
+    """
+    address.address = request.POST.get('address')
+    address.address2 = request.POST.get('address2')
+    address.state = request.POST.get('state')
+    print("update_address:CITY", city)
+    address.zip_code = request.POST.get('zip_code')
+    address.city = city
+    address.save(update_fields['address', 'address2', 'city', 'state', 'zip_code'])
+    return address
 
 def create_contact(request):
     """
@@ -36,6 +53,7 @@ def create_contact(request):
     con.save()
     return con
 
+
 def create_employee_contact(request):
     """
     Takes a request and returns a contact
@@ -49,6 +67,21 @@ def create_employee_contact(request):
     con.save()
     return con
 
+
+def update_employee_contact(request, contact):
+    """
+    updates an employee contact object
+    @param request: request date
+    @param contact: contact object. Validated with get_or_create from view
+    @return: updated contact object
+    """
+    contact.phone = request.POST.get('phone')
+    contact.cell = request.POST.get('cell')
+    contact.email = request.POST.get('email')
+    contact.save(udpate_fields['phone', 'cell', 'email'])
+    return contact
+
+
 def city_worker(request, city):
     """
     Checks existence of specified City then gets or creates City Object
@@ -58,6 +91,7 @@ def city_worker(request, city):
     """
     c, created = City.objects.get_or_create(city_name=city)
     c.save()
+    print "CITY FROM CITY_WORKER", c.city_id
     return c
 
 
@@ -69,7 +103,7 @@ def boolean_helper(*args):
     """
     worker = True
     print('before if boolean', args[0])
-    if args[0] == 'None':
+    if args[0] is None or args[0] == 'None':
         worker = False
         print('is bus == none', args[0])
     """
@@ -79,7 +113,8 @@ def boolean_helper(*args):
     """
     return worker
 
-def handle_auto_city(request):
+
+def handle_auto_citys(request):
     """
     Takes city from form and checks if it exists
     @param request:
@@ -87,10 +122,12 @@ def handle_auto_city(request):
     """
     ac = request.POST.get('city-autocomplete')
     c = request.POST.get('city')
-    if ac != '':
+    print("HANDAUTOCITY ac / c", ac, c)
+
+    if ac != '' or ac is not None:
         print "AC IS NOT NONE"
         return ac
-    elif c != '':
+    elif c != '' or c is not None:
         print "C IS NONE"
         try:
             c = City.objects.get(pk=c)
@@ -111,11 +148,13 @@ def handle_auto_city(request):
     """
     ac = request.POST.get('city-autocomplete')
     c = request.POST.get('city')
-    if ac != '':
-        print "AC IS NOT NONE"
+    print("HANDAUTOCITY ac / c", ac, c)
+
+    if ac != '' or ac is not None:
+        print "AC IS NOT NONE: ", ac
         return ac
-    elif c != '':
-        print "C IS NONE"
+    elif c != '' or c is not None:
+        print "C IS NONE: ", c
         try:
             c = City.objects.get(pk=c)
         except City.DoesNotExist:

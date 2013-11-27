@@ -4,10 +4,20 @@
 # Using a filter
 
 {% block content %}
-<p>Edit employee information.</p>
+<p>Update employee information.</p>
+<form action="" method="post">{% csrf_token %}
 
+    <p>Employee Information</p>
+    {{ form|as_bootstrap }}
 
+    <p>Address Information</p>
+    {{ form1|as_bootstrap }}
 
+    <p>Contact Information</p>
+    {{ form2|as_bootstrap }}
 
+<br />
+<input type="submit" value="Submit" class="btn btn-primary" />
+</form>
 
 {% endblock %}
