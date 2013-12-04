@@ -19,20 +19,21 @@ def create_address(request, city):
     return a
 
 
-def update_address(request, address):
+def update_address(request, address, city):
     """
     Updates an Address object
     @param request: request data
     @param address: address object. validated in view
     @return: updated address
     """
+    print "ADDRESS CITY UPDATE", type(address), city, type(city), city
     address.address = request.POST.get('address')
     address.address2 = request.POST.get('address2')
     address.state = request.POST.get('state')
     print("update_address:CITY", city)
     address.zip_code = request.POST.get('zip_code')
     address.city = city
-    address.save(update_fields['address', 'address2', 'city', 'state', 'zip_code'])
+    address.save(update_fields=['address', 'address2', 'city', 'state', 'zip_code'])
     return address
 
 def create_contact(request):
@@ -53,6 +54,24 @@ def create_contact(request):
     con.save()
     return con
 
+
+def update_contact(request, contact):
+    """
+    Updates a Contact object
+    @param request: request from form
+    @param contact: Contact object
+    @return: updated Contact object
+    """
+    contact.phone = request.POST.get('phone')
+    contact.phone_extension = request.POST.get('phone_extension')
+    contact.cell = request.POST.get('cell')
+    contact.office = request.POST['office_phone']
+    contact.office_extension = request.POST['office_phone_extension']
+    contact.email = request.POST.get('email')
+    contact.website = request.POST.get('website')
+    contact.save(update_fields=['phone', 'phone_extension', 'office_phone', 'office_phone_extension',
+                                'cell', 'email', 'website'])
+    return contact
 
 def create_employee_contact(request):
     """
@@ -75,10 +94,11 @@ def update_employee_contact(request, contact):
     @param contact: contact object. Validated with get_or_create from view
     @return: updated contact object
     """
+    print("CONTACT / TYPE", contact, type(contact))
     contact.phone = request.POST.get('phone')
     contact.cell = request.POST.get('cell')
     contact.email = request.POST.get('email')
-    contact.save(udpate_fields['phone', 'cell', 'email'])
+    contact.save(update_fields=['phone', 'cell', 'email'])
     return contact
 
 
@@ -99,7 +119,7 @@ def boolean_helper(*args):
     """
     Takes boolean from form and handles string passed
     @param args: boolean field from form
-    @return: boolean
+    @return: boolean updated to reflect selection
     """
     worker = True
     print('before if boolean', args[0])
@@ -148,13 +168,13 @@ def handle_auto_city(request):
     """
     ac = request.POST.get('city-autocomplete')
     c = request.POST.get('city')
-    print("HANDAUTOCITY ac / c", ac, c)
+    print("HANDAUTOCITY => ac / c", ac, c)
 
-    if ac != '' or ac is not None:
+    if ac != '': # or ac is not None:
         print "AC IS NOT NONE: ", ac
         return ac
     elif c != '' or c is not None:
-        print "C IS NONE: ", c
+        print "C IS NOT NONE: ", c
         try:
             c = City.objects.get(pk=c)
         except City.DoesNotExist:

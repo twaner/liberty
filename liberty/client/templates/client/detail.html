@@ -4,6 +4,9 @@
 {% block content %}
 
 {% if client_detail or business_client %}
+    <a href="{% url 'client:editclient' client_detail.client_id %}">
+        Edit Client Information
+    </a>
     <ul>
         <li>
             Client Info

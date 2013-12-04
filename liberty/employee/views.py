@@ -158,7 +158,9 @@ def editemployee(request, employee_id):
     }
     contact = {'phone': c.phone, 'cell': c.cell, 'email': c.email}
 
-    #TODO Handle submit button pressed
+    for k, v in address.iteritems():
+        print("K ? V", k,v)
+
     if request.method == 'POST':
         f = EmployeeForm(request.POST)
         f1 = AddressForm(request.POST)
@@ -173,15 +175,15 @@ def editemployee(request, employee_id):
         else:
             f1_valid = False
 
-        c = city_worker(request, cc)
+        city_obj = city_worker(request, cc)
 
         if f_v and f2_v and f1_valid:
             # address
-            a = update_address(request, address)
+            a = update_address(request, a, city_obj)
             # contact
-            con = update_employee_contact(request, contact)
+            con = update_employee_contact(request, c)
             #sales prospect
-            e = update_employee(request, employee, a, con)
+            e = update_employee(request, e, a, con)
 
         return HttpResponseRedirect('/employeetest/index/')
     else:
