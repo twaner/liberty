@@ -77,8 +77,9 @@ def create_sales_prospect(request, *args):
 def update_sales_prospect(request, sales_prospect, address, contact):
     sales_prospect.first_name = request.POST.get('first_name')
     sales_prospect.last_name = request.POST.get('last_name')
-    sales_prospect.liberty_contact = request.POST.get('liberty_contact')
-    sales_prospect.sale_type = request.POST.get('sales_type')
+    #sales_prospect.liberty_contact = request.POST.get('liberty_contact')
+    sales_prospect.liberty_contact = Employee.objects.get(pk=request.POST.get('liberty_contact'))
+    sales_prospect.sale_type = request.POST.get('sale_type')
     sales_prospect.probability = request.POST.get('probability')
     sales_prospect.initial_contact_date = request.POST.get('initial_contact_date')
     sales_prospect.comments = request.POST.get('comments')

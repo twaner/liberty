@@ -220,8 +220,8 @@ def editsalesprospect(request, sales_prospect_id):
         f_valid = form.is_valid()
         f3_valid = form3.is_valid()
         # address is entered
-        f1_valid = True
-        f2_valid = True
+        f1_valid = False
+        f2_valid = False
         if show_address is not None:
             # sweet validation
             f1_valid = form1.is_valid()
@@ -231,11 +231,17 @@ def editsalesprospect(request, sales_prospect_id):
         print("Form validation: ", f_valid, "1:", f1_valid, "2:", f2_valid, '3:', f3_valid)
 
         if f_valid and f1_valid and f2_valid and f3_valid:
+            print("WITH ADDRESS")
             c = city_worker(request, request.POST.get('city_name'))
             a = update_address(request, address, c)
             con = update_contact(request, contact)
-            update_sales_prospect(request, a, con)
-            return HttpResponseRedirect('/salesprospectindex/index/')
+            update_sales_prospect(request, sp, a, con)
+        elif f_valid and (not f1_valid and not f2_valid) and f3_valid:
+            print("NO ADDRESS")
+            a = None
+            con = update_contact(request, contact)
+            update_sales_prospect(request, sp, a, con)
+        return HttpResponseRedirect('/salesprospectindex/')
 
     else:
                 form = Sales_ProspectForm(sp_dict)
