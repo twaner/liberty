@@ -4,12 +4,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from client.models import Client, Sales_Prospect
 from employee.models import Employee
 from common.models import Address, Contact, Billing_Information, City
-from common.forms import AddressForm, ContactForm, CityForm, CityFormNotAuto, AddressFormNotAuto
+from common.forms import AddressForm, ContactForm, CityForm, CityFormNotAuto, AddressFormNotAuto, AddressFormPlaces
 from forms import ClientForm, Sales_ProspectForm
 from common.helpermethods import create_address, create_contact, city_worker, update_address, update_contact
 from client.helpermethods import create_client, create_sales_prospect, update_client, update_sales_prospect
 
-# Basic test
+
 def clienttester(request):
     return HttpResponse("Client Test view working!")
 
@@ -241,6 +241,7 @@ def editsalesprospect(request, sales_prospect_id):
             a = None
             con = update_contact(request, contact)
             update_sales_prospect(request, sp, a, con)
+        # TODO Handle response currently 404
         return HttpResponseRedirect('/salesprospectindex/')
 
     else:

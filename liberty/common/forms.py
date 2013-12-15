@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, Textarea
 from models import Address, City, Contact
 import autocomplete_light
 import autocomplete_light_registry
@@ -59,6 +59,14 @@ class AddressFormNotAuto(ModelForm):
     class Meta:
         model = Address
         exclude = ('city',)
+
+
+class AddressFormPlaces(ModelForm):
+    class Meta:
+        model = Address
+        exclude = ('city',)
+        widgets = {
+            'state': Textarea(attrs={'cols': 40, 'rows': 1})}
 
 
 class CityFormNotAuto(ModelForm):
