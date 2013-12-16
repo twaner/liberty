@@ -8,33 +8,24 @@ from helpermethods import create_employee, update_employee
 from common.helpermethods import city_worker, create_address, create_employee_contact, handle_auto_city, update_address,update_employee_contact
 
 
-def tester(request):
-    return HttpResponse("Test view working!")
-
-
-def testconnection(request, employee_id):
-    return HttpResponse("Employee id is %s" % employee_id)
-
-# Workers =>
-def bettertest(request):
-    all_employees_list = Employee.objects.order_by('-employee_id')
-    output = ', '.join([e.first_name for e in all_employees_list])
-    return HttpResponse(output)
-
-
-def indexer(request):
+def index(request):
+    """
+    List of all Employees.
+    @param request: request.
+    @return: rendered view with all Employees.
+    """
     all_employees_list = Employee.objects.order_by('last_name')
     context = {'all_employees_list': all_employees_list}
     return render(request, 'employee/index.html', context)
 
 
-def detaileder(request, employee_id):
-    employee_detail = Employee.objects.get(pk=employee_id)
-    context = {'employee_detail': employee_detail}
-    return render(request, 'employee/detail.html', context)
-
-
 def details(request, employee_id):
+    """
+    Detailed view of Employee.
+    @param request: request.
+    @param employee_id: Employee pk.
+    @return: rendered view with Employee details.
+    """
     employee_detail = Employee.objects.get(pk=employee_id)
     address_detail = Address.objects.get(pk=employee_detail.address_id)
     contact_detail = Contact.objects.get(pk=employee_detail.contact_info_id)
@@ -42,32 +33,6 @@ def details(request, employee_id):
     context = {'employee_detail': employee_detail, 'address_detail': address_detail,
                'contact_detail': contact_detail, 'title_details': title_details}
     return render(request, 'employee/detail.html', context)
-
-# FORMS
-def index(request):
-    return render(request, "employee/index.html")
-
-
-def testing(request):
-    return render(request, 'employee/test.html')
-
-
-def search_form(request):
-    return render(request, 'employee/search_form.html')
-
-
-def search(request):
-    if 'q' in request.GET and request.GET['q']:
-        q = request.GET['q']
-        employees = Employee.objects.filter(first_name__icontains=q)
-        return render(request, 'employee/search_results.html',
-                      {'employees': employees, 'query': q})
-    else:
-        return HttpResponse('Please submit a search term.')
-
-
-def addemployee(request):
-    return render(request, 'employee/addemployee.html')
 
 
 def titleform1(request):
@@ -82,6 +47,11 @@ def titleform1(request):
 
 
 def empform(request):
+    """
+    Creates a new Employee.
+    @param request: request.
+    @return: redirect to index or form with validation errors.
+    """
     print("EMPFORM LONG VIEW CALLED")
     if request.method == 'POST':  # If form has been submitted...
         print("POST ==")
@@ -143,6 +113,12 @@ def empform(request):
 
 def editemployee(request, employee_id):
     # bound form
+    """
+    Edits an Employee object
+    @param request: request.
+    @param employee_id: Employee pk.
+    @return: redirect or form with validation errors.
+    """
     e = Employee.objects.get(pk=employee_id)
     a = Address.objects.get(pk=e.address_id)
     c = Contact.objects.get(pk=e.contact_info_id)
@@ -212,7 +188,7 @@ def titleform(request):
 
 def empform1(request):
     print("empform1 view called")
-    if request.method == 'POST': # If form has been submitted...
+    if request.method == 'POST':  # If form has been submitted...
         print("POST ==")
         print("form constructors")
         form = AddEmployeeForm(request.POST)
@@ -294,4 +270,35 @@ def employeeform(request):
     return render(request, 'addemployee.html', {
         'form': form
         })
+
+def detaileder(request, employee_id):
+    employee_detail = Employee.objects.get(pk=employee_id)
+    context = {'employee_detail': employee_detail}
+    return render(request, 'employee/detail.html', context)
+
+def search_form(request):
+    return render(request, 'employee/search_form.html')
+
+
+def search(request):
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        employees = Employee.objects.filter(first_name__icontains=q)
+        return render(request, 'employee/search_results.html',
+                      {'employees': employees, 'query': q})
+    else:
+        return HttpResponse('Please submit a search term.')
+def tester(request):
+    return HttpResponse("Test view working!")
+
+
+def testconnection(request, employee_id):
+    return HttpResponse("Employee id is %s" % employee_id)
+
+# Workers =>
+def bettertest(request):
+    all_employees_list = Employee.objects.order_by('-employee_id')
+    output = ', '.join([e.first_name for e in all_employees_list])
+    return HttpResponse(output)
+
 """

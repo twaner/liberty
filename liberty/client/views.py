@@ -10,15 +10,12 @@ from common.helpermethods import create_address, create_contact, city_worker, up
 from client.helpermethods import create_client, create_sales_prospect, update_client, update_sales_prospect
 
 
-def clienttester(request):
-    return HttpResponse("Client Test view working!")
-
-# More advanced test
-def detailedClient(request, client_id):
-    return HttpResponse("Client id is %s" % client_id)
-
-
 def index(request):
+    """
+    lists all clients filtered by personal and commercial
+    @param request: request with data
+    @return: html page rendered with clients
+    """
     client_detail = Client.clients.filter(is_business=False).order_by('last_name')
     business_client = Client.clients.filter(is_business=True).order_by('last_name')
     context = {'client_detail': client_detail, 'business_client': business_client}
@@ -28,6 +25,12 @@ def index(request):
 
 
 def detail(request, client_id):
+    """
+    Detailed view of a single client
+    @param request: request data
+    @param client_id: client_id
+    @return: rendered view with client detail
+    """
     client_detail = Client.clients.get(pk=client_id)
     address_detail = Address.objects.get(pk=client_detail.address_id)
     contact_detail = Contact.objects.get(pk=client_detail.contact_info_id)
@@ -41,6 +44,11 @@ def detail(request, client_id):
 
 
 def addclient(request):
+    """
+    View used to add a new client
+    @param request: request data from form
+    @return: redirect or form with validation errors
+    """
     print("Add client view called")
     #forms
     if request.method == 'POST':
@@ -78,6 +86,12 @@ def addclient(request):
 
 
 def editclient(request, client_id):
+    """
+    View that allows a client object to be edited.
+    @param request: request.
+    @param client_id: client_id.
+    @return: client index after success or form with validation errors.
+    """
     print("EDITCLIENT CALLED")
     client = Client.clients.get(pk=client_id)
     address = Address.objects.get(pk=client.address_id)
@@ -128,6 +142,11 @@ def editclient(request, client_id):
 
 
 def addsalesprospect(request):
+    """
+    Adds a sales prospect.
+    @param request: request.
+    @return: redirect to index or form with validation errors.
+    """
     print("Add sales prospect called!")
     if request.method == 'POST':
         form = Sales_ProspectForm(request.POST)
@@ -177,6 +196,12 @@ def addsalesprospect(request):
 
 
 def editsalesprospect(request, sales_prospect_id):
+    """
+    Edits a Sales_Prospect object.
+    @param request: request.
+    @param sales_prospect_id: pk of object.
+    @return: redirect or form with validation errors.
+    """
     sp = Sales_Prospect.objects.get(pk=sales_prospect_id)
     contact = Contact.objects.get(pk=sp.contact_info_id)
     # There does not have to be an address =>
@@ -255,12 +280,22 @@ def editsalesprospect(request, sales_prospect_id):
 
 
 def salesprospectindex(request):
+    """
+    View of all Sales_Prospect objects.
+    @param request: request.
+    @return: list of all Sales_Prospects.
+    """
     sales_prospect_detail = Sales_Prospect.objects.all().order_by('last_name')
     context = {'sales_prospect_detail': sales_prospect_detail}
     return render(request, 'client/salesprospectindex.html', context)
 
 
 def salesprospectdetails(request, sales_prospect_id):
+    """
+    Detailed view of a Sales_Prospect objects.
+    @param request: request.
+    @return: details of a Sales_Prospects.
+    """
     sales_prospect_detail = Sales_Prospect.objects.get(pk=sales_prospect_id)
     try:
         address_detail = Address.objects.get(pk=sales_prospect_detail.address_id)
