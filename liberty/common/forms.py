@@ -60,13 +60,19 @@ class AddressFormNotAuto(ModelForm):
         model = Address
         exclude = ('city',)
 
+class AddressFormPure(ModelForm):
+    class Meta:
+        model = Address
+        widgets = {
+            'city': Textarea(attrs={'cols': 40, 'rows': 1})}
+
 
 class AddressFormPlaces(ModelForm):
     class Meta:
         model = Address
         exclude = ('city',)
-        widgets = {
-            'state': Textarea(attrs={'cols': 40, 'rows': 1})}
+        #widgets = {
+         #   'state': Textarea(attrs={'cols': 40, 'rows': 1})}
 
 
 class CityFormNotAuto(ModelForm):

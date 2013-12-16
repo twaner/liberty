@@ -1,8 +1,13 @@
-from models import Employee
+from models import Employee, Title
 from common.models import Address, Contact
 
 
 def create_employee(request, *args):
+    """
+    Creates Employee object.
+    @param request: request.
+    @param args: Address and Contact.
+    """
     first_name = request.POST.get('first_name')
     last_name = request.POST.get('last_name')
     employee_number = request.POST.get('employee_number')
@@ -45,8 +50,9 @@ def update_employee(request, employee, address, contact):
     employee.termination_reason = request.POST.get('termination_reason')
     print("TERMINATION DATE ", employee.termination_date, employee.termination_date == '')
     #handle title
-    # all current titles
+    # all current titles.
     title_list = request.POST.getlist('e_title')
+    # list of employee's previous titles.
     et_list = []
     [et_list.append(unicode(t.title_id)) for t in employee.e_title.all()]
     # add titles
@@ -57,7 +63,9 @@ def update_employee(request, employee, address, contact):
         # remove title
     for t in et_list:
         if t not in title_list:
-            employee.e_title.filter(pk=int(t)).delete()
+            #employee.e_title.filter(pk=int(t)).remove()
+            t = Title.objects.get(pk=int(t))
+            employee.e_title.remove(t)
         #update
     employee.save(update_fields=['first_name', 'last_name', 'employee_number', 'hire_date',
                                  'pay_type', 'pay_rate', 'address', 'contact_info', 'termination_reason'])

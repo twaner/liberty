@@ -40,8 +40,13 @@ for (var i = 0; i < place.address_components.length; i++) {
     }
 }
 document.getElementById("id_address").value = g_Addy[0] + ' ' + g_Addy[1];
-document.getElementById("id_city_name").value = g_Addy[2];
 document.getElementById("id_zip_code").value = g_Addy[4];
+
+if (document.getElementById("id_city_name")){
+    document.getElementById("id_city_name").value = g_Addy[2];
+} else {
+    document.getElementById("id_city").value = g_Addy[2];
+}
 
 // Handle State <select> options
 var state_worker = document.getElementById("id_state");

@@ -105,9 +105,9 @@ def update_employee_contact(request, contact):
 def city_worker(request, city):
     """
     Checks existence of specified City then gets or creates City Object
-    @param request:
-    @param city:
-    @return: City
+    @param request: request.
+    @param city: city from form.
+    @return: City.
     """
     c, created = City.objects.get_or_create(city_name=city)
     c.save()

@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block body_block %}
+    <body onload="initialize()">
+{% endblock %}
 {% load bootstrap_toolkit %}
 
 # Using a filter
@@ -11,10 +14,15 @@
     {{ form|as_bootstrap }}
 
     <p>Address Information</p>
+    <div id="locationField">
+        <input id="autocomplete" placeholder="Enter your address"
+        onFocus="geolocate()" type="text"></input>
+    </div>
+    {{ form2|as_bootstrap }}
     {{ form1|as_bootstrap }}
 
     <p>Contact Information</p>
-    {{ form2|as_bootstrap }}
+    {{ form3|as_bootstrap }}
 
 <br />
 <input type="submit" value="Submit" class="btn btn-primary" />
