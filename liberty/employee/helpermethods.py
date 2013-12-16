@@ -27,6 +27,7 @@ def create_employee(request, *args):
     e.save()
     # handle m2m field
     [e.e_title.add(et) for et in request.POST.getlist('e_title')]
+    e.save()
 
 
 def update_employee(request, employee, address, contact):
@@ -55,17 +56,10 @@ def update_employee(request, employee, address, contact):
     # list of employee's previous titles.
     et_list = []
     [et_list.append(unicode(t.title_id)) for t in employee.e_title.all()]
-    # add titles
-    for t in title_list:
-        if t not in et_list:
-            # new
-            employee.e_title.add(t)
-        # remove title
-    for t in et_list:
-        if t not in title_list:
-            #employee.e_title.filter(pk=int(t)).remove()
-            t = Title.objects.get(pk=int(t))
-            employee.e_title.remove(t)
+
+    [employee.e_title.add(t) for t in title_list if t not in et_list]
+
+    [employee.e_title.remove(t) for t in et_list if t not in title_list]
         #update
     employee.save(update_fields=['first_name', 'last_name', 'employee_number', 'hire_date',
                                  'pay_type', 'pay_rate', 'address', 'contact_info', 'termination_reason'])
