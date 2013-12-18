@@ -26,19 +26,21 @@ class Call_List_Details(models.Model):
     call_list_details_type = models.CharField(max_length=2, choices=CALL_LIST_TYPE)
     order = models.CharField(max_length=30)
     enabled = models.BooleanField(default=False)
-
+    call_list_contact = models.ForeignKey('common.Contact', null=True, blank=True)
 
 def __unicode__(self):
     return self.get_call_list_details_type_display()
-
 #return(u'%s %s' % (self.first_name, self.last_name))
+
 
 class Call_List(Person):
     call_list_id = models.AutoField(primary_key=True)
-    call_list_detail = models.ForeignKey('Call_List_Details', verbose_name="call list list details",
-                                         null=True, blank=True)
+    # call_list_detail = models.ForeignKey('Call_List_Details', verbose_name="call list list details",
+    #                                      null=True, blank=True)
     # NEW
-    call_list_contact = models.ForeignKey('common.Contact', null=True, blank=True)
+    #call_list_contact = models.ForeignKey('common.Contact', null=True, blank=True)
+    call_list_details = models.ManyToManyField(Call_List_Details,
+                                               verbose_name="Call list(s)")
 
     def __unicode__(self):
         return u'%s' % (self.call_list_detail.get_call_list_details_type_display())

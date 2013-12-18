@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from employee.models import Employee, Title
 from employee.forms import EmployeeForm, TitleForm, AddEmployeeForm
 from common.models import Address, Contact, City
-from common.forms import AddressForm, EmployeeContactForm, CityForm, AddressForm1, AddressFormPlaces, CityFormNotAuto
+from common.forms import AddressForm, EmployeeContactForm, CityForm, AddressFormPlaces, CityFormNotAuto
 from helpermethods import create_employee, update_employee
 from common.helpermethods import city_worker, create_address, create_employee_contact, handle_auto_city, update_address,update_employee_contact
 
@@ -35,7 +35,6 @@ def details(request, employee_id):
     return render(request, 'employee/detail.html', context)
 
 
-# Updated for Places API
 def empform(request):
     """
     Creates a new Employee.

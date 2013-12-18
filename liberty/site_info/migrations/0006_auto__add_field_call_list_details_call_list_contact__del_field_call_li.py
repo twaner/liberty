@@ -8,229 +8,43 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Call_List_Details'
-        db.create_table(u'site_info_call_list_details', (
-            ('call_list_details_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('call_list_details_type', self.gf('django.db.models.fields.CharField')(max_length=2)),
-            ('order', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('enabled', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal(u'site_info', ['Call_List_Details'])
+        # Adding field 'Call_List_Details.call_list_contact'
+        db.add_column(u'site_info_call_list_details', 'call_list_contact',
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['common.Contact'], null=True, blank=True),
+                      keep_default=False)
 
-        # Adding model 'Call_List'
-        db.create_table(u'site_info_call_list', (
-            ('first_name', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('last_name', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('call_list_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('call_list_detail', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Call_List_Details'], null=True, blank=True)),
-            ('call_list_contact', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['common.Contact'], null=True, blank=True)),
-        ))
-        db.send_create_signal(u'site_info', ['Call_List'])
+        # Deleting field 'Call_List.call_list_contact'
+        db.delete_column(u'site_info_call_list', 'call_list_contact_id')
 
-        # Adding model 'Site_Information'
-        db.create_table(u'site_info_site_information', (
-            ('address', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['common.Address'])),
-            ('contact', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['common.Contact'])),
-            ('site_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('site_client', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['client.Client'])),
-        ))
-        db.send_create_signal(u'site_info', ['Site_Information'])
+        # Deleting field 'Call_List.call_list_detail'
+        db.delete_column(u'site_info_call_list', 'call_list_detail_id')
 
-        # Adding M2M table for field site_call_list on 'Site_Information'
-        m2m_table_name = db.shorten_name(u'site_info_site_information_site_call_list')
+        # Adding M2M table for field call_list_deta8os on 'Call_List'
+        m2m_table_name = db.shorten_name(u'site_info_call_list_call_list_deta8os')
         db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('site_information', models.ForeignKey(orm[u'site_info.site_information'], null=False)),
-            ('call_list', models.ForeignKey(orm[u'site_info.call_list'], null=False))
+            ('call_list', models.ForeignKey(orm[u'site_info.call_list'], null=False)),
+            ('call_list_details', models.ForeignKey(orm[u'site_info.call_list_details'], null=False))
         ))
-        db.create_unique(m2m_table_name, ['site_information_id', 'call_list_id'])
-
-        # Adding model 'Panel'
-        db.create_table(u'site_info_panel', (
-            (u'equipment_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['common.Equipment'], unique=True)),
-            ('panel_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('panel_name', self.gf('django.db.models.fields.CharField')(max_length=100, blank=True)),
-        ))
-        db.send_create_signal(u'site_info', ['Panel'])
-
-        # Adding model 'Module'
-        db.create_table(u'site_info_module', (
-            ('location', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=40)),
-            ('number', self.gf('django.db.models.fields.CharField')(max_length=20)),
-            ('manufacturer', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
-            ('part_number', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
-            ('serial_number', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
-            ('install_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
-            ('install_tech', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['employee.Employee'])),
-            ('service', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Service_Information'])),
-            ('module_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('module_panel_alarm', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Panel'])),
-            ('module_site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Site_Information'])),
-        ))
-        db.send_create_signal(u'site_info', ['Module'])
-
-        # Adding model 'Zone'
-        db.create_table(u'site_info_zone', (
-            ('location', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=40)),
-            ('number', self.gf('django.db.models.fields.CharField')(max_length=20)),
-            ('manufacturer', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
-            ('part_number', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
-            ('serial_number', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
-            ('install_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
-            ('install_tech', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['employee.Employee'])),
-            ('service', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Service_Information'])),
-            ('zone_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('zones_panel_alarm', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Panel'])),
-            ('zone_site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Site_Information'])),
-        ))
-        db.send_create_signal(u'site_info', ['Zone'])
-
-        # Adding model 'Site_Equipment'
-        db.create_table(u'site_info_site_equipment', (
-            (u'equipment_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['common.Equipment'], unique=True)),
-            ('equipment_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('equipment_site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Site_Information'])),
-        ))
-        db.send_create_signal(u'site_info', ['Site_Equipment'])
-
-        # Adding model 'Camera'
-        db.create_table(u'site_info_camera', (
-            (u'equipment_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['common.Equipment'], unique=True)),
-            ('camera_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('camera_name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('DVR_type', self.gf('django.db.models.fields.CharField')(max_length=100, blank=True)),
-            ('communication_type', self.gf('django.db.models.fields.CharField')(max_length=300, blank=True)),
-        ))
-        db.send_create_signal(u'site_info', ['Camera'])
-
-        # Adding model 'Site_Panel'
-        db.create_table(u'site_info_site_panel', (
-            ('site_panel_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('panel_site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Site_Information'])),
-            ('site_panel_panel', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Panel'])),
-            ('communication_id', self.gf('django.db.models.fields.CharField')(max_length=20)),
-        ))
-        db.send_create_signal(u'site_info', ['Site_Panel'])
-
-        # Adding model 'Site_Camera'
-        db.create_table(u'site_info_site_camera', (
-            ('site_camera_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('camera_site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Site_Information'])),
-            ('camera', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Camera'])),
-            ('location', self.gf('django.db.models.fields.CharField')(max_length=100, blank=True)),
-        ))
-        db.send_create_signal(u'site_info', ['Site_Camera'])
-
-        # Adding model 'Service_Information'
-        db.create_table(u'site_info_service_information', (
-            ('service_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('service_panel', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Panel'])),
-            ('technician', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['employee.Employee'])),
-            ('start_time', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
-            ('end_time', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
-            ('notes', self.gf('django.db.models.fields.CharField')(max_length=1000)),
-        ))
-        db.send_create_signal(u'site_info', ['Service_Information'])
-
-        # Adding model 'Installation_Information'
-        db.create_table(u'site_info_installation_information', (
-            ('installation_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('installation_site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Site_Information'])),
-            ('installation_start_time', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
-            ('installation_end_time', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
-        ))
-        db.send_create_signal(u'site_info', ['Installation_Information'])
-
-        # Adding M2M table for field installation_tech on 'Installation_Information'
-        m2m_table_name = db.shorten_name(u'site_info_installation_information_installation_tech')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('installation_information', models.ForeignKey(orm[u'site_info.installation_information'], null=False)),
-            ('employee', models.ForeignKey(orm[u'employee.employee'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['installation_information_id', 'employee_id'])
-
-        # Adding M2M table for field panels_installed on 'Installation_Information'
-        m2m_table_name = db.shorten_name(u'site_info_installation_information_panels_installed')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('installation_information', models.ForeignKey(orm[u'site_info.installation_information'], null=False)),
-            ('panel', models.ForeignKey(orm[u'site_info.panel'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['installation_information_id', 'panel_id'])
-
-        # Adding M2M table for field cameras_installed on 'Installation_Information'
-        m2m_table_name = db.shorten_name(u'site_info_installation_information_cameras_installed')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('installation_information', models.ForeignKey(orm[u'site_info.installation_information'], null=False)),
-            ('camera', models.ForeignKey(orm[u'site_info.camera'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['installation_information_id', 'camera_id'])
-
-        # Adding M2M table for field additional_equipment on 'Installation_Information'
-        m2m_table_name = db.shorten_name(u'site_info_installation_information_additional_equipment')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('installation_information', models.ForeignKey(orm[u'site_info.installation_information'], null=False)),
-            ('equipment', models.ForeignKey(orm[u'common.equipment'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['installation_information_id', 'equipment_id'])
+        db.create_unique(m2m_table_name, ['call_list_id', 'call_list_details_id'])
 
 
     def backwards(self, orm):
-        # Deleting model 'Call_List_Details'
-        db.delete_table(u'site_info_call_list_details')
+        # Deleting field 'Call_List_Details.call_list_contact'
+        db.delete_column(u'site_info_call_list_details', 'call_list_contact_id')
 
-        # Deleting model 'Call_List'
-        db.delete_table(u'site_info_call_list')
+        # Adding field 'Call_List.call_list_contact'
+        db.add_column(u'site_info_call_list', 'call_list_contact',
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['common.Contact'], null=True, blank=True),
+                      keep_default=False)
 
-        # Deleting model 'Site_Information'
-        db.delete_table(u'site_info_site_information')
+        # Adding field 'Call_List.call_list_detail'
+        db.add_column(u'site_info_call_list', 'call_list_detail',
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_info.Call_List_Details'], null=True, blank=True),
+                      keep_default=False)
 
-        # Removing M2M table for field site_call_list on 'Site_Information'
-        db.delete_table(db.shorten_name(u'site_info_site_information_site_call_list'))
-
-        # Deleting model 'Panel'
-        db.delete_table(u'site_info_panel')
-
-        # Deleting model 'Module'
-        db.delete_table(u'site_info_module')
-
-        # Deleting model 'Zone'
-        db.delete_table(u'site_info_zone')
-
-        # Deleting model 'Site_Equipment'
-        db.delete_table(u'site_info_site_equipment')
-
-        # Deleting model 'Camera'
-        db.delete_table(u'site_info_camera')
-
-        # Deleting model 'Site_Panel'
-        db.delete_table(u'site_info_site_panel')
-
-        # Deleting model 'Site_Camera'
-        db.delete_table(u'site_info_site_camera')
-
-        # Deleting model 'Service_Information'
-        db.delete_table(u'site_info_service_information')
-
-        # Deleting model 'Installation_Information'
-        db.delete_table(u'site_info_installation_information')
-
-        # Removing M2M table for field installation_tech on 'Installation_Information'
-        db.delete_table(db.shorten_name(u'site_info_installation_information_installation_tech'))
-
-        # Removing M2M table for field panels_installed on 'Installation_Information'
-        db.delete_table(db.shorten_name(u'site_info_installation_information_panels_installed'))
-
-        # Removing M2M table for field cameras_installed on 'Installation_Information'
-        db.delete_table(db.shorten_name(u'site_info_installation_information_cameras_installed'))
-
-        # Removing M2M table for field additional_equipment on 'Installation_Information'
-        db.delete_table(db.shorten_name(u'site_info_installation_information_additional_equipment'))
+        # Removing M2M table for field call_list_deta8os on 'Call_List'
+        db.delete_table(db.shorten_name(u'site_info_call_list_call_list_deta8os'))
 
 
     models = {
@@ -250,7 +64,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Address'},
             'address': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'address2': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'city': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['common.City']"}),
+            'city': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['common.City']", 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'state': ('django.db.models.fields.CharField', [], {'default': "'NY'", 'max_length': '30'}),
             'zip_code': ('django.db.models.fields.CharField', [], {'max_length': '10'})
@@ -308,14 +122,14 @@ class Migration(SchemaMigration):
         },
         u'site_info.call_list': {
             'Meta': {'object_name': 'Call_List'},
-            'call_list_contact': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['common.Contact']", 'null': 'True', 'blank': 'True'}),
-            'call_list_detail': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['site_info.Call_List_Details']", 'null': 'True', 'blank': 'True'}),
+            'call_list_deta8os': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['site_info.Call_List_Details']", 'symmetrical': 'False'}),
             'call_list_id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30'})
         },
         u'site_info.call_list_details': {
             'Meta': {'object_name': 'Call_List_Details'},
+            'call_list_contact': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['common.Contact']", 'null': 'True', 'blank': 'True'}),
             'call_list_details_id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'call_list_details_type': ('django.db.models.fields.CharField', [], {'max_length': '2'}),
             'enabled': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),

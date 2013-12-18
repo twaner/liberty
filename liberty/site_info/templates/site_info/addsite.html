@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load bootstrap_toolkit %}
+<form action="" method="post">{% csrf_token %}
+{% block content %}
+    <p>form = AddSiteInformationForm </p>
+    {{ form }}
+
+    <p>form1 = AddCallListForm </p>
+    {{ form1 }}
+
+    <p>form2 = AddCallListDetailsForm </p>
+    {{ form2 }}
+
+    <p>form3 = SiteContactForm </p>
+    {{ form3 }}
+
+<br />
+<input type="submit" value="Submit" class="btn btn-primary" />
+</form>
+{% endblock %}
