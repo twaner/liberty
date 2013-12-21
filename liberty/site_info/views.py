@@ -2,11 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from client.models import Client
 from common.models import Address, Contact
-from site_info.models import Call_List, Call_List_Details, Site_Information
-from site_info.forms import AddSiteInformationForm, AddCallListForm, AddCallListDetailsForm
+from site_info.models import Call_List_Details, Site_Information
+from site_info.forms import AddSiteInformationForm, AddCallListDetailsForm, AddSiteInformationFormAuto
 from common.forms import AddressForm, SiteContactForm, AddressFormPlaces, CityFormNotAuto
-from common.helpermethods import city_worker, create_address, create_employee_contact, handle_auto_city, update_address,update_employee_contact
-
+from common.helpermethods import city_worker, create_address, create_site_info_contact, update_site_info_contact, validation_helper
+from site_info.helpermethods import create_call_list_details, create_site_information
 def testview(self):
     return HttpResponse("Site Info working!")
 
@@ -41,20 +41,41 @@ def detail(request, site_id):
 
 def addsiteinfo(request):
     """
-    Creates new site.
+    Creates a new Site_Information object.
     @param request: request.
     """
     if request.method == 'POST':
         form = AddSiteInformationForm(request.POST)
-        form1 = AddCallListForm(request.POST)
-        form2 = AddCallListDetailsForm(request.POST)
-        form3 = SiteContactForm(request.POST)
+        form1 = AddCallListDetailsForm(request.POST)
+        form2 = SiteContactForm(request.POST)
+        form3 = AddCallListDetailsForm(request.POST)
+        form4 = SiteContactForm(request.POST)
+        form_list = [form, form1, form2, form3, form4]
+
+        # additional site contact info
+        show_additional_contact =request.POST.get('showcontact')
+        if show_additional_contact != 'None':
+            validation = validation_helper(form_list)
+            if validation:
+                #TODO code to save site
+                contact = create_site_info_contact(request)
+                call_list_details =  create_call_list_details(request, contact)
+                create_site_information
+
+        else:
+            # only the first contact
+            form_v = form.is_valid()
+            form1_v = form1.is_valid()
+            form2_v = form2.is_valid()
+            #TODO code to save site
 
         return HttpResponseRedirect('/site_infotest/index')
+
     else:
         form = AddSiteInformationForm()
-        form1 = AddCallListForm()
-        form2 = AddCallListDetailsForm()
-        form3 = SiteContactForm()
+        form1 = AddCallListDetailsForm()
+        form2 = SiteContactForm()
+        form3 = AddCallListDetailsForm()
+        form4 = SiteContactForm()
     return render(request, 'site_info/addsite.html', { 'form': form, 'form1': form1, 'form2': form2,
-                                         'form3': form3, })
+                                          'form3': form3, 'form4': form4})

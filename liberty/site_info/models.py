@@ -2,6 +2,7 @@
 from django.db import models
 from datetime import datetime, timedelta
 from common.models import Site, Module_Zone, Equipment, Person
+from client.models import Client
 
 # CALL LIST
 class Call_List_Details(models.Model):
@@ -21,38 +22,42 @@ class Call_List_Details(models.Model):
         (ALTERNATE, 'Alternate Call List'),
         (ALTERNATE2, 'Alternate Call List 2'),
     )
-
+    FIRST = '1'
+    SECOND = '2'
+    THIRD = '3'
+    FOURTH = '4'
+    FIFTH = '5'
+    SIXTH = '6'
+    SEVENTH = '7'
+    EIGHTH = '8'
+    ORDER_NUMBER = (
+        (FIRST, 'First'),
+        (SECOND, 'Second'),
+        (THIRD, 'Third'),
+        (FOURTH, 'Fourth'),
+        (FIFTH, 'Fifth'),
+        (SIXTH, 'Sixth'),
+        (SEVENTH, 'Seventh'),
+        (EIGHTH, 'Eighth'),
+    )
     call_list_details_id = models.AutoField(primary_key=True)
     call_list_details_type = models.CharField(max_length=2, choices=CALL_LIST_TYPE)
-    order = models.CharField(max_length=30)
+    call_order = models.CharField(max_length=2, choices=ORDER_NUMBER)
+    #order = models.CharField(max_length=30)
     enabled = models.BooleanField(default=False)
     call_list_contact = models.ForeignKey('common.Contact', null=True, blank=True)
 
-def __unicode__(self):
-    return self.get_call_list_details_type_display()
-#return(u'%s %s' % (self.first_name, self.last_name))
-
-
-class Call_List(Person):
-    call_list_id = models.AutoField(primary_key=True)
-    # call_list_detail = models.ForeignKey('Call_List_Details', verbose_name="call list list details",
-    #                                      null=True, blank=True)
-    # NEW
-    #call_list_contact = models.ForeignKey('common.Contact', null=True, blank=True)
-    call_list_details = models.ManyToManyField(Call_List_Details,
-                                               verbose_name="Call list(s)")
-
     def __unicode__(self):
-        return u'%s' % (self.call_list_detail.get_call_list_details_type_display())
+        return self.get_call_list_details_type_display()
+
 
 # REGION	 SITE INFORMATION
 class Site_Information(Site):
     site_id = models.AutoField(primary_key=True)
-    # specific info for the client - not related to call list
-    site_client = models.ForeignKey('client.client', verbose_name="Client Site")
+    site_client = models.ForeignKey(Client, verbose_name="Client Site")
     #q = si.site_call_list.all()
     #si.site_call_list.add(cl)
-    site_call_list = models.ManyToManyField('Call_List')
+    site_call_list_details = models.ManyToManyField(Call_List_Details, verbose_name="Call List")
 
     def __unicode__(self):
         return u'%s %s' % (self.site_client.first_name, self.site_client.last_name)
@@ -89,7 +94,7 @@ class Zone(Module_Zone):
 #BASE OBJECT
 class Site_Equipment(Equipment):
     equipment_id = models.AutoField(primary_key=True)
-    equipment_site = models.ForeignKey('Site_Information')
+    equipment_site_id = models.ForeignKey('Site_Information')
 
 # CAMERA OBJECT
 class Camera(Equipment):
@@ -140,6 +145,11 @@ class Installation_Information(models.Model):
 
 
 def _get_install_time(self):
+    """
+    Gets an installation's time.
+    @param self:
+    @return: Time of installation formatted HH:MM
+    """
     dt = self.installation_start_time - self.installation_end_time
     days, seconds = dt.days, dt.seconds
     hours = days * 24 + seconds // 3600
@@ -150,3 +160,17 @@ def _get_install_time(self):
 
 installation_duration = property(_get_install_time)
 
+## REGION OLD CODE
+"""
+class Call_List(models.Model):
+    call_list_id = models.AutoField(primary_key=True)
+    # call_list_detail = models.ForeignKey('Call_List_Details', verbose_name="call list list details",
+    #                                      null=True, blank=True)
+    # NEW
+    #call_list_contact = models.ForeignKey('common.Contact', null=True, blank=True)
+    call_list_detail = models.ManyToManyField(Call_List_Details,
+                                               verbose_name="Call list(s)")
+
+    def __unicode__(self):
+        return u'%s' % (self.call_list_detail.get_call_list_details_type_display())
+"""

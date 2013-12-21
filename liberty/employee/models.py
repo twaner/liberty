@@ -26,10 +26,6 @@ class Title(models.Model):
 
 
 class Employee(Person):
-    """COM = 'COM',
-    HR = 'HR',
-    SAL = 'SAL',
-    OT = 'OT', """
     PAY_TYPE_CHOICES = (
         ('COM', 'Commission'),
         ('HR', 'Hourly'),

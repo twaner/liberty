@@ -1,21 +1,57 @@
 {% extends 'base.html' %}
-
+{% block body_block %}
+<body onload="initialize()">
+{% endblock %}
 {% load bootstrap_toolkit %}
-<form action="" method="post">{% csrf_token %}
 {% block content %}
+<script type="text/javascript">
+    function fnchecked(blnchecked){
+        if(blnchecked)
+        {
+        document.getElementById("address").style.display = "";
+        }
+        else
+        {
+        document.getElementById("address").style.display = "none";
+        }
+    }
+</script>
+
+    <p>Add a sales contact.</p>
+    <form action="" method="post">
+    {% csrf_token %}
+
     <p>form = AddSiteInformationForm </p>
     {{ form }}
 
-    <p>form1 = AddCallListForm </p>
+    <p>form1 = AddCallListDetailsForm </p>
     {{ form1 }}
 
-    <p>form2 = AddCallListDetailsForm </p>
+    <p>form2 = SiteContactForm </p>
     {{ form2 }}
 
-    <p>form3 = SiteContactForm </p>
-    {{ form3 }}
 
-<br />
-<input type="submit" value="Submit" class="btn btn-primary" />
+    {% block address %}
+    <!-- address is optional for sales clients -->
+    <tr><th>
+        <label>Select to enter another call list</label>
+    </th><td>
+        <input type="checkbox" name="showcontact" id="showcontact"
+        onclick="fnchecked(this.checked);" value="show">
+    </td></tr>
+        <br />
+    <div id="address" style="display:none">
+        <br />
+             <p>Call List Information:</p>
+            {{ form3 }}
+
+            {{ form4 }}
+    </div>
+    {% endblock %}
+    <!-- end address -->
+
+    <div class="form-actions">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
 </form>
 {% endblock %}

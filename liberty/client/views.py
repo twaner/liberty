@@ -6,7 +6,7 @@ from employee.models import Employee
 from common.models import Address, Contact, Billing_Information, City
 from common.forms import AddressForm, ContactForm, CityForm, CityFormNotAuto, AddressFormNotAuto, AddressFormPlaces
 from forms import ClientForm, Sales_ProspectForm
-from common.helpermethods import create_address, create_contact, city_worker, update_address, update_contact
+from common.helpermethods import create_address, create_contact, city_worker, update_address, update_contact, validation_helper
 from client.helpermethods import create_client, create_sales_prospect, update_client, update_sales_prospect
 
 
@@ -56,23 +56,14 @@ def addclient(request):
         form1 = CityFormNotAuto(request.POST)
         form2 = AddressFormNotAuto(request.POST)
         form3 = ContactForm(request.POST)
-        # sweet validation
-        f_valid = form.is_valid()
-        f1_valid = form1.is_valid()
-        f2_valid = form2.is_valid()
-        f3_valid = form3.is_valid()
-        # debugging
-        print("Form validation: ", f_valid, "1:", f1_valid, "2:", f2_valid, '3:', f3_valid)
+        form_list = [form, form1, form2, form3]
+        validation = validation_helper(form_list)
 
-        if form.is_valid() and form1.is_valid() and form2.is_valid() and form3.is_valid():
-            #city
+        if validation:
             city_f = request.POST.get('city_name')
             c = city_worker(request, city_f)
-            # address
             a = create_address(request, c)
-            # contact
             con = create_contact(request)
-            #client
             create_client(request, a, con)
             return HttpResponseRedirect('/clienttest/index/')
             # good god...just work!
@@ -125,12 +116,10 @@ def editclient(request, client_id):
 
     # validation
     if form_v and form2_v and form3_v and form1_v:
-        # validates =>
-        #city_f = request.POST.get('city_name')
         c = city_worker(request, request.POST.get('city_name'))
         a = update_address(request, address, c)
         con = update_contact(request, contact)
-        cli = update_client(request, client, a, con)
+        client = update_client(request, client, a, con)
         return HttpResponseRedirect('/clienttest/index/')
     else:
         # display bound form
@@ -147,7 +136,6 @@ def addsalesprospect(request):
     @param request: request.
     @return: redirect to index or form with validation errors.
     """
-    print("Add sales prospect called!")
     if request.method == 'POST':
         form = Sales_ProspectForm(request.POST)
         form1 = CityFormNotAuto(request.POST)
@@ -178,12 +166,13 @@ def addsalesprospect(request):
                 create_sales_prospect(address=a, contact_info=con)
 
                 #handle success!
-                return HttpResponseRedirect('/salesprospectindex/index/')
-            # no address entered
-        print("Form validation: ", f_valid, "3: ", f3_valid)
+                return HttpResponseRedirect('/clienttest/salesprospectindex/')
+        # no address entered
         if f_valid and f3_valid:
             con = create_contact(request)
             create_sales_prospect(request, con)
+            return HttpResponseRedirect('/clienttest/salesprospectindex/')
+
 
     else:
         form = Sales_ProspectForm()
@@ -267,7 +256,7 @@ def editsalesprospect(request, sales_prospect_id):
             con = update_contact(request, contact)
             update_sales_prospect(request, sp, a, con)
         # TODO Handle response currently 404
-        return HttpResponseRedirect('/salesprospectindex/')
+        return HttpResponseRedirect('/clienttest/salesprospectindex/')
 
     else:
                 form = Sales_ProspectForm(sp_dict)

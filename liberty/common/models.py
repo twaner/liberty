@@ -186,7 +186,7 @@ class Billing_Information(models.Model):
 # LibertyModels
 class Site(models.Model):
     address = models.ForeignKey(Address)
-    contact = models.ForeignKey(Contact)
+    #contact = models.ForeignKey(Contact)
 
     class Meta:
         abstract = True

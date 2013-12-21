@@ -24,10 +24,10 @@
     {% block address %}
     <!-- address is optional for sales clients -->
     <tr><th>
-        <label >Select to enter contact address</label>
+        <label>Select to enter contact address</label>
     </th><td>
-        <input type="checkbox" name="showaddress" id="showaddress" onclick="fnchecked(this.checked);"
-                value="show">
+        <input type="checkbox" name="showaddress" id="showaddress"
+        onclick="fnchecked(this.checked);" value="show">
     </td></tr>
     <br />
     <div id="address" style="display:none">
@@ -44,6 +44,7 @@
     </div>
     {% endblock %}
     <!-- end address -->
+    <p>Contact Information:</p>
     {{ form3 }}
 
     <div class="form-actions">

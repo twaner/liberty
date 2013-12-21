@@ -8,7 +8,6 @@ import autocomplete_light_registry
 class AddressForm(ModelForm):
     city = forms.ModelChoiceField(City.objects.all(),
                                   widget=autocomplete_light.ChoiceWidget('CityAutocomplete'))
-
     class Meta:
         model = Address
         #widgets = {'city': autocomplete_light.get_widgets_dict(City)}
@@ -31,8 +30,6 @@ class AddressFormPlaces(ModelForm):
 class CityFormNotAuto(ModelForm):
     class Meta:
         model = City
-
-
 
 
 class CityForm(ModelForm):

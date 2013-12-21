@@ -1,5 +1,10 @@
 from models import Address, City, Contact
 
+## ADDRESS HELPERS ## ##
+"""
+Address object helpers methods
+"""
+
 
 def create_address(request, city):
     """
@@ -11,7 +16,6 @@ def create_address(request, city):
     address = request.POST.get('address')
     address2 = request.POST.get('address2')
     state = request.POST.get('state')
-    print("create_address:CITY", city)
     zip_code = request.POST.get('zip_code')
     a = Address(address=address, address2=address2, city=city, state=state,
                 zip_code=zip_code)
@@ -26,15 +30,19 @@ def update_address(request, address, city):
     @param address: address object. validated in view
     @return: updated address
     """
-    print "ADDRESS CITY UPDATE", type(address), city, type(city), city
     address.address = request.POST.get('address')
     address.address2 = request.POST.get('address2')
     address.state = request.POST.get('state')
-    print("update_address:CITY", city)
     address.zip_code = request.POST.get('zip_code')
     address.city = city
     address.save(update_fields=['address', 'address2', 'city', 'state', 'zip_code'])
     return address
+
+## CONTACT HELPERS ## ##
+"""
+CONTACT object helpers
+"""
+
 
 def create_contact(request):
     """
@@ -73,6 +81,10 @@ def update_contact(request, contact):
                                 'cell', 'email', 'website'])
     return contact
 
+
+## EMPLOYEE CONTACT HELPERS ## ##
+
+
 def create_employee_contact(request):
     """
     Takes a request and returns a contact
@@ -82,9 +94,9 @@ def create_employee_contact(request):
     phone = request.POST.get('phone')
     cell = request.POST.get('cell')
     email = request.POST.get('email')
-    con = Contact(phone=phone, cell=cell, email=email)
-    con.save()
-    return con
+    contact = Contact(phone=phone, cell=cell, email=email)
+    contact.save()
+    return contact
 
 
 def update_employee_contact(request, contact):
@@ -102,17 +114,37 @@ def update_employee_contact(request, contact):
     return contact
 
 
-def city_worker(request, city):
+## SITE_INFO CONTACT HELPERS ##
+def create_site_info_contact(request):
     """
-    Checks existence of specified City then gets or creates City Object
+    Creates a Contact object for Site_Info
     @param request: request.
-    @param city: city from form.
-    @return: City.
+    @return: returns a Contact object.
     """
-    c, created = City.objects.get_or_create(city_name=city)
-    c.save()
-    print "CITY FROM CITY_WORKER", c.city_id
-    return c
+    phone = request.POST.get('phone')
+    phone_extension = request.POST.get('phone_extension')
+    contact = (phone=phone, phone_extension=phone_extension)
+    contact.save()
+    return contact
+
+
+def update_site_info_contact(request, contact):
+    """
+    Creates a Contact object for Site_Info
+    @param contact: Contact object.
+    @param request: request.
+    @return: returns an updated Contact object.
+    """
+    contact.phone = request.POST.get('phone')
+    contact.phone_extension = request.POST.get('phone_extension')
+    contact.save(update_fields=['phone', 'phone_extension'])
+    return contact
+
+
+## BOOLEAN HELPERS ## ##
+"""
+Boolean object helpers
+"""
 
 
 def boolean_helper(*args):
@@ -132,6 +164,11 @@ def boolean_helper(*args):
         worker = True
     """
     return worker
+
+## CITY HELPERS ## ##
+"""
+City object helpers
+"""
 
 
 def handle_auto_citys(request):
@@ -184,3 +221,36 @@ def handle_auto_city(request):
     else:
         print "ELSE"
         return "None"
+
+
+def city_worker(request, city):
+    """
+    Checks existence of specified City then gets or creates City Object
+    @param request: request.
+    @param city: city from form.
+    @return: City.
+    """
+    c, created = City.objects.get_or_create(city_name=city)
+    c.save()
+    print "CITY FROM CITY_WORKER", c.city_id
+    return c
+
+
+## FORM HELPERS ##
+"""
+Form validation helpers
+"""
+
+
+def validation_helper(form_list):
+    for i in form_list:
+        if not i.is_valid():
+            return False
+        else:
+            return True
+
+
+def dict_generator(form_list):
+    d = {}
+    [d.update({str(i): i}) for i in form_list]
+    return d

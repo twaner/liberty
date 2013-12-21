@@ -1,7 +1,7 @@
 from models import Employee, Title
 from common.models import Address, Contact
 
-
+## EMPLOYEE HELPERS
 def create_employee(request, *args):
     """
     Creates Employee object.
