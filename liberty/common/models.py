@@ -165,6 +165,10 @@ class Contact(models.Model):
     website = models.URLField(blank=True)
 
     def __unicode__(self):
+        """
+        Display for contact.
+        @return: Formatted phone number.
+        """
         return "%s%s%s-%s%s%s-%s%s%s%s" % tuple(self.phone)
 
 
@@ -177,6 +181,10 @@ class Billing_Information(models.Model):
     is_business = models.BooleanField(default=False)
 
     def __unicode__(self):
+        """
+        Display for billing information.
+        @return: business name or first and last name of client.
+        """
         if self.is_business == True:
             return (self.business_name)
         else:

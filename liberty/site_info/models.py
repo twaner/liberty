@@ -48,6 +48,10 @@ class Call_List_Details(models.Model):
     call_list_contact = models.ForeignKey('common.Contact', null=True, blank=True)
 
     def __unicode__(self):
+        """
+        Display for call_list_details.
+        @return: Call list display.
+        """
         return self.get_call_list_details_type_display()
 
 
@@ -60,6 +64,10 @@ class Site_Information(Site):
     site_call_list_details = models.ManyToManyField(Call_List_Details, verbose_name="Call List")
 
     def __unicode__(self):
+        """
+        Sets value for Site_Information.
+        @return: first and last name of the client.
+        """
         return u'%s %s' % (self.site_client.first_name, self.site_client.last_name)
 
 # PANEL OBJECT

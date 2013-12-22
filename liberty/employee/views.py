@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from employee.models import Employee, Title
-from employee.forms import EmployeeForm, TitleForm, AddEmployeeForm
+from employee.forms import EmployeeForm, AddEmployeeForm
 from common.models import Address, Contact, City
-from common.forms import AddressForm, EmployeeContactForm, CityForm, AddressFormPlaces, CityFormNotAuto
+from common.forms import AddressForm, EmployeeContactForm, AddressFormPlaces, CityFormNotAuto
 from helpermethods import create_employee, update_employee
-from common.helpermethods import city_worker, create_address, create_employee_contact, handle_auto_city, update_address,update_employee_contact
+from common.helpermethods import city_worker, create_address, create_employee_contact, handle_auto_city, update_address, update_employee_contact, validation_helper, form_generator, dict_generator
 
 
 def index(request):
@@ -41,20 +41,16 @@ def empform(request):
     @param request: request.
     @return: redirect to index or form with validation errors.
     """
-    print("EMPFORM LONG VIEW CALLED")
+    form_list = form_generator(4)
     if request.method == 'POST':  # If form has been submitted...
-        print("POST ==")
-        form = AddEmployeeForm(request.POST)
-        form1 = CityFormNotAuto(request.POST)
-        form2 = AddressFormPlaces(request.POST)
-        form3 = EmployeeContactForm(request.POST)
+        form_list[0] = AddEmployeeForm(request.POST)
+        form_list[1] = CityFormNotAuto(request.POST)
+        form_list[2] = AddressFormPlaces(request.POST)
+        form_list[3] = EmployeeContactForm(request.POST)
+        #form_list = [form0, form1, form2, form3]
+        validation = validation_helper(form_list)
 
-        f_valid = form.is_valid()
-        f1_valid = form1.is_valid()
-        f2_valid = form2.is_valid()
-        f3_valid = form3.is_valid()
-
-        if f_valid and f1_valid and f2_valid and f3_valid:
+        if validation:
             #city
             city_f = request.POST.get('city_name')
             c = city_worker(request, city_f)
@@ -68,13 +64,13 @@ def empform(request):
             return HttpResponseRedirect('/employeetest/index/')
     else:
         # unbound forms
-        form = AddEmployeeForm()
-        form1 = CityFormNotAuto()
-        form2 = AddressFormPlaces()
-        form3 = EmployeeContactForm()
+        form_list[0] = AddEmployeeForm()
+        form_list[1] = CityFormNotAuto()
+        form_list[2] = AddressFormPlaces()
+        form_list[3] = EmployeeContactForm()
+    form_dict = dict_generator(form_list)
 
-    return render(request, 'title.html', {'form': form, 'form1': form1,
-                                          'form2': form2, 'form3': form3})
+    return render(request, 'title.html', form_dict)
 
 
 def editemployee(request, employee_id):
@@ -85,6 +81,7 @@ def editemployee(request, employee_id):
     @param employee_id: Employee pk.
     @return: redirect or form with validation errors.
     """
+    form_list = form_generator(4)
     employee = Employee.objects.get(pk=employee_id)
     address = Address.objects.get(pk=employee.address_id)
     contact = Contact.objects.get(pk=employee.contact_info_id)
@@ -102,32 +99,29 @@ def editemployee(request, employee_id):
     }
     contact_dict = {'phone': contact.phone, 'cell': contact.cell, 'email': contact.email}
     city_dict = {'city_name': city.city_name}
+    # form submission
+    if request.method == 'POST':
+        form_list[0] = EmployeeForm(request.POST)
+        form_list[1] = CityFormNotAuto(request.POST)
+        form_list[2] = AddressFormPlaces(request.POST)
+        form_list[3] = EmployeeContactForm(request.POST)
+        validation = validation_helper(form_list)
 
-    form = EmployeeForm(request.POST)
-    form2 = AddressFormPlaces(request.POST)
-    form3 = EmployeeContactForm(request.POST)
-    form1 = CityFormNotAuto(request.POST)
-
-    # validation vars
-    form_v = form.is_valid()
-    form2_v = form2.is_valid()
-    form3_v = form3.is_valid()
-    form1_v = form1.is_valid()
-    if form_v and form2_v and form3_v and form1_v:
-            cit = city_worker(request, request.POST.get('city_name'))
-            address = update_address(request, address, cit)
-            con = update_employee_contact(request, contact)
-            #sales prospect
-            employee = update_employee(request, employee, address, con)
-            return HttpResponseRedirect('/employeetest/index/')
+        if validation:
+                cit = city_worker(request, request.POST.get('city_name'))
+                address = update_address(request, address, cit)
+                con = update_employee_contact(request, contact)
+                #sales prospect
+                employee = update_employee(request, employee, address, con)
+                return HttpResponseRedirect('/employeetest/index/')
     else:
         # redisplay bound form
-        form = EmployeeForm(employee_dict)
-        form2 = AddressFormPlaces(address_dict)
-        form1 = CityFormNotAuto(city_dict)
-        form3 = EmployeeContactForm(contact_dict)
-    return render(request, 'employee/editemployee.html', {'form': form, 'form1': form1,
-                                                          'form2': form2, 'form3': form3})
+        form_list[0] = EmployeeForm(employee_dict)
+        form_list[2] = AddressFormPlaces(address_dict)
+        form_list[1] = CityFormNotAuto(city_dict)
+        form_list[3] = EmployeeContactForm(contact_dict)
+    form_dict = dict_generator(form_list)
+    return render(request, 'employee/editemployee.html', form_dict)
 
 
 def titleform(request):

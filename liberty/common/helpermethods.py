@@ -123,7 +123,7 @@ def create_site_info_contact(request):
     """
     phone = request.POST.get('phone')
     phone_extension = request.POST.get('phone_extension')
-    contact = (phone=phone, phone_extension=phone_extension)
+    contact = Contact(phone=phone, phone_extension=phone_extension)
     contact.save()
     return contact
 
@@ -238,7 +238,7 @@ def city_worker(request, city):
 
 ## FORM HELPERS ##
 """
-Form validation helpers
+Form helpers used to dynamical generate content.
 """
 
 
@@ -248,9 +248,53 @@ def validation_helper(form_list):
             return False
         else:
             return True
+    """
+    q = [False if not i.is_valid() else True for i in form_list]
+    """
+
+
+def form_generator(n):
+    """
+    Dynamically generates a list to of items called 'form + i'.
+    @param n: number of elements to add to the list.
+    @return: list with n elements.
+    """
+    form_list = []
+    [form_list.append("form" + str(i)) for i in range(n)]
+    return form_list
 
 
 def dict_generator(form_list):
+    """
+    genrates dictionary to hold forms.
+    @type form_list: List
+    @param: list.
+    @return: dictionary with k, v for forms.
+    """
     d = {}
-    [d.update({str(i): i}) for i in form_list]
+    [d.update({"form" + str(i): form_list[i]}) for i in range(len(form_list))]
     return d
+
+
+def form_worker(form_list, requested, *args):
+    """
+    Takes form list and either runs a request.POST or generate unbound forms.
+    @param requested: Boolean for whether to run request routine
+    @param form_list: form list.
+    @param args: ModelForms
+    @return:
+    """
+    if requested:
+        for i in range(len(form_list)):
+            form_list[i] = args[i](request.POST)
+    else:
+        for i in range(len(form_list)):
+            form_list[i] = args[i]
+
+    return form_list
+
+"""
+form_list[0] = AddEmployeeForm(request.POST)
+        form_list[1] = CityFormNotAuto(request.POST)
+        form_list[2] = AddressFormPlaces(request.POST)
+        form_list[3] = EmployeeContactForm(request.POST)"""

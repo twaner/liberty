@@ -3,19 +3,10 @@
 <body onload="initialize()">
 {% endblock %}
 {% load bootstrap_toolkit %}
+
 {% block content %}
-<script type="text/javascript">
-    function fnchecked(blnchecked){
-        if(blnchecked)
-        {
-        document.getElementById("address").style.display = "";
-        }
-        else
-        {
-        document.getElementById("address").style.display = "none";
-        }
-    }
-</script>
+{% load static %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/show_div_checkbox.js"></script>
 
     <p>Add a sales contact.</p>
     <form action="" method="post">
