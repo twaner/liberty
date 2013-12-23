@@ -155,6 +155,8 @@ class Address(models.Model):
                                      self.city.city_name, self.state, self.zip_code))
 
 # Info Models
+
+
 class Contact(models.Model):
     phone = models.CharField("primary phone", max_length=13, blank=True)
     phone_extension = models.CharField("primary phone extension", max_length=10, blank=True)
@@ -170,6 +172,17 @@ class Contact(models.Model):
         @return: Formatted phone number.
         """
         return "%s%s%s-%s%s%s-%s%s%s%s" % tuple(self.phone)
+
+    def phone_extension_helper(self):
+        """
+        Helps create a readable phone number and extension.
+        @return: a phone and extension if it exists.
+        """
+        if self.phone_extension is None:
+            return "%s%s%s-%s%s%s-%s%s%s%s" % tuple(self.phone)
+        else:
+            return "%s%s%s-%s%s%s-%s%s%s%s" % tuple(self.phone),
+        " ", self.phone_extension
 
 
 class Billing_Information(models.Model):

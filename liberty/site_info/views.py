@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
+from django.db.models import Count
 from client.models import Client
 from common.models import Address, Contact
 from site_info.models import Call_List_Details, Site_Information
@@ -16,7 +17,10 @@ def index(request):
     @return: rendered index view of site info.
     """
     site_detail = Site_Information.objects.order_by('-site_id')
-    context = {'site_detail': site_detail}
+    print("DEETS", site_detail)
+    client_info = Site_Information.objects.values('site_client').annotate(dd=Count('site_client'))
+    jj = set(Site_Information.objects.values_list('site_client'))
+    context = {'site_detail': site_detail, 'jj': jj}
     return render(request, 'site_info/index.html', context)
 
 
@@ -28,7 +32,7 @@ def detail(request, site_id):
     @return: rendered site detail view.
     """
     site_detail = Site_Information.objects.get(pk=site_id)
-    site_worker = Call_List.objects.get(call_list_id == site_detail.site_call_list)
+    site_worker = site_detail.site_call_list_details.all()
     context = {'site_detail': site_detail, 'site_worker': site_worker}
     return render(request, 'site_info/detail.html', context)
 

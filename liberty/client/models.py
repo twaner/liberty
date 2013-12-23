@@ -4,6 +4,8 @@ from common.models import Person
 from employee.models import Employee
 
 # USE 0 == False // 1 == True!
+
+
 class BusinessManager(models.Manager):
     def get_query_set(self):
         """

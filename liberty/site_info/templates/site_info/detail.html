@@ -1,14 +1,36 @@
 {% extends 'base.html' %}
 {% load bootstrap_toolkit %}
-
+{% block content %}
 {% if site_detail %}
     <ul>
         <li>
-            Site Info
+            Site Information
         </li>
         <li>
-
+            {{ site_detail.site_client }}
         </li>
+        <li>
+            {{ site_detail.address }}
+        </li>
+        <li>
+            <p>Call List Information</p>
+        </li>
+            {% for s in site_worker %}
+        <li>
+            {{ s }}
+        </li>
+        <li>
+            {{ s.call_order }}
+        </li>
+        <li>
+            {{ s.enabled }}
+        </li>
+        <li>
+            {{ s }}
+        </li>
+            {% endfor %}
+    </ul>
 {% else %}
         <p>No Site Information is available.</p>
 {% endif %}
+{% endblock %}

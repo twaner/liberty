@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load bootstrap_toolkit %}
-
-{% if site_detail %}
+{% block content %}
     <p>Site Information</p>
+{% if site_detail %}
+
     <ul>
         {% for s in site_detail %}
         <li>
             <a href="/site_infotest/{{ s.site_id }}/">
-                {{ s.client.first_name}} {{ s.client.last_name }}
+                {{ s.site_client}}
             </a>
         </li>
         {% endfor %}
@@ -15,7 +16,15 @@
 {% else %}
         <p>No Sites are available.</p>
 {% endif %}
+        {% if jj %}
+        {% for j in jj %}
+        <li>
+            {{ j.site_id }}
+        </li>
+        {% endfor %}
+        {% endif %}
         {% comment %}
-//<a href="/employeetest/{{ e.employee_id }}/">
+    <a href="/employeetest/{{ e.employee_id }}/">
     <a href="{ % url 'detailed' e.employee_id %}">
-    {% endcomment %}
+        {% endcomment %}
+{% endblock %}
