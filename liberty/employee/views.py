@@ -30,8 +30,10 @@ def details(request, employee_id):
     address_detail = Address.objects.get(pk=employee_detail.address_id)
     contact_detail = Contact.objects.get(pk=employee_detail.contact_info_id)
     title_details = employee_detail.e_title.all()
-    context = {'employee_detail': employee_detail, 'address_detail': address_detail,
-               'contact_detail': contact_detail, 'title_details': title_details}
+    context = {
+        'employee_detail': employee_detail, 'address_detail': address_detail,
+        'contact_detail': contact_detail, 'title_details': title_details
+    }
     return render(request, 'employee/detail.html', context)
 
 

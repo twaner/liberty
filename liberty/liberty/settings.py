@@ -54,7 +54,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = '/Users/taiowawaner/Documents/LibertySecurity/liberty/static/media/'
+MEDIA_ROOT = '/Users/taiowawaner/Documents/LibertyNET/Django Projects/LibertySecurity/liberty/static/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -76,7 +76,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/Users/taiowawaner/Documents/LibertySecurity/liberty/static/',
+    '/Users/taiowawaner/Documents/LibertyNET/Django Projects/LibertySecurity/liberty/static/',
     #os.path.join(PROJECT_DIR, 'static',
 )
 
@@ -114,7 +114,7 @@ ROOT_URLCONF = 'liberty.urls'
 WSGI_APPLICATION = 'liberty.wsgi.application'
 
 TEMPLATE_DIRS = (
-    '/Users/taiowawaner/Documents/LibertySecurity/liberty/templates/'
+    '/Users/taiowawaner/Documents/LibertyNET/Django Projects/LibertySecurity/liberty/templates/'
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

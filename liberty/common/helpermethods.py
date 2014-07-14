@@ -147,24 +147,14 @@ Boolean object helpers
 """
 
 
-def boolean_helper(*args):
-    """
-    Takes boolean from form and handles string passed
-    @param args: boolean field from form
-    @return: boolean updated to reflect selection
-    """
-    worker = True
-    print('before if boolean', args[0])
-    if args[0] is None or args[0] == 'None':
-        worker = False
-        print('is bus == none', args[0])
+
     """
     elif args[0] == 'on':
         print('is business == on', args[0])
         worker = True
-    """
-    return worker
 
+    return worker
+    """
 ## CITY HELPERS ## ##
 """
 City object helpers

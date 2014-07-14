@@ -25,6 +25,7 @@ def create_employee(request, *args):
                  address=a, contact_info=c, hire_date=hire_date, pay_type=pay_type,
                  pay_rate=pay_rate)
     e.save()
+    print("TYPE OF REQUEST.POST.getLIST ==>", type(request.POST.getlist('e_title')))
     # handle m2m field
     [e.e_title.add(et) for et in request.POST.getlist('e_title')]
     e.save()
